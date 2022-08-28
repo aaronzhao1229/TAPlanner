@@ -2,34 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { getGreeting } from '../apiClient'
 
 const App = () => {
-  const [greeting, setGreeting] = useState('')
-  const [count, setCount] = useState(0)
-  const [isError, setIsError] = useState(false)
-
-  useEffect(() => {
-    getGreeting()
-      .then((greeting) => {
-        console.log(greeting)
-        setGreeting(greeting)
-        setIsError(false)
-      })
-      .catch((err) => {
-        console.log(err)
-        setIsError(true)
-      })
-  }, [count])
-
   return (
-    <>
-      {count}
-      <h1>{greeting}</h1>
-      {isError && (
-        <p style={{ color: 'red' }}>
-          There was an error retrieving the greeting.
-        </p>
-      )}
-      <button onClick={() => setCount(count + 1)}>Click</button>
-    </>
+    <div>
+      <div
+        className="hero p-5 has-text-centered"
+        style={{ backgroundImage: `url('./images/header.jpeg')` }}
+      >
+        <h1 className="is-size-3">Te Araroa Planner</h1>
+      </div>
+
+      <nav className="box has-background-primary has-text-centered">
+        <div className="columns">
+          <div className="column is-one-third">Home</div>
+          <div className="column is-one-third">Planner</div>
+          <div className="column is-one-third">Gears</div>
+        </div>
+      </nav>
+
+      <button>Click</button>
+    </div>
   )
 }
 
