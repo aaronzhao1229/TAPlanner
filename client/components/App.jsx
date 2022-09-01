@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getGreeting } from '../apiClient'
+import Home from './Home'
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
           <div className="column is-one-third">Gears</div>
         </div>
       </nav>
-
+      <Home />
       <button>Click</button>
     </div>
   )
