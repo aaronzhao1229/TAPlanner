@@ -11,7 +11,7 @@ const initialFormData = {
 }
 const initialRegionId = 1
 const initialTrackId = 1
-
+let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 export default function Planner() {
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
@@ -19,7 +19,16 @@ export default function Planner() {
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
+  const [table, setTable] = useState([])
 
+  // to do: get section id and stop Id
+  function handleSubmit(e) {
+    e.preventDefault()
+
+    // const fullDataForOneSection = {day: form.day, region: regionData.name, track: tracksData}
+    // to be updated
+    // check state and form submit data and show in the table
+  }
   useEffect(() => {
     getRegions()
       .then((regions) => {
@@ -50,6 +59,9 @@ export default function Planner() {
 
   function regionSelected(event) {
     let regionId = event.target.value
+
+    ids['regionId'] = Number(regionId)
+
     getTracksByRegionId(regionId)
       .then((tracks) => {
         setTrackData(tracks)
@@ -61,6 +73,8 @@ export default function Planner() {
 
   function trackSelected(event) {
     let trackId = event.target.value
+    ids['trackId'] = Number(trackId)
+    console.log(ids)
     getSectionsByTrackId(trackId)
       .then((sections) => {
         return setSectionsData(sections)
@@ -80,11 +94,6 @@ export default function Planner() {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    // to be updated
-    // check state and form submit data and show in the table
-  }
   return (
     <>
       <table className="table container is-bordered">
