@@ -5,7 +5,9 @@ export default function Planner() {
 
   return (
     <div className="container">
-      <h3>Add a section</h3>
+      <h3 className="is-size-5">
+        <strong>Add a section</strong>
+      </h3>
       {/* <form onSubmit={handleSubmit}> */}
       <form>
         <div className="columns">
