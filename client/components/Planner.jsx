@@ -6,8 +6,20 @@ const initialRegionData = [
     name: '',
   },
 ]
+
+const initialTrackData = [
+  {
+    id: '',
+    name: '',
+    category: '',
+    regionId: '',
+  },
+]
+
 export default function Planner() {
   const [regionData, setRegionData] = useState(initialRegionData)
+  const [trackData, setTrackData] = useState(initialTrackData)
+
   useEffect(() => {
     getRegions().then((regions) => {
       setRegionData(regions)

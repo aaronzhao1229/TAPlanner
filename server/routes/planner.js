@@ -14,4 +14,16 @@ router.get('/regions', (req, res) => {
     })
 })
 
+router.get('/tracks/:regionId', (req, res) => {
+  const regionId = req.params.regionId
+  db.getTracksByRegionId(regionId)
+    .then((tracks) => {
+      res.json(tracks)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server error')
+    })
+})
+
 module.exports = router
