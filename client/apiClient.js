@@ -11,3 +11,9 @@ export function getTracksByRegionId(regionId) {
     return res.body
   })
 }
+
+export function getSectionsByTrackId(trackId) {
+  return request.get(`/planner/sections/${trackId}`).then((res) => {
+    return res.body
+  })
+}

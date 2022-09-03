@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getRegions, getTracksByRegionId } from '../apiClient'
+import {
+  getRegions,
+  getTracksByRegionId,
+  getSectionsByTrackId,
+} from '../apiClient'
 
 const initialRegionId = 1
 const initialTrackId = 1
@@ -25,10 +29,10 @@ export default function Planner() {
         return getSectionsByTrackId(initialTrackId)
       })
       .then((sections) => {
-        setSectionData(sections)
+        setSectionsData(sections)
       })
   }, [])
-
+  console.log(sectionsData)
   function regionSelected(event) {
     let regionId = event.target.value
     console.log(regionId)
@@ -104,14 +108,22 @@ export default function Planner() {
             <label htmlFor="section" className="label">
               Section
             </label>
-            <input
-              className="input"
-              type="text"
-              id="section"
-              name="section"
-              // value={section}
-              // onChange={handleChange}
-            />
+            <div className="select">
+              <select
+                // onChange={sectionSelected}
+                className="input"
+                id="sections"
+                name="sections"
+              >
+                {sectionsData.map((section) => {
+                  return (
+                    <option key={section.id} value={section.id}>
+                      {section.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
           </div>
           <div className="column">
             <label htmlFor="stop" className="label">
