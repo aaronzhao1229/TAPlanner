@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { getRegions } from '../apiClient'
-const initialRegionData = [
-  {
-    id: '',
-    name: '',
-  },
-]
+import { getRegions, getTracksByRegionId } from '../apiClient'
 
-const initialTrackData = [
-  {
-    id: '',
-    name: '',
-    category: '',
-    regionId: '',
-  },
-]
+const initialRegionId = 1
+const initialTrackId = 1
+const intialSectionId = 1
 
 export default function Planner() {
-  const [regionData, setRegionData] = useState(initialRegionData)
-  const [trackData, setTrackData] = useState(initialTrackData)
+  const [regionData, setRegionData] = useState([])
+  const [tracksData, setTrackData] = useState([])
 
   useEffect(() => {
-    getRegions().then((regions) => {
-      setRegionData(regions)
-    })
+    getRegions()
+      .then((regions) => {
+        return setRegionData(regions)
+      })
+      .then(() => {
+        return getTracksByRegionId(initialRegionId)
+      })
+      .then((tracks) => {
+        setTrackData(tracks)
+      })
   }, [])
+
   function regionSelected(event) {
     let regionId = event.target.value
     console.log(regionId)
+    getTracksByRegionId(regionId).then((tracks) => {
+      setTrackData(tracks)
+    })
   }
   return (
     // form <-------
@@ -61,7 +61,6 @@ export default function Planner() {
                 className="input"
                 id="region"
                 name="region"
-                // onChange={handleChange}
               >
                 {regionData.map((region) => {
                   return (
@@ -74,17 +73,25 @@ export default function Planner() {
             </div>
           </div>
           <div className="column">
-            <label htmlFor="track" className="label">
+            <label htmlFor="tracks" className="label">
               Track
             </label>
-            <input
-              className="input"
-              type="text"
-              id="track"
-              name="track"
-              // value={track}
-              // onChange={handleChange}
-            />
+            <div className="select">
+              <select
+                // onChange={trackSelected}
+                className="input"
+                id="tracks"
+                name="tracks"
+              >
+                {tracksData.map((track) => {
+                  return (
+                    <option key={track.id} value={track.id}>
+                      {track.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
           </div>
           <div className="column">
             <label htmlFor="section" className="label">
