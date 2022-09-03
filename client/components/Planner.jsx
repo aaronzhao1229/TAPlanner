@@ -3,6 +3,7 @@ import {
   getRegions,
   getTracksByRegionId,
   getSectionsByTrackId,
+  getStopsByTrackId,
 } from '../apiClient'
 
 const initialRegionId = 1
@@ -31,6 +32,12 @@ export default function Planner() {
       .then((sections) => {
         return setSectionsData(sections)
       })
+      .then(() => {
+        return getStopsByTrackId(initialTrackId)
+      })
+      .then((stops) => {
+        return setStopsData(stops)
+      })
   }, [])
 
   function regionSelected(event) {
@@ -42,10 +49,16 @@ export default function Planner() {
 
   function trackSelected(event) {
     let trackId = event.target.value
-    console.log(trackId)
-    getSectionsByTrackId(trackId).then((sections) => {
-      setSectionsData(sections)
-    })
+    getSectionsByTrackId(trackId)
+      .then((sections) => {
+        return setSectionsData(sections)
+      })
+      .then(() => {
+        return getStopsByTrackId(trackId)
+      })
+      .then((stops) => {
+        return setStopsData(stops)
+      })
   }
   return (
     // form <-------
@@ -133,17 +146,25 @@ export default function Planner() {
             </div>
           </div>
           <div className="column">
-            <label htmlFor="stop" className="label">
+            <label htmlFor="stops" className="label">
               Stop for the day
             </label>
-            <input
-              className="input"
-              type="text"
-              id="stop"
-              name="stop"
-              // value={section}
-              // onChange={handleChange}
-            />
+            <div className="select">
+              <select
+                // onChange={sectionSelected}
+                className="input"
+                id="stops"
+                name="stops"
+              >
+                {stopsData.map((stop) => {
+                  return (
+                    <option key={stop.id} value={stop.id}>
+                      {stop.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
           </div>
         </div>
         <input className="button is-primary mr-5" type="submit" />
