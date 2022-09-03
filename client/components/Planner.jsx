@@ -8,6 +8,7 @@ const intialSectionId = 1
 export default function Planner() {
   const [regionData, setRegionData] = useState([])
   const [tracksData, setTrackData] = useState([])
+  const [sectionsData, setSectionsData] = useState([])
 
   useEffect(() => {
     getRegions()
@@ -18,7 +19,13 @@ export default function Planner() {
         return getTracksByRegionId(initialRegionId)
       })
       .then((tracks) => {
-        setTrackData(tracks)
+        return setTrackData(tracks)
+      })
+      .then(() => {
+        return getSectionsByTrackId(initialTrackId)
+      })
+      .then((sections) => {
+        setSectionData(sections)
       })
   }, [])
 

@@ -5,6 +5,7 @@ const connection = require('knex')(config)
 module.exports = {
   getRegions,
   getTracksByRegionId,
+  getSectionsByTrackId,
 }
 
 function getRegions(db = connection) {
@@ -13,4 +14,8 @@ function getRegions(db = connection) {
 
 function getTracksByRegionId(regionId, db = connection) {
   return db('tracks').select().where('regionId', regionId)
+}
+
+function getSectionsByTrackId(trackId, db = connection) {
+  return db('sections').select().where('trackId', trackId)
 }

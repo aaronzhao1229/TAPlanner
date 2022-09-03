@@ -26,4 +26,16 @@ router.get('/tracks/:regionId', (req, res) => {
     })
 })
 
+router.get('/sections/:trackId', (req, res) => {
+  const trackId = req.params.trackId
+  db.getSectionsByTrackId(trackId)
+    .then((sections) => {
+      res.json(sections)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server error')
+    })
+})
+
 module.exports = router
