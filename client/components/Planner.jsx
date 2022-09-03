@@ -4,58 +4,84 @@ export default function Planner() {
   // const [data, setData] = useState(initialData)
 
   return (
-    <div>
+    <div className="container">
       <h3>Add a section</h3>
       {/* <form onSubmit={handleSubmit}> */}
       <form>
-        <div>
-          <label htmlFor="day">Day</label>
-          <input
-            type="text"
-            id="day"
-            name="day"
-            // value={day}
-            // onChange={handleChange}
-          />
-          <label htmlFor="region">Rigion</label>
-          <input
-            type="text"
-            id="region"
-            name="region"
-            // value={region}
-            // onChange={handleChange}
-          />
-          <label htmlFor="track">Track</label>
-          <input
-            type="text"
-            id="track"
-            name="track"
-            // value={track}
-            // onChange={handleChange}
-          />
-          <label htmlFor="section">Section</label>
-          <input
-            type="text"
-            id="section"
-            name="section"
-            // value={section}
-            // onChange={handleChange}
-          />
-          <label htmlFor="stop">Stop for the day</label>
-          <input
-            type="text"
-            id="stop"
-            name="stop"
-            // value={section}
-            // onChange={handleChange}
-          />
+        <div className="columns">
+          <div className="column">
+            <label htmlFor="day" className="label">
+              Day
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="day"
+              name="day"
+              // value={day}
+              // onChange={handleChange}
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="region" className="label">
+              Rigion
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="region"
+              name="region"
+              // value={region}
+              // onChange={handleChange}
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="track" className="label">
+              Track
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="track"
+              name="track"
+              // value={track}
+              // onChange={handleChange}
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="section" className="label">
+              Section
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="section"
+              name="section"
+              // value={section}
+              // onChange={handleChange}
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="stop" className="label">
+              Stop for the day
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="stop"
+              name="stop"
+              // value={section}
+              // onChange={handleChange}
+            />
+          </div>
         </div>
-        <input type="submit" />
+        <input className="button is-primary mr-5" type="submit" />
         <button
-        // onClick={(e) => {
-        //   e.preventDefault()
-        //   setData(initialData)
-        // }}
+          className="button is-warning"
+          // onClick={(e) => {
+          //   e.preventDefault()
+          //   setData(initialData)
+          // }}
         >
           Cancel
         </button>
