@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { getRegions } from '../apiClient'
-const initialData = {
-  id: '',
-  name: '',
-}
+const initialRegionData = [
+  {
+    id: '',
+    name: '',
+  },
+]
 export default function Planner() {
-  const [data, setData] = useState(initialData)
+  const [regionData, setRegionData] = useState(initialRegionData)
   useEffect(() => {
     getRegions().then((regions) => {
-      setData(regions)
+      setRegionData(regions)
     })
   }, [])
-
+  function regionSelected(event) {
+    let regionId = event.target.value
+    console.log(regionId)
+  }
   return (
+    // form <-------
     <div className="container">
       <h3 className="is-size-5">
         <strong>Add a section</strong>
@@ -37,14 +43,23 @@ export default function Planner() {
             <label htmlFor="region" className="label">
               Rigion
             </label>
-            <input
-              className="input"
-              type="text"
-              id="region"
-              name="region"
-              // value={region}
-              // onChange={handleChange}
-            />
+            <div className="select">
+              <select
+                onChange={regionSelected}
+                className="input"
+                id="region"
+                name="region"
+                // onChange={handleChange}
+              >
+                {regionData.map((region) => {
+                  return (
+                    <option key={region.id} value={region.id}>
+                      {region.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
           </div>
           <div className="column">
             <label htmlFor="track" className="label">
@@ -98,5 +113,6 @@ export default function Planner() {
         </button>
       </form>
     </div>
+    // form ------->
   )
 }
