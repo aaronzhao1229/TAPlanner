@@ -1,7 +1,16 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { getRegions } from '../apiClient'
+const initialData = {
+  id: '',
+  name: '',
+}
 export default function Planner() {
-  // const [data, setData] = useState(initialData)
+  const [data, setData] = useState(initialData)
+  useEffect(() => {
+    getRegions().then((regions) => {
+      setData(regions)
+    })
+  }, [])
 
   return (
     <div className="container">
