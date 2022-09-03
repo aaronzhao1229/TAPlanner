@@ -17,3 +17,9 @@ export function getSectionsByTrackId(trackId) {
     return res.body
   })
 }
+
+export function getStopsByTrackId(trackId) {
+  return request.get(`/planner/stops/${trackId}`).then((res) => {
+    return res.body
+  })
+}

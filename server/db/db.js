@@ -6,6 +6,7 @@ module.exports = {
   getRegions,
   getTracksByRegionId,
   getSectionsByTrackId,
+  getStopsByTrackId,
 }
 
 function getRegions(db = connection) {
@@ -18,4 +19,8 @@ function getTracksByRegionId(regionId, db = connection) {
 
 function getSectionsByTrackId(trackId, db = connection) {
   return db('sections').select().where('trackId', trackId)
+}
+
+function getStopsByTrackId(trackId, db = connection) {
+  return db('stops').select().where('trackId', trackId)
 }

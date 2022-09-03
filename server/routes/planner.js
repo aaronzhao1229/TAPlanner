@@ -38,4 +38,16 @@ router.get('/sections/:trackId', (req, res) => {
     })
 })
 
+router.get('/stops/:trackId', (req, res) => {
+  const trackId = req.params.trackId
+  db.getStopsByTrackId(trackId)
+    .then((stops) => {
+      res.json(stops)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server error')
+    })
+})
+
 module.exports = router
