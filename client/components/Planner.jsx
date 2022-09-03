@@ -7,12 +7,12 @@ import {
 
 const initialRegionId = 1
 const initialTrackId = 1
-const intialSectionId = 1
 
 export default function Planner() {
   const [regionData, setRegionData] = useState([])
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
+  const [stopsData, setStopsData] = useState([])
 
   useEffect(() => {
     getRegions()
@@ -29,15 +29,22 @@ export default function Planner() {
         return getSectionsByTrackId(initialTrackId)
       })
       .then((sections) => {
-        setSectionsData(sections)
+        return setSectionsData(sections)
       })
   }, [])
-  console.log(sectionsData)
+
   function regionSelected(event) {
     let regionId = event.target.value
-    console.log(regionId)
     getTracksByRegionId(regionId).then((tracks) => {
       setTrackData(tracks)
+    })
+  }
+
+  function trackSelected(event) {
+    let trackId = event.target.value
+    console.log(trackId)
+    getSectionsByTrackId(trackId).then((sections) => {
+      setSectionsData(sections)
     })
   }
   return (
@@ -89,7 +96,7 @@ export default function Planner() {
             </label>
             <div className="select">
               <select
-                // onChange={trackSelected}
+                onChange={trackSelected}
                 className="input"
                 id="tracks"
                 name="tracks"
