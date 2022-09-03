@@ -5,11 +5,16 @@ import {
   getSectionsByTrackId,
   getStopsByTrackId,
 } from '../apiClient'
-
+const initialFormData = {
+  day: '',
+  additionalNotes: '',
+}
 const initialRegionId = 1
 const initialTrackId = 1
 
 export default function Planner() {
+  const [form, setForm] = useState(initialFormData)
+  const { day, additionalNotes } = form
   const [regionData, setRegionData] = useState([])
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
@@ -38,13 +43,25 @@ export default function Planner() {
       .then((stops) => {
         return setStopsData(stops)
       })
+      .catch((err) => {
+        console.error(err.message + 'Planner useEffect')
+      })
   }, [])
+
+  function handleChange(event) {
+    setForm({ ...form, [event.target.name]: event.target.value })
+  }
+  console.log(form)
 
   function regionSelected(event) {
     let regionId = event.target.value
-    getTracksByRegionId(regionId).then((tracks) => {
-      setTrackData(tracks)
-    })
+    getTracksByRegionId(regionId)
+      .then((tracks) => {
+        setTrackData(tracks)
+      })
+      .catch((err) => {
+        console.error(err.message + 'regionSelected')
+      })
   }
 
   function trackSelected(event) {
@@ -59,6 +76,9 @@ export default function Planner() {
       .then((stops) => {
         return setStopsData(stops)
       })
+      .catch((err) => {
+        console.error(err.message + 'trackSelected')
+      })
   }
   return (
     // form <-------
@@ -71,15 +91,15 @@ export default function Planner() {
         <div className="columns">
           <div className="column">
             <label htmlFor="day" className="label">
-              Day
+              Day (eg. day 1 or 03/09/2022)
             </label>
             <input
               className="input"
               type="text"
               id="day"
               name="day"
-              // value={day}
-              // onChange={handleChange}
+              value={day}
+              onChange={handleChange}
             />
           </div>
           <div className="column">
@@ -165,6 +185,19 @@ export default function Planner() {
                 })}
               </select>
             </div>
+          </div>
+          <div className="column">
+            <label htmlFor="additionalNotes" className="label">
+              Additional Notes
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="additionalNotes"
+              name="additionalNotes"
+              value={additionalNotes}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <input className="button is-primary mr-5" type="submit" />
