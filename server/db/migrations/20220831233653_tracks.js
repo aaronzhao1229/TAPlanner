@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments('id')
     table.string('name')
     table.string('category')
-    table.integer('regionId')
+    table.integer('regionId').references('regions.id')
   })
 }
 

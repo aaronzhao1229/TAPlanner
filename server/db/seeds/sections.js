@@ -115,7 +115,8 @@ exports.seed = async function (knex) {
       name: 'Browning Hut to Hacket Junction',
       time: '1 hours',
       length: '3.4 km',
-      notes: '',
+      notes:
+        'Continue to Hacket Hut, or to Hope villiage where a bus can be caught into Nelson',
       trackId: 3,
     },
     {
@@ -124,6 +125,109 @@ exports.seed = async function (knex) {
       time: '15 minutes',
       length: '1.3 km',
       notes: '',
+      trackId: 4,
+    },
+    {
+      id: 16,
+      name: 'Hacket Hut to Starveall Hut',
+      time: '4 hours',
+      length: '6 km',
+      notes: 'Numerous river crossings',
+      trackId: 4,
+    },
+    {
+      id: 17,
+      name: 'Starveall Hut to Slaty Hut',
+      time: '2.5 hours',
+      length: '5 km',
+      notes:
+        'Carry water at least enough to last through to the next hut and resupply point',
+      trackId: 4,
+    },
+    {
+      id: 18,
+      name: 'Slaty Hut to Old Man Hut',
+      time: '5 hours',
+      length: '10 km',
+      notes:
+        'Carry water at least enough to last through to the next hut and resupply point',
+      trackId: 4,
+    },
+    {
+      id: 19,
+      name: 'Old Man Hut to Rintoul Hut',
+      time: '5 hours',
+      length: '4.5 km',
+      notes:
+        'Carry water at least enough to last through to the next hut and resupply point',
+      trackId: 4,
+    },
+    {
+      id: 20,
+      name: 'Rintoul Hut to Tarn Hut',
+      time: '4.5 hours',
+      length: '8 km',
+      notes:
+        'Carry water at least enough to last through to the next hut and resupply point',
+      trackId: 4,
+    },
+    {
+      id: 21,
+      name: 'Tarn Hut to Mid Wairoa Hut',
+      time: '4 hours',
+      length: '6.5 km',
+      notes:
+        'Carry water at least enough to last through to the next hut and resupply point',
+      trackId: 4,
+    },
+    {
+      id: 22,
+      name: 'Mid Wairoa Hut to Top Wairoa Hut',
+      time: '4.5 hours',
+      length: '7 km',
+      notes:
+        'Eight river crossings. It should not be attempted during periods of heavy rain as the river can rise quickly.',
+      trackId: 4,
+    },
+    {
+      id: 23,
+      name: 'Top Wairoa Hut to Hunters Hut',
+      time: '5 hours',
+      length: '10.5 km',
+      notes: '',
+      trackId: 4,
+    },
+    {
+      id: 24,
+      name: 'Hunters Hut to Porters Creek Hut',
+      time: '4 hours',
+      length: '9 km',
+      notes: '',
+      trackId: 4,
+    },
+    {
+      id: 25,
+      name: 'Porters Creek Hut to Red Hills Hut',
+      time: '5 hours',
+      length: '10.5 km',
+      notes:
+        'Motueka River crossing. The Motueka river can rise, and fall, very quickly after heavy rain. Take care in crossing and be prepared to sit it out if required',
+      trackId: 4,
+    },
+    {
+      id: 26,
+      name: 'Red Hills Hut to SH63',
+      time: '4 - 5 hours',
+      length: '7.5 km',
+      notes: '',
+      trackId: 4,
+    },
+    {
+      id: 27,
+      name: 'SH63 to St Arnaud',
+      time: '2 hours',
+      length: '8 km',
+      notes: 'Road Walking',
       trackId: 4,
     },
   ])

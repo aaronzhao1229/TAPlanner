@@ -13,7 +13,7 @@ const App = () => {
     setTable(newData)
   }
   return (
-    <div style={{ backgroundImage: `url('./images/header.jpeg')` }}>
+    <div>
       <Header />
       <Nav />
       <Routes>

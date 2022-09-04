@@ -125,127 +125,119 @@ export default function AddSection(props) {
         </h3>
         <form className="container" onSubmit={handleSubmit}>
           {/* <div className="columns"> */}
-          {/* <div className="column"> */}
-          <label htmlFor="day" className="label">
-            Day (eg. Day 1 or 03/09/2022)
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="day"
-            name="day"
-            value={day}
-            onChange={handleChange}
-          />
-          {/* </div> */}
-          {/* <div className="column"> */}
-          <label htmlFor="region" className="label">
-            Region
-          </label>
-          <div className="select">
-            <select
-              onChange={regionSelected}
+          <div className="container mt-3">
+            <label htmlFor="day" className="label">
+              Day (eg. Day 1 or 03/09/2022)
+            </label>
+            <input
               className="input"
-              id="region"
-              name="region"
-            >
-              {regionData.map((region) => {
-                return (
-                  <option key={region.id} value={region.id}>
-                    {region.name}
-                  </option>
-                )
-              })}
-            </select>
+              type="text"
+              id="day"
+              name="day"
+              value={day}
+              onChange={handleChange}
+            />
           </div>
-          {/* </div> */}
-          {/* <div className="column"> */}
-          <label htmlFor="tracks" className="label">
-            Track
-          </label>
-          <div className="select">
-            <select
-              onChange={trackSelected}
+          <div className="container mt-3">
+            <label htmlFor="region" className="label">
+              Region
+            </label>
+            <div className="select">
+              <select
+                onChange={regionSelected}
+                className="input"
+                id="region"
+                name="region"
+              >
+                {regionData.map((region) => {
+                  return (
+                    <option key={region.id} value={region.id}>
+                      {region.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="container mt-3">
+            <label htmlFor="tracks" className="label">
+              Track
+            </label>
+            <div className="select">
+              <select
+                onChange={trackSelected}
+                className="input"
+                id="tracks"
+                name="tracks"
+              >
+                {tracksData.map((track) => {
+                  return (
+                    <option key={track.id} value={track.id}>
+                      {track.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className="container mt-3">
+            <label htmlFor="section" className="label">
+              Section
+            </label>
+            <div className="select">
+              <select
+                onChange={sectionSelected}
+                className="input"
+                id="sections"
+                name="sections"
+              >
+                {sectionsData.map((section) => {
+                  return (
+                    <option key={section.id} value={section.id}>
+                      {section.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="container mt-3">
+            <label htmlFor="stops" className="label">
+              Stop for the day
+            </label>
+            <div className="select">
+              <select
+                onChange={stopSelected}
+                className="input"
+                id="stops"
+                name="stops"
+              >
+                {stopsData.map((stop) => {
+                  return (
+                    <option key={stop.id} value={stop.id}>
+                      {stop.name}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="container mt-3">
+            <label htmlFor="additionalNotes" className="label">
+              Additional Notes
+            </label>
+            <input
               className="input"
-              id="tracks"
-              name="tracks"
-            >
-              {tracksData.map((track) => {
-                return (
-                  <option key={track.id} value={track.id}>
-                    {track.name}
-                  </option>
-                )
-              })}
-            </select>
+              type="text"
+              id="additionalNotes"
+              name="additionalNotes"
+              value={additionalNotes}
+              onChange={handleChange}
+            />
           </div>
-          {/* </div> */}
-          {/* <div className="column"> */}
-          <label htmlFor="section" className="label">
-            Section
-          </label>
-          <div className="select">
-            <select
-              onChange={sectionSelected}
-              className="input"
-              id="sections"
-              name="sections"
-            >
-              {sectionsData.map((section) => {
-                return (
-                  <option key={section.id} value={section.id}>
-                    {section.name}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-          {/* </div> */}
-          {/* <div className="column"> */}
-          <label htmlFor="stops" className="label">
-            Stop for the day
-          </label>
-          <div className="select">
-            <select
-              onChange={stopSelected}
-              className="input"
-              id="stops"
-              name="stops"
-            >
-              {stopsData.map((stop) => {
-                return (
-                  <option key={stop.id} value={stop.id}>
-                    {stop.name}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-          {/* </div> */}
-          {/* <div className="column"> */}
-          <label htmlFor="additionalNotes" className="label">
-            Additional Notes
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="additionalNotes"
-            name="additionalNotes"
-            value={additionalNotes}
-            onChange={handleChange}
-          />
-          {/* </div> */}
-          {/* </div> */}
-          <input className="button is-primary mr-5" type="submit" />
-          <button
-            className="button is-warning"
-            // onClick={(e) => {
-            //   e.preventDefault()
-            //   setData(initialData)
-            // }}
-          >
-            Cancel
-          </button>
+
+          <input className="button is-primary mt-3" type="submit" />
         </form>
       </div>
     </>

@@ -9,7 +9,7 @@ exports.up = function (knex) {
     table.string('time')
     table.string('length')
     table.string('notes')
-    table.integer('trackId')
+    table.integer('trackId').references('tracks.id')
   })
 }
 

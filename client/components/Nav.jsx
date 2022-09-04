@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Nav() {
   return (
-    <nav className="box has-text-centered ml-5 mr-5">
+    <nav className="box has-text-centered has-background-primary">
       <div className="columns">
         <div className="column is-one-third">
           <Link to="/">Home</Link>

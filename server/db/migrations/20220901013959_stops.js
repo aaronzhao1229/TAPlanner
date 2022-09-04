@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments('id')
     table.string('name')
     table.string('resupply')
-    table.integer('trackId')
+    table.integer('trackId').references('tracks.id')
   })
 }
 

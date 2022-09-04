@@ -20,5 +20,11 @@ exports.seed = async function (knex) {
     },
     { id: 3, name: 'Pelorus River Track', category: 'Advanced', regionId: 1 },
     { id: 4, name: 'Richmond Alpine Track', category: 'Expert', regionId: 2 },
+    {
+      id: 5,
+      name: 'Waiau Pass Track',
+      category: 'Advanced to Expert',
+      regionId: 2,
+    },
   ])
 }
