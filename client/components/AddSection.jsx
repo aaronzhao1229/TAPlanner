@@ -140,7 +140,7 @@ export default function AddSection(props) {
           {/* </div> */}
           {/* <div className="column"> */}
           <label htmlFor="region" className="label">
-            Rigion
+            Region
           </label>
           <div className="select">
             <select

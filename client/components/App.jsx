@@ -10,7 +10,7 @@ import Gears from './Gears'
 const App = () => {
   const [table, setTable] = useState([])
   return (
-    <div>
+    <div style={{ backgroundImage: `url('./images/header.jpeg')` }}>
       <Header />
       <Nav />
       <Routes>
