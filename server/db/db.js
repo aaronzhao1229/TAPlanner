@@ -40,7 +40,7 @@ function getAllInfo(regionId, trackId, sectionId, stopId, db = connection) {
       'sections.time as time',
       'sections.notes as notes',
       'stops.name as stop',
-      'stops.resupply as resuply'
+      'stops.resupply as resupply'
     )
     .where('regions.id', regionId)
     .where('tracks.id', trackId)

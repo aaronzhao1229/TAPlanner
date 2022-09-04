@@ -24,28 +24,11 @@ export default function Planner(props) {
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
+  const [page, setPage] = useState(0)
   const { table } = props.tableData
   const { setTable } = props.setTableFunction
   // to do: trackId bug needs to be fixed if not selected and keep the default
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
-      .then((res) => {
-        console.log(res)
-        res[0].day = day
-        res[0].additionalNotes = additionalNotes
-        updatedTable.push(res[0])
-        setTable(updatedTable)
-      })
-      .catch((err) => {
-        console.error(err.message + 'Planner handleSummit')
-      })
-
-    // to be updated
-    // check state and form submit data and show in the table
-  }
-  console.log(table)
   useEffect(() => {
     getRegions()
       .then((regions) => {
@@ -121,6 +104,21 @@ export default function Planner(props) {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
+      .then((res) => {
+        res[0].day = day
+        res[0].additionalNotes = additionalNotes
+        updatedTable.push(res[0])
+        setTable(updatedTable)
+        setPage(page + 1)
+      })
+      .catch((err) => {
+        console.error(err.message + 'Planner handleSummit')
+      })
+  }
+
   return (
     <>
       <table className="table container is-bordered">
@@ -135,21 +133,30 @@ export default function Planner(props) {
             <th>Estimate time</th>
             <th>Section Note</th>
             <th>Stop for the day</th>
+            <th>Resupply</th>
             <th>Addtional Note</th>
           </tr>
         </thead>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-          <td>Maria Anders</td>
-        </tr>
+        {table.length !== 0 &&
+          table.map((row) => {
+            return (
+              <tbody key={row.section}>
+                <tr>
+                  <td>{row.day}</td>
+                  <td>{row.region}</td>
+                  <td>{row.track}</td>
+                  <td>{row.category}</td>
+                  <td>{row.section}</td>
+                  <td>{row.length}</td>
+                  <td>{row.time}</td>
+                  <td>{row.notes}</td>
+                  <td>{row.stop}</td>
+                  <td>{row.resupply}</td>
+                  <td>{row.additionalNotes}</td>
+                </tr>
+              </tbody>
+            )
+          })}
       </table>
       {/* form <------- */}
       <div className="container">
