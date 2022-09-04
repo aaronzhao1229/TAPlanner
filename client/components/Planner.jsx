@@ -31,7 +31,22 @@ export default function Planner(props) {
   function handleSubmit(e) {
     e.preventDefault()
     const targetRegion = findElementById(ids.regionId, regionData)
-    console.log(targetRegion)
+    const targetTrack = findElementById(ids.trackId, tracksData)
+    const targetSection = findElementById(ids.sectionId, sectionsData)
+    const targetStop = findElementById(ids.stopId, stopsData)
+    const tableRowToBeAdded = {
+      day: day,
+      region: targetRegion.name,
+      track: targetTrack.name,
+      catogery: targetTrack.catogery,
+      section: targetSection.name,
+      length: targetSection.length,
+      time: targetSection.time,
+      notes: targetSection.notes,
+      stop: targetStop.name,
+      resupply: targetStop.resupply,
+      additionalNotes: additionalNotes,
+    }
     // const fullDataForOneSection = {day: form.day, region: regionData.name, track: tracksData}
     // to be updated
     // check state and form submit data and show in the table
