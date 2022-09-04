@@ -5,6 +5,9 @@ import {
   getSectionsByTrackId,
   getStopsByTrackId,
 } from '../apiClient'
+
+import { findElementById } from '../helper'
+
 const initialFormData = {
   day: '',
   additionalNotes: '',
@@ -23,10 +26,12 @@ export default function Planner(props) {
   const table = props.tableData
   const setTable = props.setTableFunction
 
-  // to do: get section id and stop Id
+  // to do: trackId bug needs to be fixed if not selected and keep the default
+
   function handleSubmit(e) {
     e.preventDefault()
-
+    const targetRegion = findElementById(ids.regionId, regionData)
+    console.log(targetRegion)
     // const fullDataForOneSection = {day: form.day, region: regionData.name, track: tracksData}
     // to be updated
     // check state and form submit data and show in the table
@@ -94,15 +99,14 @@ export default function Planner(props) {
 
   function sectionSelected(event) {
     let sectionId = event.target.value
-
     ids['sectionId'] = Number(sectionId)
   }
 
   function stopSelected(event) {
     let stopId = event.target.value
-
     ids['stopId'] = Number(stopId)
   }
+
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
