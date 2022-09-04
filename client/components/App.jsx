@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { getGreeting } from '../apiClient'
+
 import Home from './Home'
 import Nav from './Nav'
 import Header from './Header'
