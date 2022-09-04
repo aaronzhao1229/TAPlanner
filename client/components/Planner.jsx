@@ -12,14 +12,16 @@ const initialFormData = {
 const initialRegionId = 1
 const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
-export default function Planner() {
+
+export default function Planner(props) {
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
   const [regionData, setRegionData] = useState([])
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
-  const [table, setTable] = useState([])
+  const table = props.tableData
+  const setTable = props.setTableFunction
 
   // to do: get section id and stop Id
   function handleSubmit(e) {
@@ -90,6 +92,12 @@ export default function Planner() {
       })
   }
 
+  function sectionSelected(event) {
+    let sectionId = event.target.value
+
+    ids['sectionId'] = Number(sectionId)
+    console.log(ids)
+  }
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
@@ -192,7 +200,7 @@ export default function Planner() {
           </label>
           <div className="select">
             <select
-              // onChange={sectionSelected}
+              onChange={sectionSelected}
               className="input"
               id="sections"
               name="sections"

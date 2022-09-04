@@ -8,13 +8,19 @@ import Planner from './Planner'
 import Gears from './Gears'
 
 const App = () => {
+  const [table, setTable] = useState([])
   return (
     <div>
       <Header />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/planner" element={<Planner />} />
+        <Route
+          path="/planner"
+          element={
+            <Planner tableData={{ table }} setTableFunction={{ setTable }} />
+          }
+        />
         <Route path="/gears" element={<Gears />} />
       </Routes>
     </div>
