@@ -23,3 +23,11 @@ export function getStopsByTrackId(trackId) {
     return res.body
   })
 }
+
+export function getAllInfo(regionId, trackId, sectionId, stopId) {
+  return request
+    .get(`/planner/getAllInfo/${regionId}/${trackId}/${sectionId}/${stopId}`)
+    .then((res) => {
+      return res.body
+    })
+}

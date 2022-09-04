@@ -4,6 +4,7 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
+  getAllInfo,
 } from '../apiClient'
 
 import { findElementById } from '../helper'
@@ -15,7 +16,7 @@ const initialFormData = {
 const initialRegionId = 1
 const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
-
+const updatedTable = []
 export default function Planner(props) {
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
@@ -23,34 +24,28 @@ export default function Planner(props) {
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
-  const table = props.tableData
-  const setTable = props.setTableFunction
-
+  const { table } = props.tableData
+  const { setTable } = props.setTableFunction
   // to do: trackId bug needs to be fixed if not selected and keep the default
 
   function handleSubmit(e) {
     e.preventDefault()
-    const targetRegion = findElementById(ids.regionId, regionData)
-    const targetTrack = findElementById(ids.trackId, tracksData)
-    const targetSection = findElementById(ids.sectionId, sectionsData)
-    const targetStop = findElementById(ids.stopId, stopsData)
-    const tableRowToBeAdded = {
-      day: day,
-      region: targetRegion.name,
-      track: targetTrack.name,
-      catogery: targetTrack.catogery,
-      section: targetSection.name,
-      length: targetSection.length,
-      time: targetSection.time,
-      notes: targetSection.notes,
-      stop: targetStop.name,
-      resupply: targetStop.resupply,
-      additionalNotes: additionalNotes,
-    }
-    // const fullDataForOneSection = {day: form.day, region: regionData.name, track: tracksData}
+    getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
+      .then((res) => {
+        console.log(res)
+        res[0].day = day
+        res[0].additionalNotes = additionalNotes
+        updatedTable.push(res[0])
+        setTable(updatedTable)
+      })
+      .catch((err) => {
+        console.error(err.message + 'Planner handleSummit')
+      })
+
     // to be updated
     // check state and form submit data and show in the table
   }
+  console.log(table)
   useEffect(() => {
     getRegions()
       .then((regions) => {
