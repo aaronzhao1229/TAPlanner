@@ -96,7 +96,12 @@ export default function Planner(props) {
     let sectionId = event.target.value
 
     ids['sectionId'] = Number(sectionId)
-    console.log(ids)
+  }
+
+  function stopSelected(event) {
+    let stopId = event.target.value
+
+    ids['stopId'] = Number(stopId)
   }
   function handleChange(event) {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -221,7 +226,7 @@ export default function Planner(props) {
           </label>
           <div className="select">
             <select
-              // onChange={sectionSelected}
+              onChange={stopSelected}
               className="input"
               id="stops"
               name="stops"
