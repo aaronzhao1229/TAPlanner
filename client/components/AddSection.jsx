@@ -25,7 +25,7 @@ export default function AddSection(props) {
 
   const page = props.pageData
   const setPage = props.setPageFunction
-  const setTable = props.setTableFunction
+  const updateTable = props.setTableFunction
 
   useEffect(() => {
     getRegions()
@@ -109,7 +109,7 @@ export default function AddSection(props) {
         res[0].day = day
         res[0].additionalNotes = additionalNotes
         updatedTable.push(res[0])
-        setTable(updatedTable)
+        updateTable(updatedTable)
         setPage(page + 1)
       })
       .catch((err) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Home from './Home'
@@ -9,6 +9,9 @@ import Gears from './Gears'
 
 const App = () => {
   const [table, setTable] = useState([])
+  function updateTable(newData) {
+    setTable(newData)
+  }
   return (
     <div style={{ backgroundImage: `url('./images/header.jpeg')` }}>
       <Header />
@@ -18,7 +21,7 @@ const App = () => {
         <Route
           path="/planner"
           element={
-            <Planner tableData={{ table }} setTableFunction={{ setTable }} />
+            <Planner tableData={{ table }} setTableFunction={{ updateTable }} />
           }
         />
         <Route path="/gears" element={<Gears />} />

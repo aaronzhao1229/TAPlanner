@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import {
-  getRegions,
-  getTracksByRegionId,
-  getSectionsByTrackId,
-  getStopsByTrackId,
-  getAllInfo,
-} from '../apiClient'
+import React, { useState } from 'react'
+
 import AddSection from './AddSection'
 
 export default function Planner(props) {
   const [page, setPage] = useState(0)
   const { table } = props.tableData
-  const { setTable } = props.setTableFunction
+  const { updateTable } = props.setTableFunction
 
   return (
     <>
@@ -53,7 +47,7 @@ export default function Planner(props) {
           })}
       </table>
       <AddSection
-        setTableFunction={setTable}
+        setTableFunction={updateTable}
         pageData={page}
         setPageFunction={setPage}
       />
