@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 
 import AddSection from './AddSection'
-
+let updatedTable = []
 export default function Planner(props) {
   const [page, setPage] = useState(0)
   const { table } = props.tableData
   const { updateTable } = props.setTableFunction
-
+  function deletePlan(target) {
+    const originalTableData = [...table]
+    updatedTable = originalTableData.filter((r) => r.section !== target)
+    updateTable(updatedTable)
+  }
+  console.log(table)
   return (
     <>
       <table className="table container is-bordered">
@@ -23,6 +28,7 @@ export default function Planner(props) {
             <th>Stop for the day</th>
             <th>Resupply</th>
             <th>Addtional Note</th>
+            <th>Delete?</th>
           </tr>
         </thead>
         {table.length !== 0 &&
@@ -41,6 +47,11 @@ export default function Planner(props) {
                   <td>{row.stop}</td>
                   <td>{row.resupply}</td>
                   <td>{row.additionalNotes}</td>
+                  <td>
+                    <button onClick={() => deletePlan(row.section)}>
+                      delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             )
@@ -50,6 +61,7 @@ export default function Planner(props) {
         setTableFunction={updateTable}
         pageData={page}
         setPageFunction={setPage}
+        updateTableData={updatedTable}
       />
     </>
   )
