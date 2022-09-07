@@ -14,8 +14,9 @@ const initialFormData = {
 const initialRegionId = 1
 const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
-const updatedTable = []
+
 export default function AddSection(props) {
+  const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
   const [regionData, setRegionData] = useState([])
