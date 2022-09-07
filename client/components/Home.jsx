@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
@@ -12,8 +13,18 @@ export default function Home() {
               </figure>
             </div>
             <header className="card-header">
-              <p className="card-header-title is-centered">Planner</p>
+              <p className="card-header-title is-centered">
+                <Link to="/planner">Planner</Link>
+              </p>
             </header>
+            <div clasName="card-content ">
+              <div className="content ml-6 mr-6 mt-5">
+                This planning tool provides dropdown lists which makes planning
+                easier. Most information is based on official Te Araroa notes,
+                which however may be not accurate. Please refer to the official
+                TA notes.
+              </div>
+            </div>
           </div>
         </div>
         <div className="column">
@@ -24,8 +35,18 @@ export default function Home() {
               </figure>
             </div>
             <header className="card-header">
-              <p className="card-header-title is-centered">Gears</p>
+              <p className="card-header-title is-centered">
+                <Link to="/gears">Gears</Link>
+              </p>
             </header>
+            <div clasName="card-content ">
+              <div className="content ml-6 mr-6 mt-5">
+                A hiker using good, lightweight equipment has a better chance of
+                finishing a hike than one overloaded with poor gear. This gear
+                organising tool helps track the weight (as well as price) of
+                your gears. To be developed.
+              </div>
+            </div>
           </div>
         </div>
       </div>

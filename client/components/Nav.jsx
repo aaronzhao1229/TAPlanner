@@ -8,7 +8,7 @@ export default function Nav() {
         <div className="column is-one-third">
           <Link to="/">Home</Link>
         </div>
-        <div className="column is-one-third">
+        <div className="column is-one-third has-text-white">
           <Link to="/planner">Planner</Link>
         </div>
         <div className="column is-one-third">
