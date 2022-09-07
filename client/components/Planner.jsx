@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { exportData } from '../helper'
 import AddSection from './AddSection'
 let updatedTable = []
 export default function Planner(props) {
@@ -11,10 +11,15 @@ export default function Planner(props) {
     updatedTable = originalTableData.filter((r) => r.section !== target)
     updateTable(updatedTable)
   }
-  console.log(table)
+
   return (
     <>
-      <table className="table container is-bordered">
+      <div className="block has-text-right mr-4">
+        <button className="button is-primary" onClick={exportData}>
+          Export table
+        </button>
+      </div>
+      <table className="table container is-bordered" id="datatable">
         <thead>
           <tr>
             <th>Day</th>
@@ -48,8 +53,11 @@ export default function Planner(props) {
                   <td>{row.resupply}</td>
                   <td>{row.additionalNotes}</td>
                   <td>
-                    <button onClick={() => deletePlan(row.section)}>
-                      delete
+                    <button
+                      className="button is-warning"
+                      onClick={() => deletePlan(row.section)}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>
