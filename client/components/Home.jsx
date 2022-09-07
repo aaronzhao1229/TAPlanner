@@ -14,7 +14,9 @@ export default function Home() {
             </div>
             <header className="card-header">
               <p className="card-header-title is-centered">
-                <Link to="/planner">Planner</Link>
+                <Link to="/planner" style={{ color: 'black' }}>
+                  Planner
+                </Link>
               </p>
             </header>
             <div clasName="card-content ">
@@ -36,7 +38,9 @@ export default function Home() {
             </div>
             <header className="card-header">
               <p className="card-header-title is-centered">
-                <Link to="/gears">Gears</Link>
+                <Link to="/gears" style={{ color: 'black' }}>
+                  Gears
+                </Link>
               </p>
             </header>
             <div clasName="card-content ">
@@ -52,7 +56,11 @@ export default function Home() {
       </div>
       <footer className="footer">
         <div className="content has-text-centered">
-          <a href={'https://www.flaticon.com'} title={'plan icons'}>
+          <a
+            href={'https://www.flaticon.com'}
+            title={'plan icons'}
+            style={{ color: '#394851' }}
+          >
             Icons created by Freepik - Flaticon
           </a>
         </div>
