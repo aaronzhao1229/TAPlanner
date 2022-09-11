@@ -1,7 +1,9 @@
 import React from 'react'
-import Planner from './Planner'
+
 const { screen, render } = require('@testing-library/react')
 require('@testing-library/jest-dom')
+
+import Planner from './Planner'
 
 describe('Planner', () => {
   it('test if table is displayed', () => {

@@ -42,4 +42,17 @@ module.exports = {
       tableName: 'knex_migrations',
     },
   },
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: ':memory:',
+    },
+    useNullAsDefault: true,
+    seeds: {
+      directory: path.join(__dirname, 'seeds'),
+    },
+    migrations: {
+      directory: path.join(__dirname, 'migrations'),
+    },
+  },
 }
