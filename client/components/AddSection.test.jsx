@@ -26,7 +26,7 @@ const mockSections = [
 const mockStops = [{ name: 'Christchurch' }, { name: 'Arthurs Pass' }]
 
 describe('AddSection', () => {
-  it('shows regions dropdown with all the regions', async () => {
+  it('shows dropdown with all the options', async () => {
     await act(async () => {
       await getRegions.mockReturnValue(Promise.resolve(mockRegions))
       await getTracksByRegionId.mockReturnValue(Promise.resolve(mockTracks))
@@ -44,5 +44,6 @@ describe('AddSection', () => {
     // screen.debug()
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(8)
+    expect(options[0]).toHaveTextContent('Canterbury')
   })
 })
