@@ -28,7 +28,7 @@ export default function Planner(props) {
             <th>Track Catogery</th>
             <th>Section</th>
             <th>Length</th>
-            <th>Estimate time</th>
+            <th>Estimated time</th>
             <th>Section Note</th>
             <th>Stop for the day</th>
             <th>Resupply</th>
