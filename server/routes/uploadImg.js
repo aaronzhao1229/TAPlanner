@@ -25,14 +25,25 @@ router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
     console.log('No file upload')
   } else {
-    console.log(req)
+    console.log(req.file.filename)
     let imgsrc = './images/' + req.file.filename
     db.uploadImage(imgsrc)
-      .then((ids) => res.json(ids))
+      .then(() => res.redirect('/gears'))
       .catch((err) => {
         console.error(err.message)
         res.status(500).send('Server error')
       })
   }
+})
+
+router.get('/', (req, res) => {
+  db.getImageUrl()
+    .then((imgs) => {
+      res.json(imgs)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server error')
+    })
 })
 module.exports = router

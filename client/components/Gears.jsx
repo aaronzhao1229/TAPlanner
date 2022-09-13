@@ -1,5 +1,5 @@
 import React from 'react'
-
+import UploadAFile from './UploadAFile'
 export default function Gears() {
   return (
     <div>
@@ -13,6 +13,7 @@ export default function Gears() {
           <p>Kitchen</p>
         </div>
       </div>
+      <UploadAFile />
     </div>
   )
 }
