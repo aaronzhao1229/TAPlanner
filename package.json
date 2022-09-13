@@ -37,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.11.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "excellentexport": "^3.8.0",
