@@ -5,12 +5,13 @@ export default function UploadAFile() {
   const [selectedImage, setSelectedImage] = useState(null)
   function handleChange(e) {
     setSelectedImage(e.target.files[0])
-    uploadImage(e.target.files[0])
   }
 
-  // function saveToServer() {
+  // function saveToServer(e) {
+  //   e.preventDefault()
   //   console.log('save to server')
-  //   uploadImage(selectedImage)
+  //   console.log(e.target)
+  //   uploadImage({ fieldname: 'image', file: selectedImage })
   // }
 
   return (
@@ -28,7 +29,10 @@ export default function UploadAFile() {
         </div>
       )}
       <br />
-      <input type="file" name="image" onChange={handleChange} />
+      <form action="/uploadImage" method="post" encType="multipart/form-data">
+        <input type="file" name="image" onChange={handleChange} />
+        <input type="submit" />
+      </form>
     </>
   )
 }

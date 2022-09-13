@@ -25,8 +25,8 @@ router.post('/', upload.single('image'), (req, res) => {
   if (!req.file) {
     console.log('No file upload')
   } else {
-    console.log(req.file.filename)
-    let imgsrc = 'http://127.0.0.1:3000/images/' + req.file.filename
+    console.log(req)
+    let imgsrc = './images/' + req.file.filename
     db.uploadImage(imgsrc)
       .then((ids) => res.json(ids))
       .catch((err) => {
