@@ -32,17 +32,6 @@ export function getAllInfo(regionId, trackId, sectionId, stopId) {
     })
 }
 
-// export function uploadImage(img) {
-//   console.log('apiClient works')
-//   return request
-//     .post('/uploadImage')
-//     .send(img)
-//     .then(() => {
-//       console.log('apiClient works')
-//       // return res.body
-//     })
-// }
-
 export function getImages() {
   return request.get('/uploadImage').then((res) => {
     return res.body
