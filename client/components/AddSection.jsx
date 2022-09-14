@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchRegions } from '../actions/planner'
+import { fetchRegions, fetchTracksByRegionId } from '../actions/planner'
 import {
-  // getRegions,
-  getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
   getAllInfo,
@@ -23,8 +21,7 @@ export default function AddSection(props) {
   const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
-  // const [regionData, setRegionData] = useState([])
-  const [tracksData, setTrackData] = useState([])
+
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
 
@@ -34,12 +31,7 @@ export default function AddSection(props) {
 
   useEffect(() => {
     dispatch(fetchRegions())
-      .then(() => {
-        return getTracksByRegionId(initialRegionId)
-      })
-      .then((tracks) => {
-        return setTrackData(tracks)
-      })
+    dispatch(fetchTracksByRegionId(initialRegionId))
       .then(() => {
         return getSectionsByTrackId(initialTrackId)
       })
@@ -57,20 +49,11 @@ export default function AddSection(props) {
       })
   }, [])
   const regions = useSelector((state) => state.regions)
-
+  const tracks = useSelector((state) => state.tracks)
   function regionSelected(event) {
     let regionId = event.target.value
-    console.log('regionId: ' + regionId)
-
     ids['regionId'] = Number(regionId)
-
-    getTracksByRegionId(regionId)
-      .then((tracks) => {
-        setTrackData(tracks)
-      })
-      .catch((err) => {
-        console.error(err.message + 'regionSelected')
-      })
+    dispatch(fetchTracksByRegionId(regionId))
   }
 
   function trackSelected(event) {
@@ -174,7 +157,7 @@ export default function AddSection(props) {
                 id="tracks"
                 name="tracks"
               >
-                {tracksData.map((track) => {
+                {tracks.map((track) => {
                   return (
                     <option key={track.id} value={track.id}>
                       {track.name}
