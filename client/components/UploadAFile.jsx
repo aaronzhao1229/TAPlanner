@@ -1,18 +1,10 @@
 import React, { useState } from 'react'
-import { uploadImage } from '../apis/apiClient'
 
 export default function UploadAFile() {
   const [selectedImage, setSelectedImage] = useState(null)
   function handleChange(e) {
     setSelectedImage(e.target.files[0])
   }
-
-  // function saveToServer(e) {
-  //   e.preventDefault()
-  //   console.log('save to server')
-
-  //   uploadImage({ file: { fieldname: 'image', buffer: selectedImage } })
-  // }
 
   return (
     <>
@@ -33,10 +25,6 @@ export default function UploadAFile() {
         <input type="file" name="image" onChange={handleChange} />
         <input type="submit" />
       </form>
-      {/* <form onSubmit={saveToServer} encType="multipart/form-data">
-        <input type="file" name="image" onChange={handleChange} />
-        <input type="submit" />
-      </form> */}
     </>
   )
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchRegions } from '../actions/planner'
 import {
-  getRegions,
+  // getRegions,
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
@@ -16,10 +18,12 @@ const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
 export default function AddSection(props) {
+  const dispatch = useDispatch()
+
   const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
-  const [regionData, setRegionData] = useState([])
+  // const [regionData, setRegionData] = useState([])
   const [tracksData, setTrackData] = useState([])
   const [sectionsData, setSectionsData] = useState([])
   const [stopsData, setStopsData] = useState([])
@@ -29,10 +33,7 @@ export default function AddSection(props) {
   const updateTable = props.setTableFunction
 
   useEffect(() => {
-    getRegions()
-      .then((regions) => {
-        return setRegionData(regions)
-      })
+    dispatch(fetchRegions())
       .then(() => {
         return getTracksByRegionId(initialRegionId)
       })
@@ -55,9 +56,11 @@ export default function AddSection(props) {
         console.error(err.message + 'Planner useEffect')
       })
   }, [])
+  const regions = useSelector((state) => state.regions)
 
   function regionSelected(event) {
     let regionId = event.target.value
+    console.log('regionId: ' + regionId)
 
     ids['regionId'] = Number(regionId)
 
@@ -150,7 +153,7 @@ export default function AddSection(props) {
                 id="region"
                 name="region"
               >
-                {regionData.map((region) => {
+                {regions.map((region) => {
                   return (
                     <option key={region.id} value={region.id}>
                       {region.name}
