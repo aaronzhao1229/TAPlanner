@@ -13,6 +13,7 @@ export default function Nav() {
     e.preventDefault()
     loginWithRedirect()
   }
+
   return (
     <nav className="box has-text-centered has-background-primary">
       <div className="columns">

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
-  getRegions,
-  getTracksByRegionId,
-  getSectionsByTrackId,
-  getStopsByTrackId,
-  getAllInfo,
-} from '../apiClient'
-import { v4 as uuidv4 } from 'uuid'
+  fetchRegions,
+  fetchTracksByRegionId,
+  fetchSectionsByTrackId,
+  fetchStopsByTrackId,
+} from '../actions/planner'
+
+import { getAllInfo } from '../apis/apiClient'
+
 const initialFormData = {
   day: '',
   additionalNotes: '',
@@ -16,77 +18,39 @@ const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
 export default function AddSection(props) {
+  const dispatch = useDispatch()
+
   const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
-  const [regionData, setRegionData] = useState([])
-  const [tracksData, setTrackData] = useState([])
-  const [sectionsData, setSectionsData] = useState([])
-  const [stopsData, setStopsData] = useState([])
 
   const page = props.pageData
   const setPage = props.setPageFunction
   const updateTable = props.setTableFunction
 
   useEffect(() => {
-    getRegions()
-      .then((regions) => {
-        return setRegionData(regions)
-      })
-      .then(() => {
-        return getTracksByRegionId(initialRegionId)
-      })
-      .then((tracks) => {
-        return setTrackData(tracks)
-      })
-      .then(() => {
-        return getSectionsByTrackId(initialTrackId)
-      })
-      .then((sections) => {
-        return setSectionsData(sections)
-      })
-      .then(() => {
-        return getStopsByTrackId(initialTrackId)
-      })
-      .then((stops) => {
-        return setStopsData(stops)
-      })
-      .catch((err) => {
-        console.error(err.message + 'Planner useEffect')
-      })
+    dispatch(fetchRegions())
+    dispatch(fetchTracksByRegionId(initialRegionId))
+    dispatch(fetchSectionsByTrackId(initialTrackId))
+    dispatch(fetchStopsByTrackId(initialTrackId))
   }, [])
+
+  const regions = useSelector((state) => state.regions)
+  const tracks = useSelector((state) => state.tracks)
+  const sections = useSelector((state) => state.sections)
+  const stops = useSelector((state) => state.stops)
 
   function regionSelected(event) {
     let regionId = event.target.value
-
     ids['regionId'] = Number(regionId)
-
-    getTracksByRegionId(regionId)
-      .then((tracks) => {
-        setTrackData(tracks)
-      })
-      .catch((err) => {
-        console.error(err.message + 'regionSelected')
-      })
+    dispatch(fetchTracksByRegionId(regionId))
   }
 
   function trackSelected(event) {
     let trackId = event.target.value
     ids['trackId'] = Number(trackId)
-    console.log(ids)
-    getSectionsByTrackId(trackId)
-      .then((sections) => {
-        return setSectionsData(sections)
-      })
-      .then(() => {
-        return getStopsByTrackId(trackId)
-      })
-      .then((stops) => {
-        return setStopsData(stops)
-      })
-      .catch((err) => {
-        console.error(err.message + 'trackSelected')
-      })
+    dispatch(fetchSectionsByTrackId(trackId))
+    dispatch(fetchStopsByTrackId(trackId))
   }
 
   function sectionSelected(event) {
@@ -125,7 +89,6 @@ export default function AddSection(props) {
           <strong>Add a section</strong>
         </h3>
         <form className="container" onSubmit={handleSubmit}>
-          {/* <div className="columns"> */}
           <div className="container mt-3">
             <label htmlFor="day" className="label">
               Day (eg. Day 1 or 03/09/2022)
@@ -150,7 +113,7 @@ export default function AddSection(props) {
                 id="region"
                 name="region"
               >
-                {regionData.map((region) => {
+                {regions.map((region) => {
                   return (
                     <option key={region.id} value={region.id}>
                       {region.name}
@@ -171,7 +134,7 @@ export default function AddSection(props) {
                 id="tracks"
                 name="tracks"
               >
-                {tracksData.map((track) => {
+                {tracks.map((track) => {
                   return (
                     <option key={track.id} value={track.id}>
                       {track.name}
@@ -193,7 +156,7 @@ export default function AddSection(props) {
                 id="sections"
                 name="sections"
               >
-                {sectionsData.map((section) => {
+                {sections.map((section) => {
                   return (
                     <option key={section.id} value={section.id}>
                       {section.name}
@@ -214,7 +177,7 @@ export default function AddSection(props) {
                 id="stops"
                 name="stops"
               >
-                {stopsData.map((stop) => {
+                {stops.map((stop) => {
                   return (
                     <option key={stop.id} value={stop.id}>
                       {stop.name}
