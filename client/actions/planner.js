@@ -3,12 +3,14 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
+  getAllInfo,
 } from '../apis/apiClient'
 
 export const SET_REGIONS_SUCCESS = 'SET_REGIONS_SUCCESS'
 export const SET_TRACKS_SUCCESS = 'SET_TRACKS_SUCCESS'
 export const SET_SECTIONS_SUCCESS = 'SET_SECTIONS_SUCCESS'
 export const SET_STOPS_SUCCESS = 'SET_STOPS_SUCCESS'
+export const SET_ALLINFO_SUCCESS = 'SET_ALLINFO_SUCCESS'
 
 export function fetchRegions() {
   return (dispatch) => {
@@ -58,6 +60,18 @@ export function fetchStopsByTrackId(trackId) {
   }
 }
 
+export function fetchAllInfo(regionId, trackId, sectionId, stopId) {
+  return (dispatch) => {
+    return getAllInfo(regionId, trackId, sectionId, stopId)
+      .then((trip) => {
+        dispatch(setAllInfoSuccess(trip))
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+}
+
 export function setRegionsSuccess(regions) {
   return { type: SET_REGIONS_SUCCESS, payload: regions }
 }
@@ -72,4 +86,8 @@ export function setSectionsSuccess(sections) {
 
 export function setStopsSuccess(stops) {
   return { type: SET_STOPS_SUCCESS, payload: stops }
+}
+
+export function setAllInfoSuccess(trip) {
+  return { type: SET_ALLINFO_SUCCESS, payload: trip }
 }

@@ -7,10 +7,10 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
-} from '../apiClient'
+} from '../apis/apiClient'
 import { act } from 'react-dom/test-utils'
 
-jest.mock('../apiClient')
+jest.mock('../apis/apiClient')
 const mockRegions = [
   { id: 1, name: 'Canterbury' },
   { id: 2, name: 'Southland' },
@@ -25,6 +25,7 @@ const mockSections = [
 
 const mockStops = [{ name: 'Christchurch' }, { name: 'Arthurs Pass' }]
 
+// to be updated
 describe('AddSection', () => {
   it('shows dropdown with all the options', async () => {
     await act(async () => {

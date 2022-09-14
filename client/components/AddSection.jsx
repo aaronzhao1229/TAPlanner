@@ -34,10 +34,12 @@ export default function AddSection(props) {
     dispatch(fetchSectionsByTrackId(initialTrackId))
     dispatch(fetchStopsByTrackId(initialTrackId))
   }, [])
+
   const regions = useSelector((state) => state.regions)
   const tracks = useSelector((state) => state.tracks)
   const sections = useSelector((state) => state.sections)
   const stops = useSelector((state) => state.stops)
+
   function regionSelected(event) {
     let regionId = event.target.value
     ids['regionId'] = Number(regionId)
