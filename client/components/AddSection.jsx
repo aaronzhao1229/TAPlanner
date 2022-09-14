@@ -4,13 +4,10 @@ import {
   fetchRegions,
   fetchTracksByRegionId,
   fetchSectionsByTrackId,
+  fetchStopsByTrackId,
 } from '../actions/planner'
 
-import {
-  // getSectionsByTrackId,
-  getStopsByTrackId,
-  getAllInfo,
-} from '../apis/apiClient'
+import { getAllInfo } from '../apis/apiClient'
 
 const initialFormData = {
   day: '',
@@ -27,9 +24,6 @@ export default function AddSection(props) {
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
 
-  // const [sectionsData, setSectionsData] = useState([])
-  const [stopsData, setStopsData] = useState([])
-
   const page = props.pageData
   const setPage = props.setPageFunction
   const updateTable = props.setTableFunction
@@ -38,25 +32,12 @@ export default function AddSection(props) {
     dispatch(fetchRegions())
     dispatch(fetchTracksByRegionId(initialRegionId))
     dispatch(fetchSectionsByTrackId(initialTrackId))
-      // .then(() => {
-      //   return getSectionsByTrackId(initialTrackId)
-      // })
-      // .then((sections) => {
-      //   return setSectionsData(sections)
-      // })
-      .then(() => {
-        return getStopsByTrackId(initialTrackId)
-      })
-      .then((stops) => {
-        return setStopsData(stops)
-      })
-      .catch((err) => {
-        console.error(err.message + 'Planner useEffect')
-      })
+    dispatch(fetchStopsByTrackId(initialTrackId))
   }, [])
   const regions = useSelector((state) => state.regions)
   const tracks = useSelector((state) => state.tracks)
   const sections = useSelector((state) => state.sections)
+  const stops = useSelector((state) => state.stops)
   function regionSelected(event) {
     let regionId = event.target.value
     ids['regionId'] = Number(regionId)
@@ -66,17 +47,8 @@ export default function AddSection(props) {
   function trackSelected(event) {
     let trackId = event.target.value
     ids['trackId'] = Number(trackId)
-    console.log(ids)
     dispatch(fetchSectionsByTrackId(trackId))
-      .then(() => {
-        return getStopsByTrackId(trackId)
-      })
-      .then((stops) => {
-        return setStopsData(stops)
-      })
-      .catch((err) => {
-        console.error(err.message + 'trackSelected')
-      })
+    dispatch(fetchStopsByTrackId(trackId))
   }
 
   function sectionSelected(event) {
@@ -115,7 +87,6 @@ export default function AddSection(props) {
           <strong>Add a section</strong>
         </h3>
         <form className="container" onSubmit={handleSubmit}>
-          {/* <div className="columns"> */}
           <div className="container mt-3">
             <label htmlFor="day" className="label">
               Day (eg. Day 1 or 03/09/2022)
@@ -204,7 +175,7 @@ export default function AddSection(props) {
                 id="stops"
                 name="stops"
               >
-                {stopsData.map((stop) => {
+                {stops.map((stop) => {
                   return (
                     <option key={stop.id} value={stop.id}>
                       {stop.name}
