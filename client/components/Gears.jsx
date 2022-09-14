@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import UploadAFile from './UploadAFile'
-import { getImages } from '../apiClient'
+import { getImages } from '../apis/apiClient'
 
 const initialImageData = [{ id: '', url: '' }]
 export default function Gears() {

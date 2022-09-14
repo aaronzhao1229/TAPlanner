@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { uploadImage } from '../apiClient'
+import { uploadImage } from '../apis/apiClient'
 
 export default function UploadAFile() {
   const [selectedImage, setSelectedImage] = useState(null)
