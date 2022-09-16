@@ -1,5 +1,5 @@
 import React from 'react'
-import AddSection from './AddSection'
+import AddSection from '../AddSection'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import {
@@ -7,10 +7,10 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
-} from '../apis/apiClient'
+} from '../../apis/apiClient'
 import { act } from 'react-dom/test-utils'
 
-jest.mock('../apis/apiClient')
+jest.mock('../../apis/apiClient')
 const mockRegions = [
   { id: 1, name: 'Canterbury' },
   { id: 2, name: 'Southland' },
