@@ -1,7 +1,7 @@
 const { expressjwt: jwt } = require('express-jwt')
 const jwks = require('jwks-rsa')
 
-const domain = 'pikopiko-2022-aaron.au.auth0.com'
+const domain = 'https://pikopiko-2022-aaron.au.auth0.com'
 const audience = 'https://taplanner/api'
 
 const checkJwt = jwt({

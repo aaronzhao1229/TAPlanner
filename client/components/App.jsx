@@ -7,6 +7,8 @@ import Header from './Header'
 import Planner from './Planner'
 import Gears from './Gears'
 
+import SignIn from './SignIn'
+
 const App = () => {
   const [table, setTable] = useState([])
   function updateTable(newData) {
@@ -17,7 +19,7 @@ const App = () => {
       <Header />
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<SignIn />} />
         <Route
           path="/planner"
           element={

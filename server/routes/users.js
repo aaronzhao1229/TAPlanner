@@ -50,6 +50,7 @@ router.get('/singleUser', checkJwt, (req, res) => {
     usersDb
       .getUserById(auth0_id)
       .then((user) => {
+        console.log(user)
         res.json(user ? user : null)
       })
       .catch((err) => {
