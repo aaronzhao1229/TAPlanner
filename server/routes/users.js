@@ -3,6 +3,7 @@ const path = require('path')
 const multer = require('multer')
 const usersDb = require('../db/db.users')
 const router = express.Router()
+const checkJwt = require('../auth0')
 
 //! Use of Multer
 let storage = multer.diskStorage({
@@ -31,13 +32,29 @@ router.post('/createProfile', upload.single('profile'), (req, res) => {
       location: req.body.location,
       image: './images/' + req.file.filename,
     }
-
     usersDb
       .createProfile(newProfile)
       .then(() => res.redirect('/gears')) //to be update
       .catch((err) => {
         console.error(err.message)
         res.status(500).send('Server error')
+      })
+  }
+})
+
+router.get('/singleUser', checkJwt, (req, res) => {
+  const auth0_id = req.auth?.sub
+  if (!auth0_id) {
+    res.send(null)
+  } else {
+    usersDb
+      .getUserById(auth0_id)
+      .then((user) => {
+        res.json(user ? user : null)
+      })
+      .catch((err) => {
+        console.error(err.message)
+        res.status(500).send(err.message)
       })
   }
 })

@@ -4,6 +4,7 @@ const connection = require('knex')(config)
 
 module.exports = {
   createProfile,
+  getUserById,
 }
 
 function createProfile(user, db = connection) {
@@ -13,4 +14,8 @@ function createProfile(user, db = connection) {
     location: user.location,
     image: user.image,
   })
+}
+
+function getUserById(auth0Id, db = connection) {
+  return db('users').select().where('auth0Id', auth0Id)
 }
