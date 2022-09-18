@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { storeAuth0Id } from '../apis/user.api'
+import { useSelector, useDispatch } from 'react-redux'
 
 const initialFormData = {
   firstName: '',
@@ -9,6 +11,7 @@ const initialFormData = {
 export default function CreateProfile() {
   const [form, setForm] = useState(initialFormData)
   const [selectedImage, setSelectedImage] = useState(null)
+  const user = useSelector((state) => state.loggedInUser)
 
   const { firstName, lastName, location } = form
   function handleImageChange(e) {
@@ -18,6 +21,13 @@ export default function CreateProfile() {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
+  function handleSubmit(event) {
+    event.preventDefault()
+    const userInfo = { ...form, auth0Id: user.auth0Id }
+    console.log(userInfo)
+    return false
+  }
+
   return (
     <div className="container">
       <h3 className="is-size-5">
@@ -25,7 +35,7 @@ export default function CreateProfile() {
       </h3>
 
       <form
-        action="/users/createProfile" // to be updated
+        action="/users/createProfile"
         method="post"
         encType="multipart/form-data"
         className="container"

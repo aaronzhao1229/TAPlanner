@@ -8,3 +8,10 @@ export function getUser(token) {
       return res.body
     })
 }
+
+export function storeAuth0Id(user) {
+  return request
+    .patch('/users/storeAuth0Id')
+    .send(user)
+    .then((res) => res.body)
+}
