@@ -34,7 +34,7 @@ router.post('/createProfile', upload.single('profile'), (req, res) => {
     }
     usersDb
       .createProfile(newProfile)
-      .then(() => res.redirect('/gears')) //to be update
+      .then(() => res.redirect('/singleProfile'))
       .catch((err) => {
         console.error(err.message)
         res.status(500).send('Server error')

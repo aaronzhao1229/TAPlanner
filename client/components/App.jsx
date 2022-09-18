@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Home from './Home'
 import Nav from './Nav'
 import Header from './Header'
 import Planner from './Planner'
 import Gears from './Gears'
 
 import SignIn from './SignIn'
+import SingleProfile from './SingleProfile'
 
 const App = () => {
   const [table, setTable] = useState([])
@@ -16,17 +16,42 @@ const App = () => {
   }
   return (
     <div>
-      <Header />
-      <Nav />
       <Routes>
         <Route path="/" element={<SignIn />} />
+
         <Route
           path="/planner"
           element={
-            <Planner tableData={{ table }} setTableFunction={{ updateTable }} />
+            <>
+              <Header />
+              <Nav />
+              <Planner
+                tableData={{ table }}
+                setTableFunction={{ updateTable }}
+              />
+            </>
           }
         />
-        <Route path="/gears" element={<Gears />} />
+        <Route
+          path="/gears"
+          element={
+            <>
+              <Header />
+              <Nav />
+              <Gears />
+            </>
+          }
+        />
+        <Route
+          path="/singleProfile"
+          element={
+            <>
+              <Header />
+              <Nav />
+              <SingleProfile />
+            </>
+          }
+        />
       </Routes>
     </div>
   )

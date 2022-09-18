@@ -6,7 +6,9 @@ const user = {
   location: 'Christchurch',
   image: './images/aaron.JPG',
 }
+
 export default function SingleProfile() {
+  // to be updated
   return (
     <div className="container has-text-centered">
       <figure className="image is-inline-block" style={{ width: '400px' }}>

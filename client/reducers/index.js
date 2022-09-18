@@ -4,5 +4,13 @@ import tracks from './tracks'
 import sections from './sections'
 import stops from './stops'
 import allInfo from './allInfo'
+import loggedInUser from './loggedInUser'
 
-export default combineReducers({ regions, tracks, sections, stops, allInfo })
+export default combineReducers({
+  regions,
+  tracks,
+  sections,
+  stops,
+  allInfo,
+  loggedInUser,
+})
