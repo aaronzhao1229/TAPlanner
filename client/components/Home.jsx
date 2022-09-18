@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CreateProfile from './CreatProfile'
+import SingleProfile from './SingleProfile'
+
 export default function Home() {
   return (
     <>
@@ -66,6 +68,7 @@ export default function Home() {
         </div>
       </footer>
       <CreateProfile />
+      <SingleProfile />
     </>
   )
 }

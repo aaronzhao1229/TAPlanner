@@ -74,6 +74,7 @@ export default function CreateProfile() {
             Upload your photo
           </label>
           <input
+            className="button is-primary mt-3"
             type="file"
             name="profile"
             id="profile"
