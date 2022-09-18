@@ -1,11 +1,12 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
-const bodyparser = require('body-parser')
+// const bodyparser = require('body-parser')
 
 const planner = require('./routes/planner')
 const uploadImage = require('./routes/uploadImg')
 const server = express()
+const users = require('./routes/users')
 
 server.use(express.json())
 server.use(express.static(path.join(__dirname, './public')))
@@ -20,6 +21,7 @@ server.use(cors('*'))
 // )
 
 server.use('/planner', planner)
+server.use('/users', users)
 server.use('/uploadImage', uploadImage)
 
 server.get('*', (req, res) => {

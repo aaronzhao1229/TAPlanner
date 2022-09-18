@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import CreateProfile from './CreatProfile'
 export default function Home() {
   return (
     <>
@@ -19,7 +19,7 @@ export default function Home() {
                 </Link>
               </p>
             </header>
-            <div clasName="card-content ">
+            <div className="card-content ">
               <div className="content ml-6 mr-6 mt-5">
                 This planning tool provides dropdown lists which makes planning
                 easier. Most information is based on official Te Araroa notes,
@@ -43,7 +43,7 @@ export default function Home() {
                 </Link>
               </p>
             </header>
-            <div clasName="card-content ">
+            <div className="card-content ">
               <div className="content ml-6 mr-6 mt-5">
                 A hiker using good, lightweight equipment has a better chance of
                 finishing a hike than one overloaded with poor gear. This gear
@@ -65,6 +65,7 @@ export default function Home() {
           </a>
         </div>
       </footer>
+      <CreateProfile />
     </>
   )
 }
