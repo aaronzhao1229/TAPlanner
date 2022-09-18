@@ -50,7 +50,6 @@ router.get('/singleUser', checkJwt, (req, res) => {
     usersDb
       .getUserById(auth0_id)
       .then((user) => {
-        console.log(user)
         res.json(user ? user : null)
       })
       .catch((err) => {
@@ -59,4 +58,19 @@ router.get('/singleUser', checkJwt, (req, res) => {
       })
   }
 })
+
+router.patch('/storeAuth0Id', (req, res) => {
+  const user = req.body
+  usersDb
+    .storeAuth0Id(user)
+    .then(() => usersDb.getUserById(user.auth0Id))
+    .then((user) => {
+      res.json(user ? user : null)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router
