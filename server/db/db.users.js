@@ -10,6 +10,7 @@ module.exports = {
 
 function createProfile(user, db = connection) {
   return db('users').insert({
+    auth0Id: user.auth0Id,
     firstName: user.firstName,
     lastName: user.lastName,
     location: user.location,

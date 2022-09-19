@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { storeAuth0Id } from '../apis/user.api'
+import { storeAuth0Id, uploadProfile } from '../apis/user.api'
 import { useSelector, useDispatch } from 'react-redux'
 
 const initialFormData = {
@@ -22,10 +22,14 @@ export default function CreateProfile() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault()
-    const userInfo = { ...form, auth0Id: user.auth0Id }
-    console.log(userInfo)
-    return false
+    event.preventDefault(event)
+    const formData = new FormData()
+    formData.append('image', selectedImage)
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
+    formData.append('location', location)
+    formData.append('auth0Id', user.auth0Id)
+    uploadProfile(formData)
   }
 
   return (
@@ -35,10 +39,9 @@ export default function CreateProfile() {
       </h3>
 
       <form
-        action="/users/createProfile"
-        method="post"
         encType="multipart/form-data"
         className="container"
+        onSubmit={handleSubmit}
       >
         <div className="container mt-3">
           <label htmlFor="firstName" className="label">

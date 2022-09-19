@@ -22,11 +22,14 @@ let upload = multer({
   storage: storage,
 })
 
-router.post('/createProfile', upload.single('profile'), (req, res) => {
+router.post('/createProfile', upload.single('image'), (req, res) => {
+  console.log(req.file)
+  console.log(req.body)
   if (!req.file) {
     console.log('No file upload')
   } else {
     const newProfile = {
+      auth0Id: req.body.auth0Id,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       location: req.body.location,

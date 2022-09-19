@@ -15,3 +15,10 @@ export function storeAuth0Id(user) {
     .send(user)
     .then((res) => res.body)
 }
+
+export function uploadProfile(user) {
+  return request
+    .post('/users/createProfile')
+    .send(user)
+    .then((res) => res.body)
+}
