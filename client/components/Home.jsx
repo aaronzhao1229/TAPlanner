@@ -7,6 +7,8 @@ import { getUser } from '../apis/user.api'
 import { useDispatch, useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
+import Header from './Header'
+import Nav from './Nav'
 
 export default function Home() {
   useCacheUser()
@@ -22,9 +24,12 @@ export default function Home() {
       getAccessTokenSilently()
         .then((token) => getUser(token))
         .then((userInDb) => {
-          if (userInDb) {
+          console.log(userInDb[0])
+          if (userInDb[0]) {
+            console.log(userInDb[0])
             dispatch(updateLoggedInUser(userInDb[0]))
           } else {
+            console.log('navigate')
             navigate('/createProfile')
           }
         })
@@ -34,6 +39,8 @@ export default function Home() {
 
   return (
     <>
+      <Header />
+      <Nav />
       <div className="columns">
         <div className="column">
           <div className="card m-5">
@@ -95,8 +102,6 @@ export default function Home() {
           </a>
         </div>
       </footer>
-      <CreateProfile />
-      <SingleProfile />
     </>
   )
 }

@@ -37,7 +37,7 @@ router.post('/createProfile', upload.single('image'), (req, res) => {
     }
     usersDb
       .createProfile(newProfile)
-      .then((res) => res.body)
+      .then(() => res.json(newProfile))
       .catch((err) => {
         console.error(err.message)
         res.status(500).send('Server error')

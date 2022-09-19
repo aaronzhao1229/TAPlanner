@@ -6,31 +6,35 @@ import Header from './Header'
 import Planner from './Planner'
 import Gears from './Gears'
 
-import SignIn from './SignIn'
 import SingleProfile from './SingleProfile'
 import LandingPage from './LandingPage'
 import Home from './Home'
 import CreateProfile from './CreatProfile'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 const App = () => {
   const [table, setTable] = useState([])
   function updateTable(newData) {
     setTable(newData)
   }
+  console.log('refresh')
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
         <Route
-          path="/home"
+          path="/"
           element={
             <>
-              <Header />
-              <Nav />
-              <Home />
+              <IfAuthenticated>
+                <Home />
+              </IfAuthenticated>
+              <IfNotAuthenticated>
+                <LandingPage />
+              </IfNotAuthenticated>
             </>
           }
         />
+
         <Route
           path="/planner"
           element={
@@ -44,16 +48,7 @@ const App = () => {
             </>
           }
         />
-        <Route
-          path="/createProfile"
-          element={
-            <>
-              <Header />
-              <Nav />
-              <CreateProfile />
-            </>
-          }
-        />
+        <Route path="/createProfile" element={<CreateProfile />} />
         <Route
           path="/gears"
           element={
