@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { storeAuth0Id, uploadProfile } from '../apis/user.api'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const initialFormData = {
   firstName: '',
@@ -12,6 +13,7 @@ export default function CreateProfile() {
   const [form, setForm] = useState(initialFormData)
   const [selectedImage, setSelectedImage] = useState(null)
   const user = useSelector((state) => state.loggedInUser)
+  const navigate = useNavigate()
 
   const { firstName, lastName, location } = form
   function handleImageChange(e) {
@@ -30,6 +32,7 @@ export default function CreateProfile() {
     formData.append('location', location)
     formData.append('auth0Id', user.auth0Id)
     uploadProfile(formData)
+    navigate('/singleProfile')
   }
 
   return (
