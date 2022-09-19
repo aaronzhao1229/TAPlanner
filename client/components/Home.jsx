@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import CreateProfile from './CreatProfile'
-import SingleProfile from './SingleProfile'
+
 import { useCacheUser } from '../auth0-utils'
 import { getUser } from '../apis/user.api'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +25,6 @@ export default function Home() {
         .then((userInDb) => {
           console.log(userInDb[0])
           if (userInDb[0]) {
-            console.log(userInDb[0])
             dispatch(updateLoggedInUser(userInDb[0]))
           } else {
             console.log('navigate')
