@@ -8,6 +8,9 @@ import Gears from './Gears'
 
 import SignIn from './SignIn'
 import SingleProfile from './SingleProfile'
+import LandingPage from './LandingPage'
+import Home from './Home'
+import CreateProfile from './CreatProfile'
 
 const App = () => {
   const [table, setTable] = useState([])
@@ -17,8 +20,17 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Nav />
+              <Home />
+            </>
+          }
+        />
         <Route
           path="/planner"
           element={
@@ -29,6 +41,16 @@ const App = () => {
                 tableData={{ table }}
                 setTableFunction={{ updateTable }}
               />
+            </>
+          }
+        />
+        <Route
+          path="/createProfile"
+          element={
+            <>
+              <Header />
+              <Nav />
+              <CreateProfile />
             </>
           }
         />
