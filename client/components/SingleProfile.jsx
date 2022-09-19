@@ -1,14 +1,9 @@
 import React from 'react'
-
-const user = {
-  firstName: 'Aaron',
-  lastName: 'Zhao',
-  location: 'Christchurch',
-  image: './images/aaron.JPG',
-}
+import { useSelector } from 'react-redux'
 
 export default function SingleProfile() {
-  // to be updated
+  const user = useSelector((state) => state.loggedInUser)
+
   return (
     <div className="container has-text-centered">
       <figure className="image is-inline-block" style={{ width: '400px' }}>

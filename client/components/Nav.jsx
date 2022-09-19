@@ -2,8 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useSelector } from 'react-redux'
 
 export default function Nav() {
+  const user = useSelector((state) => state.loggedInUser)
   const { logout, loginWithRedirect } = useAuth0()
   const handleLogOff = (e) => {
     e.preventDefault()
@@ -45,12 +47,9 @@ export default function Nav() {
               <Link to="/" onClick={handleLogOff} style={{ color: '#1B303D' }}>
                 Log off
               </Link>
-              {/* <p>
-                <span role="img" alt={user.icon}>
-                  {user.icon}
-                </span>
-                {' ' + user.username}
-              </p> */}
+              <Link to="/singleProfile" style={{ color: '#1B303D' }}>
+                {' ' + user.firstName}
+              </Link>
             </IfAuthenticated>
             <IfNotAuthenticated>
               <Link to="/" onClick={handleSignIn} style={{ color: '#1B303D' }}>
