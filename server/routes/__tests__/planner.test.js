@@ -1,9 +1,9 @@
 const request = require('supertest')
-const server = require('../server')
+const server = require('../../server')
 
-const { getRegions } = require('../db/db')
+const { getRegions } = require('../../db/db')
 
-jest.mock('../db/db')
+jest.mock('../../db/db')
 jest.spyOn(console, 'error')
 
 afterEach(() => {

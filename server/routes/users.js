@@ -1,26 +1,27 @@
 const express = require('express')
-const path = require('path')
-const multer = require('multer')
+// const path = require('path')
+// const multer = require('multer')
 const usersDb = require('../db/db.users')
 const router = express.Router()
 const checkJwt = require('../auth0')
+const upload = require('../multer')
 
-//! Use of Multer
-let storage = multer.diskStorage({
-  destination: (req, file, callBack) => {
-    callBack(null, path.resolve('server/public/images')) // './public/images/' directory name where save the file
-  },
-  filename: (req, file, callBack) => {
-    callBack(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    )
-  },
-})
+// //! Use of Multer
+// let storage = multer.diskStorage({
+//   destination: (req, file, callBack) => {
+//     callBack(null, path.resolve('server/public/images')) // './public/images/' directory name where save the file
+//   },
+//   filename: (req, file, callBack) => {
+//     callBack(
+//       null,
+//       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+//     )
+//   },
+// })
 
-let upload = multer({
-  storage: storage,
-})
+// let upload = multer({
+//   storage: storage,
+// })
 
 router.post('/createProfile', upload.single('image'), (req, res) => {
   console.log(req.file)
@@ -60,20 +61,6 @@ router.get('/singleUser', checkJwt, (req, res) => {
         res.status(500).send(err.message)
       })
   }
-})
-
-router.patch('/storeAuth0Id', (req, res) => {
-  const user = req.body
-  usersDb
-    .storeAuth0Id(user)
-    .then(() => usersDb.getUserById(user.auth0Id))
-    .then((user) => {
-      res.json(user ? user : null)
-    })
-    .catch((err) => {
-      console.error(err.message)
-      res.status(500).send(err.message)
-    })
 })
 
 module.exports = router

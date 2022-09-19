@@ -9,13 +9,6 @@ export function getUser(token) {
     })
 }
 
-export function storeAuth0Id(user) {
-  return request
-    .patch('/users/storeAuth0Id')
-    .send(user)
-    .then((res) => res.body)
-}
-
 export function uploadProfile(user) {
   return request
     .post('/users/createProfile')
