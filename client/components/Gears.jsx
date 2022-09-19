@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UploadAFile from './UploadAFile'
 import { getImages } from '../apis/apiClient'
+import Table from './table'
 
 const initialImageData = [{ id: '', url: '' }]
 export default function Gears() {
@@ -26,10 +27,11 @@ export default function Gears() {
           <p>Kitchen</p>
         </div>
       </div>
-      {images.map((image) => {
+      {/* {images.map((image) => {
         return <img key={image.id} src={image.url} alt={'yourImg'} />
       })}
-      <UploadAFile />
+      <UploadAFile /> */}
+      <Table />
     </div>
   )
 }
