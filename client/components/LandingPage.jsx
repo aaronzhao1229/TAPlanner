@@ -9,24 +9,27 @@ function LandingPage() {
   }
   return (
     <>
-      <div className="container has-text-centered">
-        <div
-          className="w-full h-full bg-no-repeat bg-cover bg-center"
-          style={{ backgroundImage: `url(/images/background.jpeg)` }}
-        >
-          <div className="box">
-            <h1 className="is-size-3 has-text-white">Te Araroa Planner</h1>
-          </div>
-          <div className="flex">
-            <button className="button" onClick={handleSignIn}>
+      <section
+        className="hero is-fullheight"
+        style={{ backgroundImage: `url(/images/background.jpeg)` }}
+      >
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <button
+              className="button is-large m-5 is-primary"
+              onClick={handleSignIn}
+            >
               Sign Up
             </button>
-            <button className="button" onClick={handleSignIn}>
+            <button
+              className="button is-large m-5 is-primary"
+              onClick={handleSignIn}
+            >
               Log In
             </button>
           </div>
         </div>
-      </div>
+      </section>
     </>
   )
 }

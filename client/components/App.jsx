@@ -29,6 +29,7 @@ const App = () => {
                 <Home />
               </IfAuthenticated>
               <IfNotAuthenticated>
+                <Header />
                 <LandingPage />
               </IfNotAuthenticated>
             </>
