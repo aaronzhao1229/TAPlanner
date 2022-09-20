@@ -1,11 +1,11 @@
 import React from 'react'
-import AddSection from './AddSection'
+import AddSection from '../AddSection'
 const { screen, render } = require('@testing-library/react')
 require('@testing-library/jest-dom')
 
-jest.mock('./AddSection')
+jest.mock('../AddSection')
 
-import Planner from './Planner'
+import Planner from '../Planner'
 
 describe('Planner', () => {
   it('test if table is displayed', () => {
