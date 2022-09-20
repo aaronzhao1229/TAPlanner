@@ -1,47 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AddSection from '../AddSection'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import {
-  getRegions,
-  getTracksByRegionId,
-  getSectionsByTrackId,
-  getStopsByTrackId,
-} from '../../apis/apiClient'
-import { act } from 'react-dom/test-utils'
+import { useSelector, useDispatch } from 'react-redux'
 
 jest.mock('../../apis/apiClient')
+jest.mock('react-redux')
+
 const mockRegions = [
   { id: 1, name: 'Canterbury' },
   { id: 2, name: 'Southland' },
 ]
 
-const mockTracks = [{ name: 'Avalanche Peak' }, { name: 'Longwood Forest' }]
-
-const mockSections = [
-  { name: 'Christchurch to Arthurs Pass' },
-  { name: 'Christchurch to Arthurs Pass' },
-]
-
-const mockStops = [{ name: 'Christchurch' }, { name: 'Arthurs Pass' }]
-
-// to be updated
 describe('AddSection', () => {
   it('shows dropdown with all the options', async () => {
-    await act(async () => {
-      await getRegions.mockReturnValue(Promise.resolve(mockRegions))
-      await getTracksByRegionId.mockReturnValue(Promise.resolve(mockTracks))
-      await getSectionsByTrackId.mockReturnValue(Promise.resolve(mockSections))
-      await getStopsByTrackId.mockReturnValue(Promise.resolve(mockStops))
-      render(
-        <AddSection
-          setTableFunction={null}
-          pageData={0}
-          setPageFunction={null}
-          updateTableData={[]}
-        />
-      )
-    })
+    const fakeDispatch = jest.fn()
+    useDispatch.mockReturnValue(fakeDispatch)
+    useSelector.mockReturnValue(mockRegions)
+    render(
+      <AddSection
+        setTableFunction={null}
+        pageData={0}
+        setPageFunction={null}
+        updateTableData={[]}
+      />
+    )
     // screen.debug()
     const options = screen.getAllByRole('option')
     expect(options).toHaveLength(8)
