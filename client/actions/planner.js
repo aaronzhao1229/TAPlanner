@@ -19,7 +19,7 @@ export function fetchRegions() {
         dispatch(setRegionsSuccess(regions))
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err.message)
       })
   }
 }
@@ -31,7 +31,7 @@ export function fetchTracksByRegionId(regionId) {
         dispatch(setTracksSuccess(tracks))
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err.message)
       })
   }
 }
@@ -43,7 +43,7 @@ export function fetchSectionsByTrackId(trackId) {
         dispatch(setSectionsSuccess(sections))
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err.message)
       })
   }
 }
@@ -55,7 +55,7 @@ export function fetchStopsByTrackId(trackId) {
         dispatch(setStopsSuccess(stops))
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err.message)
       })
   }
 }
@@ -67,7 +67,7 @@ export function fetchAllInfo(regionId, trackId, sectionId, stopId) {
         dispatch(setAllInfoSuccess(trip))
       })
       .catch((err) => {
-        console.error(err)
+        console.error(err.message)
       })
   }
 }
