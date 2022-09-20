@@ -47,13 +47,15 @@ describe('GET /users/singleUser', () => {
       Promise.reject(new Error('it did not work'))
     )
     console.error.mockImplementation(() => {})
-    return request(server)
-      .get('/users/singleUser', checkJwt)
-      .set('Authorization', `Bearer 123`)
-      .then((res) => {
-        expect(res.status).toBe(500)
-        expect(console.error).toHaveBeenCalledWith('it did not work')
-      })
+    return (
+      request(server)
+        .get('/users/singleUser')
+        // .set('Authorization', `Bearer 123`)
+        .then((res) => {
+          expect(res.status).toBe(500)
+          expect(console.error).toHaveBeenCalledWith('it did not work')
+        })
+    )
   })
 })
 
@@ -69,5 +71,21 @@ describe('POST /users/createProfile', () => {
         expect(res.body.firstName).toBe('Bobby')
         expect(res.body).toHaveProperty('auth0Id')
       })
+  })
+
+  it('return status 500 and console errors when there is a problem', () => {
+    createProfile.mockImplementation(() =>
+      Promise.reject(new Error('it did not work either'))
+    )
+    console.error.mockImplementation(() => {})
+    return (
+      request(server)
+        .post('/users/createProfile')
+        // .send('auth0Id=123&firstName=Bobby&lastName=Wilson&location=Nelson')
+        .then((res) => {
+          expect(res.status).toBe(500)
+          expect(console.error).toHaveBeenCalledWith('it did not work either')
+        })
+    )
   })
 })
