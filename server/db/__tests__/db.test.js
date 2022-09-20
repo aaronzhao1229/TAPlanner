@@ -1,7 +1,7 @@
 const knex = require('knex')
-const config = require('./knexfile').test
+const config = require('../knexfile').test
 const testDb = knex(config)
-const db = require('./db')
+const db = require('../db')
 
 beforeAll(() => {
   return testDb.migrate.latest()

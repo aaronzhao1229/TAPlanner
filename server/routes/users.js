@@ -9,7 +9,6 @@ router.post('/createProfile', upload.single('image'), (req, res) => {
   console.log(req.file)
   console.log(req.body)
   if (!req.file) {
-    res.json('')
     console.log('No file upload')
   } else {
     const newProfile = {
