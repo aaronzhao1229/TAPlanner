@@ -6,8 +6,6 @@ const checkJwt = require('../auth0')
 const upload = require('../multer')
 
 router.post('/createProfile', upload.single('image'), (req, res) => {
-  console.log(req.file)
-  console.log(req.body)
   if (!req.file) {
     console.log('No file upload')
   } else {
