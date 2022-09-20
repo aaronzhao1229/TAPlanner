@@ -2,7 +2,8 @@ const request = require('supertest')
 const server = require('../../server')
 
 const checkJwt = require('../../auth0')
-const multer = require('multer')
+const upload = require('../../multer')
+
 import { getUserById, createProfile } from '../../db/db.users'
 
 jest.mock('../../db/db.users')
@@ -14,6 +15,14 @@ beforeAll(() => {
     req.auth = { sub: 'testUserId' }
     next()
   })
+})
+const fakeMulter = (req, res, next) => {
+  req.file = { filename: 'image' }
+  next()
+}
+
+jest.mock('../../multer', () => {
+  return { single: jest.fn().mockReturnValue(fakeMulter) }
 })
 
 afterEach(() => {
@@ -50,7 +59,15 @@ describe('GET /users/singleUser', () => {
 
 describe('POST /users/createProfile', () => {
   it('return the new profile', () => {
-    const fakeProfile = { id: 1, firstName: 'Jason' }
+    const fakeProfile = {}
     createProfile.mockReturnValue(Promise.resolve(fakeProfile))
+
+    return request(server)
+      .post('/users/createProfile', upload.single('image'))
+      .send('auth0Id=123&firstName=Bobby&lastName=Wilson&location=Nelson')
+      .then((res) => {
+        expect(res.body.firstName).toBe('Bobby')
+        expect(res.body).toHaveProperty('auth0Id')
+      })
   })
 })

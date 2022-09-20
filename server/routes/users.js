@@ -1,32 +1,15 @@
 const express = require('express')
-// const path = require('path')
-// const multer = require('multer')
+
 const usersDb = require('../db/db.users')
 const router = express.Router()
 const checkJwt = require('../auth0')
 const upload = require('../multer')
 
-// //! Use of Multer
-// let storage = multer.diskStorage({
-//   destination: (req, file, callBack) => {
-//     callBack(null, path.resolve('server/public/images')) // './public/images/' directory name where save the file
-//   },
-//   filename: (req, file, callBack) => {
-//     callBack(
-//       null,
-//       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-//     )
-//   },
-// })
-
-// let upload = multer({
-//   storage: storage,
-// })
-
 router.post('/createProfile', upload.single('image'), (req, res) => {
   console.log(req.file)
   console.log(req.body)
   if (!req.file) {
+    res.json('')
     console.log('No file upload')
   } else {
     const newProfile = {
