@@ -6,11 +6,11 @@ import '@testing-library/jest-dom'
 
 jest.mock('@auth0/auth0-react')
 
-afterEach(() => {
-  useAuth0.mockClear()
-})
+// afterEach(() => {
+//   useAuth0.mockReset()
+// })
 
-describe('Authentication', () => {
+describe('Authenticated', () => {
   useAuth0.mockReturnValue({
     isAuthenticated: true,
   })
@@ -23,19 +23,17 @@ describe('Authentication', () => {
     const button = screen.getByRole('button')
     expect(button).toContainHTML('authenticated')
   })
-})
 
-// describe('Not Authentication', () => {
-//   useAuth0.mockReturnValue({
-//     isAuthenticated: false,
-//   })
-//   it('render children', () => {
-//     render(
-//       <IfNotAuthenticated>
-//         <button>Not authenticated</button>
-//       </IfNotAuthenticated>
-//     )
-//     const button = screen.getByRole('button')
-//     expect(button).toContainHTML('Not authenticated')
-//   })
-// })
+  it('render another children', () => {
+    useAuth0.mockReturnValue({
+      isAuthenticated: false,
+    })
+    render(
+      <IfNotAuthenticated>
+        <button>Not authenticated</button>
+      </IfNotAuthenticated>
+    )
+    const button = screen.getByRole('button')
+    expect(button).toContainHTML('Not authenticated')
+  })
+})
