@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import AddSection from '../AddSection'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -12,7 +12,7 @@ const mockRegions = [
   { id: 2, name: 'Southland' },
 ]
 
-describe('AddSection', () => {
+describe('<AddSection />', () => {
   it('shows dropdown with all the options', async () => {
     const fakeDispatch = jest.fn()
     useDispatch.mockReturnValue(fakeDispatch)
