@@ -1,19 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { getImages } from '../apis/apiClient'
-
-const initialImageData = [{ id: '', url: '' }]
 export default function Gears() {
-  const [images, setImages] = useState(initialImageData)
-  useEffect(() => {
-    getImages()
-      .then((imgs) => {
-        return setImages(imgs)
-      })
-      .catch((err) => {
-        console.error(err.message + 'Planner useEffect')
-      })
-  }, [])
   return (
     <div>
       <div className="card">
