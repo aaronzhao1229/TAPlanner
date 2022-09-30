@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { useCacheUser } from '../auth0-utils'
 import { getUser } from '../apis/user.api'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
 import { clearLoggedInUser, updateLoggedInUser } from '../actions/loggedInUser'
 import Header from './Header'
@@ -23,7 +23,6 @@ export default function Home() {
       getAccessTokenSilently()
         .then((token) => getUser(token))
         .then((userInDb) => {
-          console.log(userInDb[0])
           if (userInDb[0]) {
             dispatch(updateLoggedInUser(userInDb[0]))
           } else {

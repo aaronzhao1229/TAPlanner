@@ -13,14 +13,6 @@ server.use(express.urlencoded({ extended: false }))
 server.use(express.static(path.join(__dirname, './public')))
 server.use(cors('*'))
 
-// body-parser middleware use
-// server.use(bodyparser.json())
-// server.use(
-//   bodyparser.urlencoded({
-//     extended: true,
-//   })
-// )
-
 server.use('/planner', planner)
 server.use('/users', users)
 
