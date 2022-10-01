@@ -14,8 +14,7 @@ const initialFormData = {
   day: '',
   additionalNotes: '',
 }
-// const initialRegionId = 1
-// const initialTrackId = 1
+
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
 export default function AddSection(props) {
@@ -45,7 +44,6 @@ export default function AddSection(props) {
     let regionId = event.target.value
     ids['regionId'] = Number(regionId)
     defaultValues(ids)
-
     dispatch(fetchTracksByRegionId(ids['regionId']))
     dispatch(fetchSectionsByTrackId(ids['trackId']))
     dispatch(fetchStopsByTrackId(ids['trackId']))
