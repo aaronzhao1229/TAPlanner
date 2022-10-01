@@ -55,10 +55,9 @@ router.get('/getAllInfo/:regionId/:trackId/:sectionId/:stopId', (req, res) => {
   const trackId = req.params.trackId
   const sectionId = req.params.sectionId
   const stopId = req.params.stopId
-  console.log(stopId)
+
   db.getAllInfo(regionId, trackId, sectionId, stopId)
     .then((info) => {
-      console.log(info)
       res.json(info)
     })
     .catch((err) => {
