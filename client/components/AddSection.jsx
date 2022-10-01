@@ -88,17 +88,14 @@ export default function AddSection(props) {
 
   return (
     <>
-      <div className="container">
-        <h3 className="is-size-5">
+      <div>
+        <h3>
           <strong>Add a section</strong>
         </h3>
-        <form className="container" onSubmit={handleSubmit}>
-          <div className="container mt-3">
-            <label htmlFor="day" className="label">
-              Day (eg. Day 1 or 03/09/2022)
-            </label>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="day">Day (eg. Day 1 or 03/09/2022)</label>
             <input
-              className="input"
               type="text"
               id="day"
               name="day"
@@ -106,17 +103,10 @@ export default function AddSection(props) {
               onChange={handleChange}
             />
           </div>
-          <div className="container mt-3">
-            <label htmlFor="region" className="label">
-              Region
-            </label>
-            <div className="select">
-              <select
-                onChange={regionSelected}
-                className="input"
-                id="region"
-                name="region"
-              >
+          <div>
+            <label htmlFor="region">Region</label>
+            <div>
+              <select onChange={regionSelected} id="region" name="region">
                 {regions.map((region) => {
                   return (
                     <option key={region.id} value={region.id}>
@@ -127,17 +117,10 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
-            <label htmlFor="tracks" className="label">
-              Track
-            </label>
-            <div className="select">
-              <select
-                onChange={trackSelected}
-                className="input"
-                id="tracks"
-                name="tracks"
-              >
+          <div>
+            <label htmlFor="tracks">Track</label>
+            <div>
+              <select onChange={trackSelected} id="tracks" name="tracks">
                 {tracks.map((track) => {
                   return (
                     <option key={track.id} value={track.id}>
@@ -149,17 +132,10 @@ export default function AddSection(props) {
             </div>
           </div>
 
-          <div className="container mt-3">
-            <label htmlFor="section" className="label">
-              Section
-            </label>
-            <div className="select">
-              <select
-                onChange={sectionSelected}
-                className="input"
-                id="sections"
-                name="sections"
-              >
+          <div>
+            <label htmlFor="section">Section</label>
+            <div>
+              <select onChange={sectionSelected} id="sections" name="sections">
                 {sections.map((section) => {
                   return (
                     <option key={section.id} value={section.id}>
@@ -170,17 +146,10 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
-            <label htmlFor="stops" className="label">
-              Stop for the day
-            </label>
-            <div className="select">
-              <select
-                onChange={stopSelected}
-                className="input"
-                id="stops"
-                name="stops"
-              >
+          <div>
+            <label htmlFor="stops">Stop for the day</label>
+            <div>
+              <select onChange={stopSelected} id="stops" name="stops">
                 {stops.map((stop) => {
                   return (
                     <option key={stop.id} value={stop.id}>
@@ -191,12 +160,9 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
-            <label htmlFor="additionalNotes" className="label">
-              Additional Notes
-            </label>
+          <div>
+            <label htmlFor="additionalNotes">Additional Notes</label>
             <input
-              className="input"
               type="text"
               id="additionalNotes"
               name="additionalNotes"
@@ -205,7 +171,7 @@ export default function AddSection(props) {
             />
           </div>
 
-          <input className="button is-primary mt-3" type="submit" />
+          <input type="submit" />
         </form>
       </div>
     </>

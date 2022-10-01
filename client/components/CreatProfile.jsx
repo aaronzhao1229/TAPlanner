@@ -53,22 +53,15 @@ export default function CreateProfile() {
     <>
       <Header />
       <Nav />
-      <div className="container">
-        <h3 className="is-size-5">
+      <div>
+        <h3>
           <strong>Create your profile</strong>
         </h3>
 
-        <form
-          encType="multipart/form-data"
-          className="container"
-          onSubmit={handleSubmit}
-        >
-          <div className="container mt-3">
-            <label htmlFor="firstName" className="label">
-              First Name
-            </label>
+        <form encType="multipart/form-data" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="firstName">First Name</label>
             <input
-              className="input"
               type="text"
               id="firstName"
               name="firstName"
@@ -76,12 +69,9 @@ export default function CreateProfile() {
               onChange={handleChange}
             />
           </div>
-          <div className="container mt-3">
-            <label htmlFor="lastName" className="label">
-              Last Name
-            </label>
+          <div>
+            <label htmlFor="lastName">Last Name</label>
             <input
-              className="input"
               type="text"
               id="lastName"
               name="lastName"
@@ -89,12 +79,9 @@ export default function CreateProfile() {
               onChange={handleChange}
             />
           </div>
-          <div className="container mt-3">
-            <label htmlFor="location" className="label">
-              Location
-            </label>
+          <div>
+            <label htmlFor="location">Location</label>
             <input
-              className="input"
               type="text"
               id="location"
               name="location"
@@ -102,19 +89,16 @@ export default function CreateProfile() {
               onChange={handleChange}
             />
           </div>
-          <div className="container mt-3">
-            <label htmlFor="profile" className="label">
-              Upload your photo
-            </label>
+          <div>
+            <label htmlFor="profile">Upload your photo</label>
             <input
-              className="button is-primary mt-3"
               type="file"
               name="profile"
               id="profile"
               onChange={handleImageChange}
             />
           </div>
-          <input className="button is-primary mt-3" type="submit" />
+          <input type="submit" />
         </form>
         <h1>Upload and Display Image</h1>
         {selectedImage && (

@@ -3,13 +3,13 @@ import React from 'react'
 export default function Gears() {
   return (
     <div>
-      <div className="card">
-        <div className="card-content">
+      <div>
+        <div>
           <p>Sleeping system</p>
         </div>
       </div>
-      <div className="card">
-        <div className="card-content">
+      <div>
+        <div>
           <p>Kitchen</p>
         </div>
       </div>

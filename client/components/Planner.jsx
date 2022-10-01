@@ -14,12 +14,10 @@ export default function Planner(props) {
 
   return (
     <>
-      <div className="block has-text-right mr-4">
-        <button className="button is-primary" onClick={exportData}>
-          Export table
-        </button>
+      <div>
+        <button onClick={exportData}>Export table</button>
       </div>
-      <table className="table container is-bordered" id="datatable">
+      <table id="datatable">
         <thead>
           <tr>
             <th>Day</th>
@@ -53,10 +51,7 @@ export default function Planner(props) {
                   <td>{row.resupply}</td>
                   <td>{row.additionalNotes}</td>
                   <td>
-                    <button
-                      className="button is-warning"
-                      onClick={() => deletePlan(row.section)}
-                    >
+                    <button onClick={() => deletePlan(row.section)}>
                       Delete
                     </button>
                   </td>

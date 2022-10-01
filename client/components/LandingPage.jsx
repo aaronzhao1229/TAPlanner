@@ -9,27 +9,24 @@ function LandingPage() {
   }
   return (
     <>
-      <section
-        className="hero is-fullheight"
-        style={{ backgroundImage: `url(/images/background.jpeg)` }}
-      >
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <button
-              className="button is-large m-5 is-primary"
-              onClick={handleSignIn}
-            >
-              Sign Up
-            </button>
-            <button
-              className="button is-large m-5 is-primary"
-              onClick={handleSignIn}
-            >
-              Log In
-            </button>
-          </div>
+      <div className="flex flex-col w-full mt-20 justify-center items-center">
+        <div className="m-3">
+          <button
+            className="w-80 btn rounded btn-primary hover:opacity-80"
+            onClick={handleSignIn}
+          >
+            Sign Up
+          </button>
         </div>
-      </section>
+        <div className="m-3">
+          <button
+            className="w-80 btn rounded btn-secondary hover:opacity-80"
+            onClick={handleSignIn}
+          >
+            Log In
+          </button>
+        </div>
+      </div>
     </>
   )
 }
