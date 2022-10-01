@@ -2,7 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
 import { Provider } from 'react-redux'
-import { applyMiddleware, compose, createStore } from 'redux'
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import App from './components/App'
 import reducers from './reducers'
