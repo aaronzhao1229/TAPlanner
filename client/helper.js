@@ -70,3 +70,17 @@ export function exportImageData() {
   /* download the data file named "TA_Plan.csv" */
   link.click()
 }
+
+export function defaultValues(ids) {
+  if (ids.regionId === 1) {
+    ids.trackId = 1
+    ids.sectionId = 1
+    ids.stopId = 1
+  } else if (ids.regionId === 2) {
+    ids.trackId = 4
+    ids.sectionId = 15
+    ids.stopId = 16
+  }
+
+  // need to add more data
+}

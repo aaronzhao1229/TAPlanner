@@ -8,8 +8,6 @@ module.exports = {
   getSectionsByTrackId,
   getStopsByTrackId,
   getAllInfo,
-  uploadImage,
-  getImageUrl,
 }
 
 function getRegions(db = connection) {
@@ -48,12 +46,4 @@ function getAllInfo(regionId, trackId, sectionId, stopId, db = connection) {
     .where('tracks.id', trackId)
     .where('sections.id', sectionId)
     .where('stops.id', stopId)
-}
-
-function uploadImage(url, db = connection) {
-  return db('image').insert({ url: url })
-}
-
-function getImageUrl(db = connection) {
-  return db('image').select()
 }

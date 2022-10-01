@@ -8,13 +8,14 @@ import {
 } from '../actions/planner'
 
 import { getAllInfo } from '../apis/apiClient'
+import { defaultValues } from '../helper'
 
 const initialFormData = {
   day: '',
   additionalNotes: '',
 }
-const initialRegionId = 1
-const initialTrackId = 1
+// const initialRegionId = 1
+// const initialTrackId = 1
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
 export default function AddSection(props) {
@@ -30,9 +31,9 @@ export default function AddSection(props) {
 
   useEffect(() => {
     dispatch(fetchRegions())
-    dispatch(fetchTracksByRegionId(initialRegionId))
-    dispatch(fetchSectionsByTrackId(initialTrackId))
-    dispatch(fetchStopsByTrackId(initialTrackId))
+    dispatch(fetchTracksByRegionId(ids.regionId))
+    dispatch(fetchSectionsByTrackId(ids.trackId))
+    dispatch(fetchStopsByTrackId(ids.trackId))
   }, [])
 
   const regions = useSelector((state) => state.regions)
@@ -43,14 +44,18 @@ export default function AddSection(props) {
   function regionSelected(event) {
     let regionId = event.target.value
     ids['regionId'] = Number(regionId)
-    dispatch(fetchTracksByRegionId(regionId))
+    defaultValues(ids)
+
+    dispatch(fetchTracksByRegionId(ids['regionId']))
+    dispatch(fetchSectionsByTrackId(ids['trackId']))
+    dispatch(fetchStopsByTrackId(ids['trackId']))
   }
 
   function trackSelected(event) {
     let trackId = event.target.value
     ids['trackId'] = Number(trackId)
-    dispatch(fetchSectionsByTrackId(trackId))
-    dispatch(fetchStopsByTrackId(trackId))
+    dispatch(fetchSectionsByTrackId(ids['trackId']))
+    dispatch(fetchStopsByTrackId(ids['trackId']))
   }
 
   function sectionSelected(event) {
@@ -69,6 +74,7 @@ export default function AddSection(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
+
     getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
       .then((res) => {
         res[0].day = day

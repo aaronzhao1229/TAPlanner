@@ -17,7 +17,7 @@ const App = () => {
   function updateTable(newData) {
     setTable(newData)
   }
-  console.log('refresh')
+
   return (
     <div>
       <Routes>

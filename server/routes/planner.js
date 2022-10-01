@@ -55,6 +55,7 @@ router.get('/getAllInfo/:regionId/:trackId/:sectionId/:stopId', (req, res) => {
   const trackId = req.params.trackId
   const sectionId = req.params.sectionId
   const stopId = req.params.stopId
+
   db.getAllInfo(regionId, trackId, sectionId, stopId)
     .then((info) => {
       res.json(info)

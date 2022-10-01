@@ -31,9 +31,3 @@ export function getAllInfo(regionId, trackId, sectionId, stopId) {
       return res.body
     })
 }
-
-export function getImages() {
-  return request.get('/uploadImage').then((res) => {
-    return res.body
-  })
-}
