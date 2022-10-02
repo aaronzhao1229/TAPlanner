@@ -107,6 +107,7 @@ export default function CreateProfile() {
               <input
                 type="file"
                 name="profile"
+                data-testid="uploadImage"
                 id="profile"
                 onChange={handleImageChange}
                 className="input input-bordered w-full max-w-xs"
@@ -122,6 +123,7 @@ export default function CreateProfile() {
           {selectedImage && (
             <div>
               <img
+                data-testid="testImage"
                 alt="not found"
                 width={'250px'}
                 src={URL.createObjectURL(selectedImage)}
