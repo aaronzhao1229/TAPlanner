@@ -17,7 +17,7 @@ export default function Nav() {
   }
 
   return (
-    <nav>
+    <nav className="mb-5">
       <div className="grid grid-cols-4 gap-4 text-center bg-primary">
         <h3 className="btn btn-ghost normal-case text-xl">
           <Link to="/">Home</Link>

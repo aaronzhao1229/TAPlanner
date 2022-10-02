@@ -38,19 +38,17 @@ export default function Home() {
     <>
       <Header />
       <Nav />
-      <div>
-        <div>
-          <div>
-            <div>
-              <figure>
-                <img src="./images/planning.png" alt="planning" />
-              </figure>
-            </div>
-            <header>
-              <p>
-                <Link to="/planner">Planner</Link>
-              </p>
-            </header>
+      <div className="flex flex-wrap justify-center">
+        <div className="card card-compact w-96 bg-base-100 shadow-xl m-6">
+          <div className="flex flex-wrap justify-center">
+            <figure className="w-20 h-20">
+              <img src="./images/planning.png" alt="planning" />
+            </figure>
+          </div>
+          <div className="card-body items-center text-center">
+            <h2 className="card-title py-4 px-8 content-center">
+              <Link to="/planner">Planner</Link>
+            </h2>
             <div>
               <div>
                 This planning tool provides dropdown lists which makes planning
@@ -62,29 +60,29 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <div>
-            <div>
-              <figure>
+          <div className="card card-compact w-96 bg-base-100 shadow-xl m-6">
+            <div className="flex flex-wrap justify-center">
+              <figure className="w-20 h-20">
                 <img src="./images/gears.png" alt="gears" />
               </figure>
             </div>
-            <header>
-              <p>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title py-4 px-8 content-center">
                 <Link to="/gears">Gears</Link>
-              </p>
-            </header>
-            <div>
+              </h2>
               <div>
-                A hiker using good, lightweight equipment has a better chance of
-                finishing a hike than one overloaded with poor gear. This gear
-                organising tool helps track the weight (as well as price) of
-                your gears. To be developed.
+                <div>
+                  A hiker using good, lightweight equipment has a better chance
+                  of finishing a hike than one overloaded with poor gear. This
+                  gear organising tool helps track the weight (as well as price)
+                  of your gears. To be developed.
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <footer>
+      <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
         <div>
           <a href={'https://www.flaticon.com'} title={'plan icons'}>
             Icons created by Freepik - Flaticon
