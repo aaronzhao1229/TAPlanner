@@ -21,7 +21,7 @@ describe('<LandingPage />', () => {
     render(<LandingPage />)
     const button = screen.getByRole('button', { name: /Sign Up/ })
     expect(button).toContainHTML('button')
-    expect(button).toHaveClass('m-5')
+    expect(button).toHaveClass('w-80 btn rounded btn-primary hover:opacity-80')
     expect.assertions(2)
   })
 

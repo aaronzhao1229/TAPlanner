@@ -43,6 +43,7 @@ export default function AddSection(props) {
   function regionSelected(event) {
     let regionId = event.target.value
     ids['regionId'] = Number(regionId)
+
     defaultValues(ids)
     dispatch(fetchTracksByRegionId(ids['regionId']))
     dispatch(fetchSectionsByTrackId(ids['trackId']))
@@ -77,6 +78,7 @@ export default function AddSection(props) {
       .then((res) => {
         res[0].day = day
         res[0].additionalNotes = additionalNotes
+
         updatedTable.push(res[0])
         updateTable(updatedTable)
         setPage(page + 1)
@@ -96,6 +98,7 @@ export default function AddSection(props) {
             </label>
             <input
               type="text"
+              data-testid="testDay"
               id="day"
               name="day"
               value={day}
@@ -110,6 +113,7 @@ export default function AddSection(props) {
             <div>
               <select
                 onChange={regionSelected}
+                data-testid="testRegion"
                 id="region"
                 name="region"
                 className="select select-primary w-full max-w-xs"
@@ -131,6 +135,7 @@ export default function AddSection(props) {
             <div>
               <select
                 onChange={trackSelected}
+                data-testid="testTracks"
                 id="tracks"
                 name="tracks"
                 className="select select-primary w-full max-w-xs"
@@ -153,6 +158,7 @@ export default function AddSection(props) {
             <div>
               <select
                 onChange={sectionSelected}
+                data-testid="testSections"
                 id="sections"
                 name="sections"
                 className="select select-primary w-full max-w-xs"
@@ -174,6 +180,7 @@ export default function AddSection(props) {
             <div>
               <select
                 onChange={stopSelected}
+                data-testid="testStops"
                 id="stops"
                 name="stops"
                 className="select select-primary w-full max-w-xs"

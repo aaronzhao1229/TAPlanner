@@ -25,7 +25,6 @@ describe('Planner', () => {
         setTableFunction={{ updateTable: null }}
       />
     )
-    // screen.debug()
     const table = screen.getByRole('table')
     expect(table).toHaveTextContent('canterbury')
   })

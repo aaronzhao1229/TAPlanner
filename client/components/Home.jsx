@@ -63,11 +63,7 @@ export default function Home() {
           <div className="card card-compact w-96 bg-base-100 shadow-xl m-6">
             <div className="flex flex-wrap justify-center">
               <figure className="w-20 h-20">
-                <img
-                  src="./images/gears.png"
-                  alt="gears"
-                  className="rounded-xl"
-                />
+                <img src="./images/gears.png" alt="gears" />
               </figure>
             </div>
             <div className="card-body items-center text-center">
