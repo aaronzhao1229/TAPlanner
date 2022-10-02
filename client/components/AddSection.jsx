@@ -88,34 +88,31 @@ export default function AddSection(props) {
 
   return (
     <>
-      <div className="container">
-        <h3 className="is-size-5">
-          <strong>Add a section</strong>
-        </h3>
-        <form className="container" onSubmit={handleSubmit}>
-          <div className="container mt-3">
+      <div className="hero">
+        <form onSubmit={handleSubmit}>
+          <div>
             <label htmlFor="day" className="label">
               Day (eg. Day 1 or 03/09/2022)
             </label>
             <input
-              className="input"
               type="text"
               id="day"
               name="day"
               value={day}
               onChange={handleChange}
+              className="input input-bordered w-full max-w-xs"
             />
           </div>
-          <div className="container mt-3">
+          <div>
             <label htmlFor="region" className="label">
               Region
             </label>
-            <div className="select">
+            <div>
               <select
                 onChange={regionSelected}
-                className="input"
                 id="region"
                 name="region"
+                className="select select-primary w-full max-w-xs"
               >
                 {regions.map((region) => {
                   return (
@@ -127,16 +124,16 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
+          <div>
             <label htmlFor="tracks" className="label">
               Track
             </label>
-            <div className="select">
+            <div>
               <select
                 onChange={trackSelected}
-                className="input"
                 id="tracks"
                 name="tracks"
+                className="select select-primary w-full max-w-xs"
               >
                 {tracks.map((track) => {
                   return (
@@ -149,16 +146,16 @@ export default function AddSection(props) {
             </div>
           </div>
 
-          <div className="container mt-3">
+          <div>
             <label htmlFor="section" className="label">
               Section
             </label>
-            <div className="select">
+            <div>
               <select
                 onChange={sectionSelected}
-                className="input"
                 id="sections"
                 name="sections"
+                className="select select-primary w-full max-w-xs"
               >
                 {sections.map((section) => {
                   return (
@@ -170,16 +167,16 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
+          <div>
             <label htmlFor="stops" className="label">
               Stop for the day
             </label>
-            <div className="select">
+            <div>
               <select
                 onChange={stopSelected}
-                className="input"
                 id="stops"
                 name="stops"
+                className="select select-primary w-full max-w-xs"
               >
                 {stops.map((stop) => {
                   return (
@@ -191,21 +188,24 @@ export default function AddSection(props) {
               </select>
             </div>
           </div>
-          <div className="container mt-3">
+          <div>
             <label htmlFor="additionalNotes" className="label">
               Additional Notes
             </label>
             <input
-              className="input"
               type="text"
               id="additionalNotes"
               name="additionalNotes"
               value={additionalNotes}
               onChange={handleChange}
+              className="input input-bordered w-full max-w-xs"
             />
           </div>
 
-          <input className="button is-primary mt-3" type="submit" />
+          <input
+            type="submit"
+            className="btn rounded btn-primary hover:opacity-80 mt-5 mb-5"
+          />
         </form>
       </div>
     </>

@@ -53,82 +53,90 @@ export default function CreateProfile() {
     <>
       <Header />
       <Nav />
-      <div className="container">
-        <h3 className="is-size-5">
-          <strong>Create your profile</strong>
-        </h3>
-
-        <form
-          encType="multipart/form-data"
-          className="container"
-          onSubmit={handleSubmit}
-        >
-          <div className="container mt-3">
-            <label htmlFor="firstName" className="label">
-              First Name
-            </label>
+      <div>
+        <div className="hero">
+          <h3>
+            <strong>Create your profile</strong>
+          </h3>
+        </div>
+        <div className="hero">
+          <form encType="multipart/form-data" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="firstName" className="label">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={firstName}
+                onChange={handleChange}
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={lastName}
+                onChange={handleChange}
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div>
+              <label htmlFor="location" className="label">
+                Location
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={location}
+                onChange={handleChange}
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div>
+              <label htmlFor="profile" className="label">
+                Upload your photo
+              </label>
+              <input
+                type="file"
+                name="profile"
+                id="profile"
+                onChange={handleImageChange}
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
             <input
-              className="input"
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={firstName}
-              onChange={handleChange}
+              type="submit"
+              className="btn rounded btn-primary hover:opacity-80 mt-5 mb-5"
             />
-          </div>
-          <div className="container mt-3">
-            <label htmlFor="lastName" className="label">
-              Last Name
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={lastName}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="container mt-3">
-            <label htmlFor="location" className="label">
-              Location
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="location"
-              name="location"
-              value={location}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="container mt-3">
-            <label htmlFor="profile" className="label">
-              Upload your photo
-            </label>
-            <input
-              className="button is-primary mt-3"
-              type="file"
-              name="profile"
-              id="profile"
-              onChange={handleImageChange}
-            />
-          </div>
-          <input className="button is-primary mt-3" type="submit" />
-        </form>
-        <h1>Upload and Display Image</h1>
-        {selectedImage && (
-          <div>
-            <img
-              alt="not found"
-              width={'250px'}
-              src={URL.createObjectURL(selectedImage)}
-            />
-            <br />
-            <button onClick={() => setSelectedImage(null)}>Remove</button>
-          </div>
-        )}
-        <br />
+          </form>
+        </div>
+        <div className="hero">
+          {selectedImage && (
+            <div>
+              <img
+                alt="not found"
+                width={'250px'}
+                src={URL.createObjectURL(selectedImage)}
+              />
+              <br />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="btn rounded btn-secondary hover:opacity-80 mt-5 mb-5"
+              >
+                Remove
+              </button>
+            </div>
+          )}
+          <br />
+        </div>
       </div>
     </>
   )

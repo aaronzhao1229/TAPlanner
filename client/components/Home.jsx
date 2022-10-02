@@ -38,23 +38,19 @@ export default function Home() {
     <>
       <Header />
       <Nav />
-      <div className="columns">
-        <div className="column">
-          <div className="card m-5">
-            <div className="card-image has-text-centered">
-              <figure className="image is-96x96 is-inline-block mt-4">
-                <img src="./images/planning.png" alt="planning" />
-              </figure>
-            </div>
-            <header className="card-header">
-              <p className="card-header-title is-centered">
-                <Link to="/planner" style={{ color: 'black' }}>
-                  Planner
-                </Link>
-              </p>
-            </header>
-            <div className="card-content ">
-              <div className="content ml-6 mr-6 mt-5">
+      <div className="flex flex-wrap justify-center">
+        <div className="card card-compact w-96 bg-base-100 shadow-xl m-6">
+          <div className="flex flex-wrap justify-center">
+            <figure className="w-20 h-20">
+              <img src="./images/planning.png" alt="planning" />
+            </figure>
+          </div>
+          <div className="card-body items-center text-center">
+            <h2 className="card-title py-4 px-8 content-center">
+              <Link to="/planner">Planner</Link>
+            </h2>
+            <div>
+              <div>
                 This planning tool provides dropdown lists which makes planning
                 easier. Most information is based on official Te Araroa notes,
                 which however may be not accurate. Please refer to the official
@@ -63,38 +59,36 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="column">
-          <div className="card m-5">
-            <div className="card-image has-text-centered">
-              <figure className="image is-96x96 is-inline-block mt-4">
-                <img src="./images/gears.png" alt="gears" />
+        <div>
+          <div className="card card-compact w-96 bg-base-100 shadow-xl m-6">
+            <div className="flex flex-wrap justify-center">
+              <figure className="w-20 h-20">
+                <img
+                  src="./images/gears.png"
+                  alt="gears"
+                  className="rounded-xl"
+                />
               </figure>
             </div>
-            <header className="card-header">
-              <p className="card-header-title is-centered">
-                <Link to="/gears" style={{ color: 'black' }}>
-                  Gears
-                </Link>
-              </p>
-            </header>
-            <div className="card-content ">
-              <div className="content ml-6 mr-6 mt-5">
-                A hiker using good, lightweight equipment has a better chance of
-                finishing a hike than one overloaded with poor gear. This gear
-                organising tool helps track the weight (as well as price) of
-                your gears. To be developed.
+            <div className="card-body items-center text-center">
+              <h2 className="card-title py-4 px-8 content-center">
+                <Link to="/gears">Gears</Link>
+              </h2>
+              <div>
+                <div>
+                  A hiker using good, lightweight equipment has a better chance
+                  of finishing a hike than one overloaded with poor gear. This
+                  gear organising tool helps track the weight (as well as price)
+                  of your gears. To be developed.
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <a
-            href={'https://www.flaticon.com'}
-            title={'plan icons'}
-            style={{ color: '#394851' }}
-          >
+      <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
+        <div>
+          <a href={'https://www.flaticon.com'} title={'plan icons'}>
             Icons created by Freepik - Flaticon
           </a>
         </div>

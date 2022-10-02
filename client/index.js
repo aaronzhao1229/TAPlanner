@@ -12,6 +12,8 @@ import App from './components/App'
 import reducers from './reducers'
 import { BrowserRouter } from 'react-router-dom'
 
+import './styles/index.css'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   reducers,

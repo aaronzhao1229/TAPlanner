@@ -17,47 +17,38 @@ export default function Nav() {
   }
 
   return (
-    <nav className="box has-text-centered has-background-primary">
-      <div className="columns">
-        <div className="column is-one-quarter">
-          <h3 className="is-size-6">
-            <Link to="/" style={{ color: '#1B303D' }}>
-              Home
-            </Link>
-          </h3>
-        </div>
-        <div className="column is-one-quarter has-text-white">
-          <h3 className="is-size-6">
-            <Link to="/planner" style={{ color: '#1B303D' }}>
-              Planner
-            </Link>
-          </h3>
-        </div>
-        <div className="column is-one-quarter">
-          <h3 className="is-size-6">
-            <Link to="/gears" style={{ color: '#1B303D' }}>
-              Gears
-            </Link>
-          </h3>
-        </div>
+    <nav className="mb-5">
+      <div className="grid grid-cols-4 gap-4 text-center bg-primary">
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/">Home</Link>
+        </h3>
 
-        <div className="column is-one-quarter">
-          <h3 className="is-size-6">
-            <IfAuthenticated>
-              <Link to="/" onClick={handleLogOff} style={{ color: '#1B303D' }}>
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/planner">Planner</Link>
+        </h3>
+
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/gears">Gears</Link>
+        </h3>
+
+        <h3>
+          <IfAuthenticated>
+            <div className="btn btn-ghost normal-case text-xl">
+              Logged in as
+              <Link to="/singleProfile">{' ' + user.firstName}</Link>
+            </div>
+            <div className="btn btn-ghost normal-case text-xl">
+              <Link to="/" onClick={handleLogOff}>
                 Log off
               </Link>
-              <Link to="/singleProfile" style={{ color: '#1B303D' }}>
-                {' ' + user.firstName}
-              </Link>
-            </IfAuthenticated>
-            <IfNotAuthenticated>
-              <Link to="/" onClick={handleSignIn} style={{ color: '#1B303D' }}>
-                Sign In
-              </Link>
-            </IfNotAuthenticated>
-          </h3>
-        </div>
+            </div>
+          </IfAuthenticated>
+          <IfNotAuthenticated>
+            <Link to="/" onClick={handleSignIn}>
+              Sign In
+            </Link>
+          </IfNotAuthenticated>
+        </h3>
       </div>
     </nav>
   )
