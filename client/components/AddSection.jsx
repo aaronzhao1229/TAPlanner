@@ -88,25 +88,32 @@ export default function AddSection(props) {
 
   return (
     <>
-      <div>
-        <h3>
-          <strong>Add a section</strong>
-        </h3>
+      <div className="hero">
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="day">Day (eg. Day 1 or 03/09/2022)</label>
+            <label htmlFor="day" className="label">
+              Day (eg. Day 1 or 03/09/2022)
+            </label>
             <input
               type="text"
               id="day"
               name="day"
               value={day}
               onChange={handleChange}
+              className="input input-bordered w-full max-w-xs"
             />
           </div>
           <div>
-            <label htmlFor="region">Region</label>
+            <label htmlFor="region" className="label">
+              Region
+            </label>
             <div>
-              <select onChange={regionSelected} id="region" name="region">
+              <select
+                onChange={regionSelected}
+                id="region"
+                name="region"
+                className="select select-primary w-full max-w-xs"
+              >
                 {regions.map((region) => {
                   return (
                     <option key={region.id} value={region.id}>
@@ -118,9 +125,16 @@ export default function AddSection(props) {
             </div>
           </div>
           <div>
-            <label htmlFor="tracks">Track</label>
+            <label htmlFor="tracks" className="label">
+              Track
+            </label>
             <div>
-              <select onChange={trackSelected} id="tracks" name="tracks">
+              <select
+                onChange={trackSelected}
+                id="tracks"
+                name="tracks"
+                className="select select-primary w-full max-w-xs"
+              >
                 {tracks.map((track) => {
                   return (
                     <option key={track.id} value={track.id}>
@@ -133,9 +147,16 @@ export default function AddSection(props) {
           </div>
 
           <div>
-            <label htmlFor="section">Section</label>
+            <label htmlFor="section" className="label">
+              Section
+            </label>
             <div>
-              <select onChange={sectionSelected} id="sections" name="sections">
+              <select
+                onChange={sectionSelected}
+                id="sections"
+                name="sections"
+                className="select select-primary w-full max-w-xs"
+              >
                 {sections.map((section) => {
                   return (
                     <option key={section.id} value={section.id}>
@@ -147,9 +168,16 @@ export default function AddSection(props) {
             </div>
           </div>
           <div>
-            <label htmlFor="stops">Stop for the day</label>
+            <label htmlFor="stops" className="label">
+              Stop for the day
+            </label>
             <div>
-              <select onChange={stopSelected} id="stops" name="stops">
+              <select
+                onChange={stopSelected}
+                id="stops"
+                name="stops"
+                className="select select-primary w-full max-w-xs"
+              >
                 {stops.map((stop) => {
                   return (
                     <option key={stop.id} value={stop.id}>
@@ -161,17 +189,23 @@ export default function AddSection(props) {
             </div>
           </div>
           <div>
-            <label htmlFor="additionalNotes">Additional Notes</label>
+            <label htmlFor="additionalNotes" className="label">
+              Additional Notes
+            </label>
             <input
               type="text"
               id="additionalNotes"
               name="additionalNotes"
               value={additionalNotes}
               onChange={handleChange}
+              className="input input-bordered w-full max-w-xs"
             />
           </div>
 
-          <input type="submit" />
+          <input
+            type="submit"
+            className="btn rounded btn-primary hover:opacity-80 mt-5 mb-5"
+          />
         </form>
       </div>
     </>
