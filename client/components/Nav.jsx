@@ -18,38 +18,37 @@ export default function Nav() {
 
   return (
     <nav>
-      <div>
-        <div>
-          <h3>
-            <Link to="/">Home</Link>
-          </h3>
-        </div>
-        <div>
-          <h3>
-            <Link to="/planner">Planner</Link>
-          </h3>
-        </div>
-        <div>
-          <h3>
-            <Link to="/gears">Gears</Link>
-          </h3>
-        </div>
+      <div className="grid grid-cols-4 gap-4 text-center bg-primary">
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/">Home</Link>
+        </h3>
 
-        <div>
-          <h3>
-            <IfAuthenticated>
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/planner">Planner</Link>
+        </h3>
+
+        <h3 className="btn btn-ghost normal-case text-xl">
+          <Link to="/gears">Gears</Link>
+        </h3>
+
+        <h3>
+          <IfAuthenticated>
+            <div className="btn btn-ghost normal-case text-xl">
+              Logged in as
+              <Link to="/singleProfile">{' ' + user.firstName}</Link>
+            </div>
+            <div className="btn btn-ghost normal-case text-xl">
               <Link to="/" onClick={handleLogOff}>
                 Log off
               </Link>
-              <Link to="/singleProfile">{' ' + user.firstName}</Link>
-            </IfAuthenticated>
-            <IfNotAuthenticated>
-              <Link to="/" onClick={handleSignIn}>
-                Sign In
-              </Link>
-            </IfNotAuthenticated>
-          </h3>
-        </div>
+            </div>
+          </IfAuthenticated>
+          <IfNotAuthenticated>
+            <Link to="/" onClick={handleSignIn}>
+              Sign In
+            </Link>
+          </IfNotAuthenticated>
+        </h3>
       </div>
     </nav>
   )
