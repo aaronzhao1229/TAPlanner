@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import { getRegions, getTracksByRegionId, getAllInfo } from './apiClient'
+import { getRegions, getTracksByRegionId, getAllInfo } from '../apiClient'
 
 describe('getRegions', () => {
   it('returns data from local api', () => {
