@@ -43,4 +43,17 @@ router.get('/singleUser', checkJwt, (req, res) => {
   }
 })
 
+router.post('/plans/addPlansForUser', (req, res) => {
+  const plan = req.body
+  usersDb
+    .planForUser(plan)
+    .then(() => {
+      res.json(plan)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router
