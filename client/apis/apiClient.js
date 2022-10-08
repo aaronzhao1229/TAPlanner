@@ -31,3 +31,9 @@ export function getAllInfo(regionId, trackId, sectionId, stopId) {
       return res.body
     })
 }
+
+export function getPlansForUser(userId) {
+  return request
+    .get(`/users/plans/getPlansForUser/${userId}`)
+    .then((res) => res.body)
+}

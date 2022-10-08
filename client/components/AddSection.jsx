@@ -7,7 +7,7 @@ import {
   fetchStopsByTrackId,
 } from '../actions/planner'
 
-import { getAllInfo } from '../apis/apiClient'
+// import { getAllInfo } from '../apis/apiClient'
 import { addPlanForUser } from '../apis/user.api'
 import { defaultValues } from '../helper'
 
@@ -79,17 +79,17 @@ export default function AddSection(props) {
     plan.day = day
     plan.additionalNotes = additionalNotes
     addPlanForUser(plan)
-    getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
-      .then((res) => {
-        res[0].day = day
-        res[0].additionalNotes = additionalNotes
-        updatedTable.push(res[0])
-        updateTable(updatedTable)
-        setPage(page + 1)
-      })
-      .catch((err) => {
-        console.error(err.message + 'Planner handleSummit')
-      })
+    // getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
+    //   .then((res) => {
+    //     res[0].day = day
+    //     res[0].additionalNotes = additionalNotes
+    //     updatedTable.push(res[0])
+    //     updateTable(updatedTable)
+    //     setPage(page + 1)
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.message + 'Planner handleSummit')
+    //   })
   }
 
   return (

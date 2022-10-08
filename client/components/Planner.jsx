@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { exportData } from '../helper'
 import AddSection from './AddSection'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPlansForUser } from '../actions/planner'
 let updatedTable = []
 export default function Planner(props) {
+  const user = useSelector((state) => state.loggedInUser)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchPlansForUser(user.id))
+  }, [])
+  const plans = useSelector((state) => state.plans)
   const [page, setPage] = useState(0)
   const { table } = props.tableData
   const { updateTable } = props.setTableFunction
@@ -37,8 +45,8 @@ export default function Planner(props) {
               <th>Delete?</th>
             </tr>
           </thead>
-          {table.length !== 0 &&
-            table.map((row) => {
+          {plans.length !== 0 &&
+            plans.map((row) => {
               return (
                 <tbody key={row.section}>
                   <tr>
