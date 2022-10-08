@@ -74,17 +74,15 @@ export default function AddSection(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-
+    const plan = { ...ids }
+    plan.userId = user.id
+    plan.day = day
+    plan.additionalNotes = additionalNotes
+    addPlanForUser(plan)
     getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
       .then((res) => {
         res[0].day = day
         res[0].additionalNotes = additionalNotes
-
-        const plan = { ...ids }
-        plan.userId = user.id
-        plan.day = day
-        plan.additionalNotes = additionalNotes
-        addPlanForUser(plan)
         updatedTable.push(res[0])
         updateTable(updatedTable)
         setPage(page + 1)

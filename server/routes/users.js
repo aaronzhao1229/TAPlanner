@@ -56,4 +56,15 @@ router.post('/plans/addPlansForUser', (req, res) => {
     })
 })
 
+router.get('/plans/getPlansForUser/:userId', (req, res) => {
+  const userId = req.params.userId
+  usersDb
+    .getPlansForUser(userId)
+    .then((plans) => res.json(plans))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router

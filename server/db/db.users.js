@@ -7,6 +7,7 @@ module.exports = {
   getUserById,
   planForUser,
   planRegions,
+  getPlansForUser,
 }
 
 function createProfile(user, db = connection) {
@@ -66,4 +67,36 @@ function planStops(planId, plan, db = connection) {
     planId: planId,
     stopId: plan.stopId,
   })
+}
+
+function getPlansForUser(userId, db = connection) {
+  return db('plans')
+    .join('plan_regions', 'plans.id', 'plan_regions.planId')
+    .join('regions', 'regions.id', 'plan_regions.regionId')
+    .join('plan_tracks', 'plans.id', 'plan_tracks.planId')
+    .join('tracks', 'tracks.id', 'plan_tracks.trackId')
+    .join('plan_sections', 'plans.id', 'plan_sections.planId')
+    .join('sections', 'sections.id', 'plan_sections.sectionId')
+    .join('plan_stops', 'plans.id', 'plan_stops.planId')
+    .join('stops', 'stops.id', 'plan_stops.stopId')
+    .select(
+      'userId',
+      'plans.id as planId',
+      'day',
+      'regions.id as regionId',
+      'regions.name as region',
+      'tracks.id as trackId',
+      'tracks.name as track',
+      'tracks.category as category',
+      'sections.id as sectionId',
+      'sections.name as section',
+      'sections.length as length',
+      'sections.time as time',
+      'sections.notes as notes',
+      'stops.id as stopId',
+      'stops.name as stop',
+      'stops.resupply as resupply',
+      'additionalNotes'
+    )
+    .where('userId', userId)
 }
