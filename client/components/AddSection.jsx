@@ -8,6 +8,7 @@ import {
 } from '../actions/planner'
 
 import { getAllInfo } from '../apis/apiClient'
+import { addPlanForUser } from '../apis/user.api'
 import { defaultValues } from '../helper'
 
 const initialFormData = {
@@ -34,7 +35,7 @@ export default function AddSection(props) {
     dispatch(fetchSectionsByTrackId(ids.trackId))
     dispatch(fetchStopsByTrackId(ids.trackId))
   }, [])
-
+  const user = useSelector((state) => state.loggedInUser)
   const regions = useSelector((state) => state.regions)
   const tracks = useSelector((state) => state.tracks)
   const sections = useSelector((state) => state.sections)
@@ -79,6 +80,11 @@ export default function AddSection(props) {
         res[0].day = day
         res[0].additionalNotes = additionalNotes
 
+        const plan = { ...ids }
+        plan.userId = user.id
+        plan.day = day
+        plan.additionalNotes = additionalNotes
+        addPlanForUser(plan)
         updatedTable.push(res[0])
         updateTable(updatedTable)
         setPage(page + 1)
