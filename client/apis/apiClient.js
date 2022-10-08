@@ -37,3 +37,12 @@ export function getPlansForUser(userId) {
     .get(`/users/plans/getPlansForUser/${userId}`)
     .then((res) => res.body)
 }
+
+export function addPlanForUser(plan) {
+  return request
+    .post(`/users/plans/addPlansForUser`)
+    .send(plan)
+    .then((res) => {
+      return res.body
+    })
+}

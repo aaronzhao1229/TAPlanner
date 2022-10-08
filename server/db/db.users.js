@@ -5,9 +5,9 @@ const connection = require('knex')(config)
 module.exports = {
   createProfile,
   getUserById,
-  planForUser,
-  planRegions,
+  addPlanForUser,
   getPlansForUser,
+  deletePlanForUser,
 }
 
 function createProfile(user, db = connection) {
@@ -24,7 +24,7 @@ function getUserById(auth0Id, db = connection) {
   return db('users').select().where('auth0Id', auth0Id)
 }
 
-function planForUser(plan, db = connection) {
+function addPlanForUser(plan, db = connection) {
   let planId = null
   return db('plans')
     .insert({
@@ -34,39 +34,67 @@ function planForUser(plan, db = connection) {
     })
     .then((newId) => {
       planId = newId[0]
-      return planRegions(planId, plan)
+      return addPlanRegions(planId, plan)
     })
-    .then(() => planTracks(planId, plan))
-    .then(() => planSections(planId, plan))
-    .then(() => planStops(planId, plan))
+    .then(() => addPlanTracks(planId, plan))
+    .then(() => addPlanSections(planId, plan))
+    .then(() => addPlanStops(planId, plan))
+    .then(() => getPlansForUser(plan.userId))
 }
 
-function planRegions(planId, plan, db = connection) {
+function addPlanRegions(planId, plan, db = connection) {
   return db('plan_regions').insert({
     planId: planId,
     regionId: plan.regionId,
   })
 }
 
-function planTracks(planId, plan, db = connection) {
+function addPlanTracks(planId, plan, db = connection) {
   return db('plan_tracks').insert({
     planId: planId,
     trackId: plan.trackId,
   })
 }
 
-function planSections(planId, plan, db = connection) {
+function addPlanSections(planId, plan, db = connection) {
   return db('plan_sections').insert({
     planId: planId,
     sectionId: plan.sectionId,
   })
 }
 
-function planStops(planId, plan, db = connection) {
+function addPlanStops(planId, plan, db = connection) {
   return db('plan_stops').insert({
     planId: planId,
     stopId: plan.stopId,
   })
+}
+
+function deletePlanForUser(planId, userId, db = connection) {
+  return db('plans')
+    .delete()
+    .where('id', planId)
+    .then(() => deletePlanRegions(planId))
+    .then(() => deletePlanTracks(planId))
+    .then(() => deletePlanSections(planId))
+    .then(() => deletePlanStops(planId))
+    .then(() => getPlansForUser(userId))
+}
+
+function deletePlanRegions(planId, db = connection) {
+  return db('plan_regions').delete().where('planId', planId)
+}
+
+function deletePlanTracks(planId, db = connection) {
+  return db('plan_tracks').delete().where('planId', planId)
+}
+
+function deletePlanSections(planId, db = connection) {
+  return db('plan_sections').delete().where('planId', planId)
+}
+
+function deletePlanStops(planId, db = connection) {
+  return db('plan_stops').delete().where('planId', planId)
 }
 
 function getPlansForUser(userId, db = connection) {

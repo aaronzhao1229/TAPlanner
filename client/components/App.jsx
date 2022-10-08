@@ -21,10 +21,10 @@ const App = () => {
   useCacheUser()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [table, setTable] = useState([])
-  function updateTable(newData) {
-    setTable(newData)
-  }
+  // const [table, setTable] = useState([])
+  // function updateTable(newData) {
+  //   setTable(newData)
+  // }
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
   // const userInData = useSelector((state) => state.loggedInUser)
 
@@ -73,8 +73,8 @@ const App = () => {
               <Header />
               <Nav />
               <Planner
-                tableData={{ table }}
-                setTableFunction={{ updateTable }}
+              // tableData={{ table }}
+              // setTableFunction={{ updateTable }}
               />
             </>
           }

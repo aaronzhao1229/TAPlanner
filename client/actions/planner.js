@@ -5,6 +5,7 @@ import {
   getStopsByTrackId,
   getAllInfo,
   getPlansForUser,
+  addPlanForUser,
 } from '../apis/apiClient'
 
 export const SET_REGIONS_SUCCESS = 'SET_REGIONS_SUCCESS'
@@ -74,6 +75,17 @@ export function fetchPlansForUser(userId) {
   }
 }
 
+export function addNewPlanForUser(plan) {
+  return (dispatch) => {
+    return addPlanForUser(plan)
+      .then((plans) => {
+        dispatch(setPlansSuccess(plans))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
 // export function fetchAllInfo(regionId, trackId, sectionId, stopId) {
 //   return (dispatch) => {
 //     return getAllInfo(regionId, trackId, sectionId, stopId)

@@ -46,9 +46,23 @@ router.get('/singleUser', checkJwt, (req, res) => {
 router.post('/plans/addPlansForUser', (req, res) => {
   const plan = req.body
   usersDb
-    .planForUser(plan)
-    .then(() => {
-      res.json(plan)
+    .addPlanForUser(plan)
+    .then((plans) => {
+      res.json(plans)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
+router.delete('/plans/deletePlans/:userId/:planId', (req, res) => {
+  const userId = req.params.userId
+  const planId = req.params.planId
+  usersDb
+    .deletePlanForUser(planId, userId)
+    .then((plans) => {
+      res.json(plans)
     })
     .catch((err) => {
       console.error(err.message)

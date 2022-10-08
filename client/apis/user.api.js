@@ -15,10 +15,3 @@ export function uploadProfile(user) {
     .send(user)
     .then((res) => res.body)
 }
-
-export function addPlanForUser(plan) {
-  return request
-    .post(`/users/plans/addPlansForUser`)
-    .send(plan)
-    .then((res) => res.body)
-}

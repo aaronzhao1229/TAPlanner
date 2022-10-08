@@ -5,10 +5,11 @@ import {
   fetchTracksByRegionId,
   fetchSectionsByTrackId,
   fetchStopsByTrackId,
+  addNewPlanForUser,
 } from '../actions/planner'
 
 // import { getAllInfo } from '../apis/apiClient'
-import { addPlanForUser } from '../apis/user.api'
+
 import { defaultValues } from '../helper'
 
 const initialFormData = {
@@ -18,16 +19,16 @@ const initialFormData = {
 
 let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
-export default function AddSection(props) {
+export default function AddSection() {
   const dispatch = useDispatch()
 
-  const updatedTable = props.updateTableData
+  // const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
 
-  const page = props.pageData
-  const setPage = props.setPageFunction
-  const updateTable = props.setTableFunction
+  // const page = props.pageData
+  // const setPage = props.setPageFunction
+  // const updateTable = props.setTableFunction
 
   useEffect(() => {
     dispatch(fetchRegions())
@@ -78,18 +79,7 @@ export default function AddSection(props) {
     plan.userId = user.id
     plan.day = day
     plan.additionalNotes = additionalNotes
-    addPlanForUser(plan)
-    // getAllInfo(ids.regionId, ids.trackId, ids.sectionId, ids.stopId)
-    //   .then((res) => {
-    //     res[0].day = day
-    //     res[0].additionalNotes = additionalNotes
-    //     updatedTable.push(res[0])
-    //     updateTable(updatedTable)
-    //     setPage(page + 1)
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.message + 'Planner handleSummit')
-    //   })
+    dispatch(addNewPlanForUser(plan))
   }
 
   return (
