@@ -8,8 +8,6 @@ import {
   addNewPlanForUser,
 } from '../actions/planner'
 
-// import { getAllInfo } from '../apis/apiClient'
-
 import { defaultValues } from '../helper'
 
 const initialFormData = {
@@ -21,15 +19,8 @@ let ids = { regionId: 1, trackId: 1, sectionId: 1, stopId: 1 }
 
 export default function AddSection() {
   const dispatch = useDispatch()
-
-  // const updatedTable = props.updateTableData
   const [form, setForm] = useState(initialFormData)
   const { day, additionalNotes } = form
-
-  // const page = props.pageData
-  // const setPage = props.setPageFunction
-  // const updateTable = props.setTableFunction
-
   useEffect(() => {
     dispatch(fetchRegions())
     dispatch(fetchTracksByRegionId(ids.regionId))
