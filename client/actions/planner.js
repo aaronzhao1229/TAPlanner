@@ -6,6 +6,7 @@ import {
   getAllInfo,
   getPlansForUser,
   addPlanForUser,
+  deletePlan,
 } from '../apis/apiClient'
 
 export const SET_REGIONS_SUCCESS = 'SET_REGIONS_SUCCESS'
@@ -78,6 +79,18 @@ export function fetchPlansForUser(userId) {
 export function addNewPlanForUser(plan) {
   return (dispatch) => {
     return addPlanForUser(plan)
+      .then((plans) => {
+        dispatch(setPlansSuccess(plans))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
+
+export function deletePlanForUser(planId, userId) {
+  return (dispatch) => {
+    return deletePlan(planId, userId)
       .then((plans) => {
         dispatch(setPlansSuccess(plans))
       })

@@ -46,3 +46,11 @@ export function addPlanForUser(plan) {
       return res.body
     })
 }
+
+export function deletePlan(planId, userId) {
+  return request
+    .delete(`/users/plans/deletePlans/${userId}/${planId}`)
+    .then((res) => {
+      return res.body
+    })
+}
