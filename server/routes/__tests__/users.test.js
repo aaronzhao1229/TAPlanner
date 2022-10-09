@@ -4,7 +4,13 @@ const server = require('../../server')
 const checkJwt = require('../../auth0')
 const upload = require('../../multer')
 
-import { getUserById, createProfile } from '../../db/db.users'
+import {
+  getUserById,
+  createProfile,
+  addPlanForUser,
+  deletePlanForUser,
+  getPlansForUser,
+} from '../../db/db.users'
 
 jest.mock('../../db/db.users')
 jest.mock('../../auth0')
@@ -16,10 +22,16 @@ beforeAll(() => {
     next()
   })
 })
+
 const fakeMulter = (req, res, next) => {
   req.file = { filename: 'image' }
   next()
 }
+
+const fakePlans = [
+  { id: 1, day: 'day 1' },
+  { id: 2, day: 'day 2' },
+]
 
 jest.mock('../../multer', () => {
   return { single: jest.fn().mockReturnValue(fakeMulter) }
@@ -87,5 +99,80 @@ describe('POST /users/createProfile', () => {
           expect(console.error).toHaveBeenCalledWith('it did not work either')
         })
     )
+  })
+})
+
+describe('POST /users/plans/addPlansForUser', () => {
+  it('return plans with new plan', () => {
+    addPlanForUser.mockReturnValue(Promise.resolve(fakePlans))
+    return request(server)
+      .post('/users/plans/addPlansForUser')
+      .then((res) => {
+        expect(res.body[0].day).toBe('day 1')
+        expect(res.body).toHaveLength(2)
+      })
+  })
+
+  it('return status 500 and console errors when there is a problem', () => {
+    addPlanForUser.mockImplementation(() =>
+      Promise.reject(new Error('it did not work 1'))
+    )
+    console.error.mockImplementation(() => {})
+    return request(server)
+      .post('/users/plans/addPlansForUser')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('it did not work 1')
+      })
+  })
+})
+
+describe('DELETE /users/plans/deletePlans/:userId/:planId', () => {
+  it('return plans with delete plan', () => {
+    deletePlanForUser.mockReturnValue(Promise.resolve(fakePlans))
+    return request(server)
+      .delete('/users/plans/deletePlans/1/2')
+      .then((res) => {
+        expect(res.body[1].day).toBe('day 2')
+        expect(res.body).toHaveLength(2)
+      })
+  })
+
+  it('return status 500 and console errors when there is a problem', () => {
+    deletePlanForUser.mockImplementation(() =>
+      Promise.reject(new Error('it did not work 2'))
+    )
+    console.error.mockImplementation(() => {})
+    return request(server)
+      .delete('/users/plans/deletePlans/1/2')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('it did not work 2')
+      })
+  })
+})
+
+describe('GET /users/plans/getPlansForUser/:userId', () => {
+  it('return plans with delete plan', () => {
+    getPlansForUser.mockReturnValue(Promise.resolve(fakePlans))
+    return request(server)
+      .get('/users/plans/getPlansForUser/2')
+      .then((res) => {
+        expect(res.body[0].day).toBe('day 1')
+        expect(res.body).toHaveLength(2)
+      })
+  })
+
+  it('return status 500 and console errors when there is a problem', () => {
+    getPlansForUser.mockImplementation(() =>
+      Promise.reject(new Error('it did not work 3'))
+    )
+    console.error.mockImplementation(() => {})
+    return request(server)
+      .get('/users/plans/getPlansForUser/2')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('it did not work 3')
+      })
   })
 })
