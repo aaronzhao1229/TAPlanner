@@ -24,9 +24,24 @@ export function getStopsByTrackId(trackId) {
   })
 }
 
-export function getAllInfo(regionId, trackId, sectionId, stopId) {
+export function getPlansForUser(userId) {
   return request
-    .get(`/planner/getAllInfo/${regionId}/${trackId}/${sectionId}/${stopId}`)
+    .get(`/users/plans/getPlansForUser/${userId}`)
+    .then((res) => res.body)
+}
+
+export function addPlanForUser(plan) {
+  return request
+    .post(`/users/plans/addPlansForUser`)
+    .send(plan)
+    .then((res) => {
+      return res.body
+    })
+}
+
+export function deletePlan(planId, userId) {
+  return request
+    .delete(`/users/plans/deletePlans/${userId}/${planId}`)
     .then((res) => {
       return res.body
     })

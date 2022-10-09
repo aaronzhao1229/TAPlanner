@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-import { getRegions, getTracksByRegionId, getAllInfo } from '../apiClient'
+import { getRegions, getTracksByRegionId } from '../apiClient'
 
 describe('getRegions', () => {
   it('returns data from local api', () => {
@@ -37,18 +37,6 @@ describe('getTracksByRegionId', () => {
     return getTracksByRegionId(2).then((result) => {
       expect(result).toHaveLength(2)
       expect(result[0].name).toContain('Peak')
-      expect(scope.isDone()).toBe(true)
-    })
-  })
-})
-
-describe('getAllInfo', () => {
-  it('returns all infos by ids', () => {
-    const scope = nock('http://localhost')
-      .get(`/planner/getAllInfo/1/1/2/2`)
-      .reply(200, { id: 3, stop: 'Queenstown' })
-    return getAllInfo(1, 1, 2, 2).then((result) => {
-      expect(result.stop).toContain('town')
       expect(scope.isDone()).toBe(true)
     })
   })

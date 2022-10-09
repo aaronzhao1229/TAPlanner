@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import Nav from './Nav'
@@ -21,12 +21,7 @@ const App = () => {
   useCacheUser()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [table, setTable] = useState([])
-  function updateTable(newData) {
-    setTable(newData)
-  }
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
-  // const userInData = useSelector((state) => state.loggedInUser)
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -72,10 +67,7 @@ const App = () => {
             <>
               <Header />
               <Nav />
-              <Planner
-                tableData={{ table }}
-                setTableFunction={{ updateTable }}
-              />
+              <Planner />
             </>
           }
         />

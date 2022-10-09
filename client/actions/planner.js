@@ -3,14 +3,17 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
-  getAllInfo,
+  getPlansForUser,
+  addPlanForUser,
+  deletePlan,
 } from '../apis/apiClient'
 
 export const SET_REGIONS_SUCCESS = 'SET_REGIONS_SUCCESS'
 export const SET_TRACKS_SUCCESS = 'SET_TRACKS_SUCCESS'
 export const SET_SECTIONS_SUCCESS = 'SET_SECTIONS_SUCCESS'
 export const SET_STOPS_SUCCESS = 'SET_STOPS_SUCCESS'
-export const SET_ALLINFO_SUCCESS = 'SET_ALLINFO_SUCCESS'
+
+export const SET_PLANS_SUCCESS = 'SET_PLANS_SUCCESS'
 
 export function fetchRegions() {
   return (dispatch) => {
@@ -60,11 +63,35 @@ export function fetchStopsByTrackId(trackId) {
   }
 }
 
-export function fetchAllInfo(regionId, trackId, sectionId, stopId) {
+export function fetchPlansForUser(userId) {
   return (dispatch) => {
-    return getAllInfo(regionId, trackId, sectionId, stopId)
-      .then((trip) => {
-        dispatch(setAllInfoSuccess(trip))
+    return getPlansForUser(userId)
+      .then((plans) => {
+        dispatch(setPlansSuccess(plans))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
+
+export function addNewPlanForUser(plan) {
+  return (dispatch) => {
+    return addPlanForUser(plan)
+      .then((plans) => {
+        dispatch(setPlansSuccess(plans))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
+
+export function deletePlanForUser(planId, userId) {
+  return (dispatch) => {
+    return deletePlan(planId, userId)
+      .then((plans) => {
+        dispatch(setPlansSuccess(plans))
       })
       .catch((err) => {
         console.error(err.message)
@@ -88,6 +115,6 @@ export function setStopsSuccess(stops) {
   return { type: SET_STOPS_SUCCESS, payload: stops }
 }
 
-export function setAllInfoSuccess(trip) {
-  return { type: SET_ALLINFO_SUCCESS, payload: trip }
+export function setPlansSuccess(plan) {
+  return { type: SET_PLANS_SUCCESS, payload: plan }
 }

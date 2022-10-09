@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { exportData } from '../helper'
 import AddSection from './AddSection'
-let updatedTable = []
-export default function Planner(props) {
-  const [page, setPage] = useState(0)
-  const { table } = props.tableData
-  const { updateTable } = props.setTableFunction
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPlansForUser, deletePlanForUser } from '../actions/planner'
+
+export default function Planner() {
+  const user = useSelector((state) => state.loggedInUser)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchPlansForUser(user.id))
+  }, [])
+  const plans = useSelector((state) => state.plans)
+
   function deletePlan(target) {
-    const originalTableData = [...table]
-    updatedTable = originalTableData.filter((r) => r.section !== target)
-    updateTable(updatedTable)
+    dispatch(deletePlanForUser(target, user.id))
   }
 
   return (
@@ -37,11 +41,11 @@ export default function Planner(props) {
               <th>Delete?</th>
             </tr>
           </thead>
-          {table.length !== 0 &&
-            table.map((row) => {
-              return (
-                <tbody key={row.section}>
-                  <tr>
+          <tbody>
+            {plans.length !== 0 &&
+              plans.map((row) => {
+                return (
+                  <tr key={row.planId}>
                     <td>{row.day}</td>
                     <td>{row.region}</td>
                     <td>{row.track}</td>
@@ -55,24 +59,19 @@ export default function Planner(props) {
                     <td>{row.additionalNotes}</td>
                     <td>
                       <button
-                        onClick={() => deletePlan(row.section)}
+                        onClick={() => deletePlan(row.planId)}
                         className="btn btn-error btn-sm"
                       >
                         Delete
                       </button>
                     </td>
                   </tr>
-                </tbody>
-              )
-            })}
+                )
+              })}
+          </tbody>
         </table>
       </div>
-      <AddSection
-        setTableFunction={updateTable}
-        pageData={page}
-        setPageFunction={setPage}
-        updateTableData={updatedTable}
-      />
+      <AddSection />
     </>
   )
 }

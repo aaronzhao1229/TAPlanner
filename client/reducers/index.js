@@ -3,7 +3,7 @@ import regions from './regions'
 import tracks from './tracks'
 import sections from './sections'
 import stops from './stops'
-import allInfo from './allInfo'
+import plans from './plans'
 import loggedInUser from './loggedInUser'
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   tracks,
   sections,
   stops,
-  allInfo,
+  plans,
   loggedInUser,
 })
