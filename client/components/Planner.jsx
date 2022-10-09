@@ -41,11 +41,11 @@ export default function Planner() {
               <th>Delete?</th>
             </tr>
           </thead>
-          {plans.length !== 0 &&
-            plans.map((row) => {
-              return (
-                <tbody key={row.section}>
-                  <tr>
+          <tbody>
+            {plans.length !== 0 &&
+              plans.map((row) => {
+                return (
+                  <tr key={row.planId}>
                     <td>{row.day}</td>
                     <td>{row.region}</td>
                     <td>{row.track}</td>
@@ -66,9 +66,9 @@ export default function Planner() {
                       </button>
                     </td>
                   </tr>
-                </tbody>
-              )
-            })}
+                )
+              })}
+          </tbody>
         </table>
       </div>
       <AddSection />

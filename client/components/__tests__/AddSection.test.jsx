@@ -12,13 +12,6 @@ const mockRegions = [
   { id: 2, name: 'Southland' },
 ]
 
-// const mockAllInfo = [
-//   {
-//     region: 'Otago',
-//     track: 'Motatapu',
-//   },
-// ]
-const fakeFunc = jest.fn()
 describe('<AddSection />', () => {
   it('shows dropdown with all the options', () => {
     const fakeDispatch = jest.fn()
