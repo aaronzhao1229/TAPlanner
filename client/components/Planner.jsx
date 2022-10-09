@@ -24,7 +24,10 @@ export default function Planner() {
         </button>
       </div>
       <div className="overflow-x-auto">
-        <table id="datatable" className="table table-compact w-full">
+        <table
+          id="datatable"
+          className="table table-compact w-full border-separate"
+        >
           <thead>
             <tr>
               <th>Day</th>

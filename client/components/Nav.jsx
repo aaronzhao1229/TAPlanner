@@ -19,34 +19,39 @@ export default function Nav() {
   return (
     <nav className="mb-5">
       <div className="grid grid-cols-4 gap-4 text-center bg-primary">
-        <h3 className="btn btn-ghost normal-case text-xl">
+        <h3 className="btn btn-ghost normal-case text-xl text-neutral-400">
           <Link to="/">Home</Link>
         </h3>
 
-        <h3 className="btn btn-ghost normal-case text-xl">
+        <h3 className="btn btn-ghost normal-case text-xl text-neutral-400">
           <Link to="/planner">Planner</Link>
         </h3>
 
-        <h3 className="btn btn-ghost normal-case text-xl">
+        <h3 className="btn btn-ghost normal-case text-xl text-neutral-400">
           <Link to="/gears">Gears</Link>
         </h3>
 
         <h3>
           <IfAuthenticated>
-            <div className="btn btn-ghost normal-case text-xl">
-              Logged in as
-              <Link to="/singleProfile">{' ' + user.firstName}</Link>
-            </div>
-            <div className="btn btn-ghost normal-case text-xl">
-              <Link to="/" onClick={handleLogOff}>
-                Log off
-              </Link>
-            </div>
+            {user.firstName && (
+              <>
+                <div className="btn btn-ghost normal-case text-xl text-neutral-400">
+                  <Link to="/singleProfile">{' ' + user.firstName}</Link>
+                </div>
+                <div className="btn btn-ghost normal-case text-xl text-neutral-400">
+                  <Link to="/" onClick={handleLogOff}>
+                    Log off
+                  </Link>
+                </div>
+              </>
+            )}
           </IfAuthenticated>
           <IfNotAuthenticated>
-            <Link to="/" onClick={handleSignIn}>
-              Sign In
-            </Link>
+            <div className="btn btn-ghost normal-case text-xl text-neutral-400">
+              <Link to="/" onClick={handleSignIn}>
+                Sign In
+              </Link>
+            </div>
           </IfNotAuthenticated>
         </h3>
       </div>
