@@ -41,15 +41,3 @@ describe('getTracksByRegionId', () => {
     })
   })
 })
-
-describe('getAllInfo', () => {
-  it('returns all infos by ids', () => {
-    const scope = nock('http://localhost')
-      .get(`/planner/getAllInfo/1/1/2/2`)
-      .reply(200, { id: 3, stop: 'Queenstown' })
-    return getAllInfo(1, 1, 2, 2).then((result) => {
-      expect(result.stop).toContain('town')
-      expect(scope.isDone()).toBe(true)
-    })
-  })
-})

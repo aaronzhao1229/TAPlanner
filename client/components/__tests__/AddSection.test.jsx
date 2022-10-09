@@ -4,42 +4,27 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import userEvent from '@testing-library/user-event'
-import { getAllInfo } from '../../apis/apiClient'
 
-jest.mock('../../apis/apiClient')
 jest.mock('react-redux')
-
-jest.spyOn(console, 'error')
-
-afterEach(() => {
-  console.error.mockReset()
-})
 
 const mockRegions = [
   { id: 1, name: 'Canterbury' },
   { id: 2, name: 'Southland' },
 ]
 
-const mockAllInfo = [
-  {
-    region: 'Otago',
-    track: 'Motatapu',
-  },
-]
+// const mockAllInfo = [
+//   {
+//     region: 'Otago',
+//     track: 'Motatapu',
+//   },
+// ]
 const fakeFunc = jest.fn()
 describe('<AddSection />', () => {
   it('shows dropdown with all the options', () => {
     const fakeDispatch = jest.fn()
     useDispatch.mockReturnValue(fakeDispatch)
     useSelector.mockReturnValue(mockRegions)
-    render(
-      <AddSection
-        setTableFunction={fakeFunc}
-        pageData={0}
-        setPageFunction={null}
-        updateTableData={[]}
-      />
-    )
+    render(<AddSection />)
     // screen.debug()
     const options = screen.getAllByRole('option')
 
@@ -51,14 +36,7 @@ describe('<AddSection />', () => {
     const fakeDispatch = jest.fn()
     useDispatch.mockReturnValue(fakeDispatch)
     useSelector.mockReturnValue(mockRegions)
-    render(
-      <AddSection
-        setTableFunction={null}
-        pageData={0}
-        setPageFunction={null}
-        updateTableData={[]}
-      />
-    )
+    render(<AddSection />)
 
     await userEvent.type(screen.getByLabelText(/Additional/i), 'Expert')
     await userEvent.selectOptions(
@@ -82,45 +60,15 @@ describe('<AddSection />', () => {
   })
 
   it('click the submit button', async () => {
-    const fakeDispatch = jest.fn()
-    useDispatch.mockReturnValue(fakeDispatch)
+    const fakeDispatch1 = jest.fn()
+    useDispatch.mockReturnValue(fakeDispatch1)
     useSelector.mockReturnValue(mockRegions)
-    getAllInfo.mockReturnValue(Promise.resolve(mockAllInfo))
-    render(
-      <AddSection
-        setTableFunction={fakeFunc}
-        pageData={0}
-        setPageFunction={fakeFunc}
-        updateTableData={[]}
-      />
-    )
+
+    render(<AddSection />)
     await userEvent.type(screen.getByTestId('testDay'), 'Day 1')
     await userEvent.type(screen.getByLabelText(/Additional/i), 'Expert')
 
     await userEvent.click(screen.getByRole('button'))
-    expect(fakeFunc).toHaveBeenCalledTimes(2)
-  })
-
-  it('console error', async () => {
-    const fakeDispatch = jest.fn()
-    useDispatch.mockReturnValue(fakeDispatch)
-    useSelector.mockReturnValue(mockRegions)
-    getAllInfo.mockImplementation(() =>
-      Promise.reject(new Error('something wrong'))
-    )
-    console.error.mockImplementation(() => {})
-    render(
-      <AddSection
-        setTableFunction={fakeFunc}
-        pageData={0}
-        setPageFunction={fakeFunc}
-        updateTableData={[]}
-      />
-    )
-
-    await userEvent.click(screen.getByRole('button'))
-    expect(console.error).toHaveBeenCalledWith(
-      'something wrongPlanner handleSummit'
-    )
+    expect(fakeDispatch1).toHaveBeenCalledTimes(5)
   })
 })
