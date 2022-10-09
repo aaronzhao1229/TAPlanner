@@ -38,3 +38,29 @@ describe('createProfile', () => {
       })
   })
 })
+
+describe('addPlanForUser', () => {
+  it('check if plan has been added', () => {
+    const fakePlan = {
+      userId: 1,
+      day: 'Day 100',
+      additionalNotes: 'River crossing',
+      regionId: 1,
+      trackId: 1,
+      sectionId: 4,
+      stopId: 5,
+    }
+    return userDb.addPlanForUser(fakePlan, testDb).then((plans) => {
+      expect(plans).toHaveLength(3)
+      expect(plans[2].stopId).toBe(5)
+    })
+  })
+})
+
+describe('deletePlanForUser', () => {
+  it('check if plan has been deleted', () => {
+    return userDb.deletePlanForUser(2, 1, testDb).then((plans) => {
+      expect(plans).toHaveLength(1)
+    })
+  })
+})

@@ -34,12 +34,14 @@ function addPlanForUser(plan, db = connection) {
     })
     .then((newId) => {
       planId = newId[0]
-      return addPlanRegions(planId, plan)
+      return addPlanRegions(planId, plan, db)
     })
-    .then(() => addPlanTracks(planId, plan))
-    .then(() => addPlanSections(planId, plan))
-    .then(() => addPlanStops(planId, plan))
-    .then(() => getPlansForUser(plan.userId))
+    .then(() => addPlanTracks(planId, plan, db))
+    .then(() => addPlanSections(planId, plan, db))
+    .then(() => addPlanStops(planId, plan, db))
+    .then(() => {
+      return getPlansForUser(plan.userId, db)
+    })
 }
 
 function addPlanRegions(planId, plan, db = connection) {
@@ -74,11 +76,11 @@ function deletePlanForUser(planId, userId, db = connection) {
   return db('plans')
     .delete()
     .where('id', planId)
-    .then(() => deletePlanRegions(planId))
-    .then(() => deletePlanTracks(planId))
-    .then(() => deletePlanSections(planId))
-    .then(() => deletePlanStops(planId))
-    .then(() => getPlansForUser(userId))
+    .then(() => deletePlanRegions(planId, db))
+    .then(() => deletePlanTracks(planId, db))
+    .then(() => deletePlanSections(planId, db))
+    .then(() => deletePlanStops(planId, db))
+    .then(() => getPlansForUser(userId, db))
 }
 
 function deletePlanRegions(planId, db = connection) {
