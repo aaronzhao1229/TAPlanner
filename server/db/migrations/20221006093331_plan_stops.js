@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('plan_stops', (table) => {
-    table.integer('planId')
+    table.integer('planId').references('plans.id')
     table.integer('stopId').references('stops.id')
   })
 }
