@@ -33,18 +33,16 @@ export default function Nav() {
 
         <h3>
           <IfAuthenticated>
-            {user.firstName && (
-              <>
-                <div className="btn btn-ghost normal-case text-xl text-neutral-400">
-                  <Link to="/singleProfile">{' ' + user.firstName}</Link>
-                </div>
-                <div className="btn btn-ghost normal-case text-xl text-neutral-400">
-                  <Link to="/" onClick={handleLogOff}>
-                    Log off
-                  </Link>
-                </div>
-              </>
-            )}
+            <>
+              <div className="btn btn-ghost normal-case text-xl text-neutral-400">
+                <Link to="/singleProfile">{' ' + user.firstName}</Link>
+              </div>
+              <div className="btn btn-ghost normal-case text-xl text-neutral-400">
+                <Link to="/" onClick={handleLogOff}>
+                  Log off
+                </Link>
+              </div>
+            </>
           </IfAuthenticated>
           <IfNotAuthenticated>
             <div className="btn btn-ghost normal-case text-xl text-neutral-400">
