@@ -1,4 +1,5 @@
-const config = require('./knexfile').development
+const environment = process.env.NODE_ENV || 'development'
+const config = require('./knexfile')[environment]
 
 const connection = require('knex')(config)
 
@@ -11,13 +12,16 @@ module.exports = {
 }
 
 function createProfile(user, db = connection) {
-  return db('users').insert({
-    auth0Id: user.auth0Id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    location: user.location,
-    image: user.image,
-  })
+  return db('users').insert(
+    {
+      auth0Id: user.auth0Id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      location: user.location,
+      image: user.image,
+    },
+    'id'
+  )
 }
 
 function getUserById(auth0Id, db = connection) {
@@ -27,11 +31,14 @@ function getUserById(auth0Id, db = connection) {
 function addPlanForUser(plan, db = connection) {
   let planId = null
   return db('plans')
-    .insert({
-      userId: plan.userId,
-      day: plan.day,
-      additionalNotes: plan.additionalNotes,
-    })
+    .insert(
+      {
+        userId: plan.userId,
+        day: plan.day,
+        additionalNotes: plan.additionalNotes,
+      },
+      'id'
+    )
     .then((newId) => {
       planId = newId[0]
       return addPlanRegions(planId, plan, db)
@@ -45,31 +52,43 @@ function addPlanForUser(plan, db = connection) {
 }
 
 function addPlanRegions(planId, plan, db = connection) {
-  return db('plan_regions').insert({
-    planId: planId,
-    regionId: plan.regionId,
-  })
+  return db('plan_regions').insert(
+    {
+      planId: planId,
+      regionId: plan.regionId,
+    },
+    'id'
+  )
 }
 
 function addPlanTracks(planId, plan, db = connection) {
-  return db('plan_tracks').insert({
-    planId: planId,
-    trackId: plan.trackId,
-  })
+  return db('plan_tracks').insert(
+    {
+      planId: planId,
+      trackId: plan.trackId,
+    },
+    'id'
+  )
 }
 
 function addPlanSections(planId, plan, db = connection) {
-  return db('plan_sections').insert({
-    planId: planId,
-    sectionId: plan.sectionId,
-  })
+  return db('plan_sections').insert(
+    {
+      planId: planId,
+      sectionId: plan.sectionId,
+    },
+    'id'
+  )
 }
 
 function addPlanStops(planId, plan, db = connection) {
-  return db('plan_stops').insert({
-    planId: planId,
-    stopId: plan.stopId,
-  })
+  return db('plan_stops').insert(
+    {
+      planId: planId,
+      stopId: plan.stopId,
+    },
+    'id'
+  )
 }
 
 function deletePlanForUser(planId, userId, db = connection) {

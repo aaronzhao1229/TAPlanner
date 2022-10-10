@@ -2,10 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = async function (knex) {
-  // Deletes ALL existing entries
-  await knex('sections').del()
-  await knex('sections').insert([
+exports.seed = function (knex) {
+  return knex('sections').insert([
     {
       id: 1,
       name: 'Ship Cove to Schoolhouse Bay campsite',

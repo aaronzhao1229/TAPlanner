@@ -2,10 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = async function (knex) {
-  // Deletes ALL existing entries
-  await knex('tracks').del()
-  await knex('tracks').insert([
+exports.seed = function (knex) {
+  return knex('tracks').insert([
     {
       id: 1,
       name: 'Queen Charlotte Track',
