@@ -40,7 +40,7 @@ function addPlanForUser(plan, db = connection) {
       'id'
     )
     .then((newId) => {
-      planId = newId[0]
+      planId = newId[0].id
       return addPlanRegions(planId, plan, db)
     })
     .then(() => addPlanTracks(planId, plan, db))
@@ -52,6 +52,8 @@ function addPlanForUser(plan, db = connection) {
 }
 
 function addPlanRegions(planId, plan, db = connection) {
+  console.log(planId)
+  console.log(plan)
   return db('plan_regions').insert({
     planId: planId,
     regionId: plan.regionId,
