@@ -52,43 +52,31 @@ function addPlanForUser(plan, db = connection) {
 }
 
 function addPlanRegions(planId, plan, db = connection) {
-  return db('plan_regions').insert(
-    {
-      planId: planId,
-      regionId: plan.regionId,
-    },
-    'id'
-  )
+  return db('plan_regions').insert({
+    planId: planId,
+    regionId: plan.regionId,
+  })
 }
 
 function addPlanTracks(planId, plan, db = connection) {
-  return db('plan_tracks').insert(
-    {
-      planId: planId,
-      trackId: plan.trackId,
-    },
-    'id'
-  )
+  return db('plan_tracks').insert({
+    planId: planId,
+    trackId: plan.trackId,
+  })
 }
 
 function addPlanSections(planId, plan, db = connection) {
-  return db('plan_sections').insert(
-    {
-      planId: planId,
-      sectionId: plan.sectionId,
-    },
-    'id'
-  )
+  return db('plan_sections').insert({
+    planId: planId,
+    sectionId: plan.sectionId,
+  })
 }
 
 function addPlanStops(planId, plan, db = connection) {
-  return db('plan_stops').insert(
-    {
-      planId: planId,
-      stopId: plan.stopId,
-    },
-    'id'
-  )
+  return db('plan_stops').insert({
+    planId: planId,
+    stopId: plan.stopId,
+  })
 }
 
 function deletePlanForUser(planId, userId, db = connection) {
