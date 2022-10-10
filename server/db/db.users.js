@@ -52,8 +52,6 @@ function addPlanForUser(plan, db = connection) {
 }
 
 function addPlanRegions(planId, plan, db = connection) {
-  console.log(planId)
-  console.log(plan)
   return db('plan_regions').insert({
     planId: planId,
     regionId: plan.regionId,
@@ -82,14 +80,23 @@ function addPlanStops(planId, plan, db = connection) {
 }
 
 function deletePlanForUser(planId, userId, db = connection) {
-  return db('plans')
-    .delete()
-    .where('id', planId)
-    .then(() => deletePlanRegions(planId, db))
-    .then(() => deletePlanTracks(planId, db))
+  return deletePlanStops(planId, db)
     .then(() => deletePlanSections(planId, db))
-    .then(() => deletePlanStops(planId, db))
+    .then(() => deletePlanTracks(planId, db))
+    .then(() => deletePlanRegions(planId, db))
+    .then(() => {
+      return db('plans').delete().where('id', planId)
+    })
     .then(() => getPlansForUser(userId, db))
+
+  // return db('plans')
+  //   .delete()
+  //   .where('id', planId)
+  //   .then(() => deletePlanStops(planId, db))
+  //   .then(() => deletePlanSections(planId, db))
+  //   .then(() => deletePlanTracks(planId, db))
+  //   .then(() => deletePlanRegions(planId, db))
+  //   .then(() => getPlansForUser(userId, db))
 }
 
 function deletePlanRegions(planId, db = connection) {
