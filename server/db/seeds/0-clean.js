@@ -9,4 +9,5 @@ exports.seed = async (knex) => {
   await knex('stops').del()
   await knex('tracks').del()
   await knex('users').del()
+  await knex('image').del()
 }
