@@ -5,6 +5,8 @@ import {
   fetchSectionsByTrackId,
   fetchStopsByTrackId,
   fetchPlansForUser,
+  addNewPlanForUser,
+  deletePlanForUser,
   SET_TRACKS_SUCCESS,
   SET_SECTIONS_SUCCESS,
   SET_STOPS_SUCCESS,
@@ -17,6 +19,8 @@ import {
   getSectionsByTrackId,
   getStopsByTrackId,
   getPlansForUser,
+  addPlanForUser,
+  deletePlan,
 } from '../../apis/apiClient'
 
 jest.mock('../../apis/apiClient')
@@ -155,6 +159,61 @@ describe('fetchPlansForUser', () => {
     console.error.mockImplementation(() => {})
     return fetchPlansForUser()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('Plans failure')
+    })
+  })
+})
+
+describe('addNewPlanForUser', () => {
+  it('dispatches setPlansSuccess', () => {
+    const mockPlans = [
+      { day: 'Day 1', region: 'Canterbury' },
+      { day: 'Day 2', region: 'Otago' },
+      { day: 'Day 3', region: 'Southland' },
+    ]
+    addPlanForUser.mockReturnValue(Promise.resolve(mockPlans))
+    const thunkFn = addNewPlanForUser()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(3)
+      expect(fakeDispatchArgument.payload[2].region).toContain('Southland')
+      expect(fakeDispatchArgument.type).toBe(SET_PLANS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    addPlanForUser.mockImplementation(() =>
+      Promise.reject(new Error('add plans failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return addNewPlanForUser()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('add plans failure')
+    })
+  })
+})
+
+describe('deletePlanForUser', () => {
+  it('dispatches setPlansSuccess', () => {
+    const mockPlans = [
+      { day: 'Day 2', region: 'Otago' },
+      { day: 'Day 3', region: 'Southland' },
+    ]
+    deletePlan.mockReturnValue(Promise.resolve(mockPlans))
+    const thunkFn = deletePlanForUser()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(2)
+      expect(fakeDispatchArgument.payload[1].region).toContain('Southland')
+      expect(fakeDispatchArgument.type).toBe(SET_PLANS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    deletePlan.mockImplementation(() =>
+      Promise.reject(new Error('delete plans failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return deletePlanForUser()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('delete plans failure')
     })
   })
 })
