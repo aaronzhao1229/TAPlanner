@@ -2,7 +2,11 @@ import {
   fetchRegions,
   SET_REGIONS_SUCCESS,
   fetchTracksByRegionId,
+  fetchSectionsByTrackId,
+  fetchStopsByTrackId,
   SET_TRACKS_SUCCESS,
+  SET_SECTIONS_SUCCESS,
+  SET_STOPS_SUCCESS,
 } from '../planner'
 
 import {
@@ -10,7 +14,6 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
-  getAllInfo,
 } from '../../apis/apiClient'
 
 jest.mock('../../apis/apiClient')
@@ -54,7 +57,6 @@ describe('fetchTracks', () => {
     const thunkFn = fetchTracksByRegionId()
     return thunkFn(fakeDispatch).then(() => {
       const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
-      expect(0).toBe(0)
       expect(fakeDispatchArgument.payload).toHaveLength(2)
       expect(fakeDispatchArgument.payload[0].name).toContain('Peak')
       expect(fakeDispatchArgument.type).toBe(SET_TRACKS_SUCCESS)
@@ -68,6 +70,61 @@ describe('fetchTracks', () => {
     console.error.mockImplementation(() => {})
     return fetchTracksByRegionId()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('Track failure')
+    })
+  })
+})
+
+describe('fetchSectionsByTrackId', () => {
+  it('dispatches setSectionsSuccess', () => {
+    const mockSections = [
+      { name: 'Picton to Anikiwa' },
+      { name: 'St Arnaud to Arthurs Pass' },
+    ]
+    getSectionsByTrackId.mockReturnValue(Promise.resolve(mockSections))
+    const thunkFn = fetchSectionsByTrackId()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(2)
+      expect(fakeDispatchArgument.payload[0].name).toContain('Picton')
+      expect(fakeDispatchArgument.type).toBe(SET_SECTIONS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    getSectionsByTrackId.mockImplementation(() =>
+      Promise.reject(new Error('Section failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return fetchSectionsByTrackId()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('Section failure')
+    })
+  })
+})
+
+describe('fetchStopsByTrackId', () => {
+  it('dispatches setStopsSuccess', () => {
+    const mockStops = [
+      { name: 'Anikiwa' },
+      { name: 'Arthurs Pass' },
+      { name: 'Wanaka' },
+    ]
+    getStopsByTrackId.mockReturnValue(Promise.resolve(mockStops))
+    const thunkFn = fetchStopsByTrackId()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(3)
+      expect(fakeDispatchArgument.payload[0].name).toContain('Anikiwa')
+      expect(fakeDispatchArgument.type).toBe(SET_STOPS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    getStopsByTrackId.mockImplementation(() =>
+      Promise.reject(new Error('Stops failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return fetchStopsByTrackId()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('Stops failure')
     })
   })
 })
