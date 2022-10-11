@@ -19,4 +19,10 @@ describe('loggedInUser reducer', () => {
     const newState = user({ auth0Id: '123' }, action)
     expect(newState.auth0Id).toBe('')
   })
+
+  test('default', () => {
+    const action = { type: '', payload: '123' }
+    const oldState = user('123456', action)
+    expect(oldState).toBe('123456')
+  })
 })
