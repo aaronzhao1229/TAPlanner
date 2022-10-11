@@ -4,9 +4,11 @@ import {
   fetchTracksByRegionId,
   fetchSectionsByTrackId,
   fetchStopsByTrackId,
+  fetchPlansForUser,
   SET_TRACKS_SUCCESS,
   SET_SECTIONS_SUCCESS,
   SET_STOPS_SUCCESS,
+  SET_PLANS_SUCCESS,
 } from '../planner'
 
 import {
@@ -14,6 +16,7 @@ import {
   getTracksByRegionId,
   getSectionsByTrackId,
   getStopsByTrackId,
+  getPlansForUser,
 } from '../../apis/apiClient'
 
 jest.mock('../../apis/apiClient')
@@ -125,6 +128,33 @@ describe('fetchStopsByTrackId', () => {
     console.error.mockImplementation(() => {})
     return fetchStopsByTrackId()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('Stops failure')
+    })
+  })
+})
+
+describe('fetchPlansForUser', () => {
+  it('dispatches setPlansSuccess', () => {
+    const mockPlans = [
+      { day: 'Day 1', region: 'Canterbury' },
+      { day: 'Day 2', region: 'Otago' },
+    ]
+    getPlansForUser.mockReturnValue(Promise.resolve(mockPlans))
+    const thunkFn = fetchPlansForUser()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(2)
+      expect(fakeDispatchArgument.payload[0].region).toContain('Canterbury')
+      expect(fakeDispatchArgument.type).toBe(SET_PLANS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    getPlansForUser.mockImplementation(() =>
+      Promise.reject(new Error('Plans failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return fetchPlansForUser()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('Plans failure')
     })
   })
 })
