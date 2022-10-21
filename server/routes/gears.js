@@ -3,7 +3,7 @@ const express = require('express')
 const gearsDb = require('../db/db.gears')
 const router = express.Router()
 
-router.get('/:userId', (req, res) => {
+router.get('/getgears/:userId', (req, res) => {
   const userId = req.params.userId
   gearsDb
     .getGears(userId)
