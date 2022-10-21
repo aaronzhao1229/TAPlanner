@@ -1,11 +1,12 @@
 import React from 'react'
+import Categories from './Categories'
 
 export default function Gears() {
   return (
     <div>
       <div>
-        <div className="hero">
-          <p>To be developed</p>
+        <div>
+          <Categories />
         </div>
       </div>
     </div>

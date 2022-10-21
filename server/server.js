@@ -7,6 +7,7 @@ const planner = require('./routes/planner')
 
 const server = express()
 const users = require('./routes/users')
+const gears = require('./routes/gears')
 
 server.use(express.json())
 server.use(express.urlencoded({ extended: false }))
@@ -15,6 +16,7 @@ server.use(cors('*'))
 
 server.use('/planner', planner)
 server.use('/users', users)
+server.use('/gears', gears)
 
 server.get('*', (req, res) => {
   res.sendFile(path.resolve('server/public/index.html'))
