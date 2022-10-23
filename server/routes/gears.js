@@ -16,4 +16,17 @@ router.get('/getgears/:userId', (req, res) => {
     })
 })
 
+router.get('/getGearCategories/:userId', (req, res) => {
+  const userId = req.params.userId
+  gearsDb
+    .getCategory(userId)
+    .then((categories) => {
+      res.json(categories)
+    })
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send('Server error')
+    })
+})
+
 module.exports = router

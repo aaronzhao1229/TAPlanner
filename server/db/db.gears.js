@@ -4,6 +4,7 @@ const connection = require('knex')(config)
 
 module.exports = {
   getGears,
+  getCategory,
 }
 
 function getGears(userId, db = connection) {
@@ -20,5 +21,11 @@ function getGears(userId, db = connection) {
       'weight',
       'quantity'
     )
+    .where('userId', userId)
+}
+
+function getCategory(userId, db = connection) {
+  return db('gear_category')
+    .select('userId', 'id', 'name as category')
     .where('userId', userId)
 }
