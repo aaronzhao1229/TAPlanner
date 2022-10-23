@@ -5,6 +5,7 @@ import sections from './sections'
 import stops from './stops'
 import plans from './plans'
 import loggedInUser from './loggedInUser'
+import gears from './gears'
 
 export default combineReducers({
   regions,
@@ -13,4 +14,5 @@ export default combineReducers({
   stops,
   plans,
   loggedInUser,
+  gears,
 })
