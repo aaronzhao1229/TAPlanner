@@ -5,3 +5,9 @@ export function getGearsForUser(userId) {
     return res.body
   })
 }
+
+export function getGearCategoriesForUser(userId) {
+  return request.get(`/gears/getGearCategories/${userId}`).then((res) => {
+    return res.body
+  })
+}

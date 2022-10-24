@@ -1,4 +1,4 @@
-import { getGearsForUser } from '../apis/gear.api'
+import { getGearsForUser, getGearCategoriesForUser } from '../apis/gear.api'
 
 export const SET_GEARS_SUCCESS = 'SET_GEARS_SUCCESS'
 

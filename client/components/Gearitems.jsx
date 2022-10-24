@@ -1,19 +1,5 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchGearsForUser } from '../actions/gears'
+import React from 'react'
 
-export default function Gearitems() {
-  const user = useSelector((state) => state.loggedInUser)
-  const gears = useSelector((state) => state.gears)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchGearsForUser(user.id))
-  })
-  return (
-    <div>
-      {gears.map((gear) => {
-        return <h2 key={gear.id}>{gear.gear}</h2>
-      })}
-    </div>
-  )
+export default function Gearitems({ children }) {
+  return <div>{children}</div>
 }
