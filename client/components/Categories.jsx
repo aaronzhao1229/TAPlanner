@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Category from './Category'
-import Gearitems from './Gearitems'
+import AddGear from './AddGear'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGearCategoriesForUser } from '../actions/gearCategories'
 import { fetchGearsForUser } from '../actions/gears'
@@ -16,21 +16,53 @@ export default function Categories() {
   }, [])
 
   return (
-    <div>
+    <div className="px-5">
       {gearCategories.map((category) => {
         return (
           <div key={category.id}>
             <Category>
-              <div>{category.category}</div>
-              {gears.map((gear) => {
-                return (
-                  <div key={gear.id}>
-                    {gear.categoryId === category.id ? (
-                      <Gearitems key={gear.id}>{gear.gear}</Gearitems>
-                    ) : null}
-                  </div>
-                )
-              })}
+              <div className="pt-5 pl-2 text-lg font-bold">
+                {category.category}
+              </div>
+              <div className="overflow-x-auto">
+                <table
+                  id="geartable"
+                  className="table table-compact w-full border-separate"
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Price</th>
+                      <th>Weight</th>
+                      <th>Quantity</th>
+                      <th>Delete?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {gears.length !== 0 &&
+                      gears
+                        .filter((gear) => gear.categoryId === category.id)
+                        .map((gear) => {
+                          return (
+                            <tr key={gear.id}>
+                              <td>{gear.gear}</td>
+                              <td>{gear.description}</td>
+                              <td>{gear.price}</td>
+                              <td>{gear.weight}</td>
+                              <td>{gear.quantity}</td>
+                              <td>
+                                <button className="btn btn-error btn-sm">
+                                  Delete
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                  </tbody>
+                </table>
+              </div>
+              <AddGear />
             </Category>
           </div>
         )
