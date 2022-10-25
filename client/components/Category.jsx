@@ -26,7 +26,7 @@ export default function Category({ category }) {
   function clickAdd() {
     setAddItem(true)
   }
-
+  console.log(additem)
   return (
     <div>
       <div className="pt-5 pl-2 text-lg font-bold">{category.category}</div>
@@ -60,6 +60,7 @@ export default function Category({ category }) {
                 </tr>
               )
             })}
+
             <tr>
               <td>
                 <button onClick={clickAdd} className="btn btn-primary btn-sm">
@@ -72,9 +73,9 @@ export default function Category({ category }) {
               <td>{allQuantity}</td>
               <td></td>
             </tr>
-            {additem && <AddGear />}
           </tbody>
         </table>
+        {additem && <AddGear setAddItemStatus={setAddItem} />}
       </div>
     </div>
   )

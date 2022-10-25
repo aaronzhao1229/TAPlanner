@@ -8,7 +8,8 @@ const initialFormData = {
   quantity: 0,
 }
 
-export default function AddGear() {
+export default function AddGear(props) {
+  const setAddItem = props.setAddItemStatus
   const [form, setForm] = useState(initialFormData)
   const { name, description, price, weight, quantity } = form
 
@@ -16,13 +17,19 @@ export default function AddGear() {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
+  function handleSubmit(event) {
+    event.preventDefault()
+    setAddItem(false)
+  }
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name" className="label">
             Gear
           </label>
+
           <input
             type="text"
             id="name"
@@ -36,6 +43,7 @@ export default function AddGear() {
           <label htmlFor="description" className="label">
             Description
           </label>
+
           <input
             type="text"
             id="description"
@@ -49,6 +57,7 @@ export default function AddGear() {
           <label htmlFor="price" className="label">
             Price
           </label>
+
           <input
             type="number"
             id="price"
@@ -62,6 +71,7 @@ export default function AddGear() {
           <label htmlFor="weight" className="label">
             Weight
           </label>
+
           <input
             type="number"
             id="weight"
@@ -75,6 +85,7 @@ export default function AddGear() {
           <label htmlFor="quantity" className="label">
             Quantity
           </label>
+
           <input
             type="number"
             id="quantity"
@@ -84,6 +95,7 @@ export default function AddGear() {
             className="input input-bordered w-full max-w-xs"
           />
         </div>
+
         <input
           type="submit"
           className="btn rounded btn-secondary hover:opacity-80 mt-5 mb-5 btn-sm"
