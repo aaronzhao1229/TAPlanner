@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-
+import { addGearCategory } from '../actions/gearCategories'
+import { useSelector, useDispatch } from 'react-redux'
 const initialFormData = {
   category: '',
 }
 
 export default function AddCategory(props) {
+  const user = useSelector((state) => state.loggedInUser)
+  const dispatch = useDispatch()
   const [form, setForm] = useState(initialFormData)
   const setAddCategory = props.setAddCategoryStatus
   const { category } = form
@@ -14,6 +17,11 @@ export default function AddCategory(props) {
 
   function handleSubmit(event) {
     event.preventDefault()
+    const categoryToBeAdded = {
+      category: category,
+      userId: user.id,
+    }
+    dispatch(addGearCategory(categoryToBeAdded))
     setAddCategory(false)
   }
   return (

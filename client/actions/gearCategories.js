@@ -1,10 +1,25 @@
-import { getGearCategoriesForUser } from '../apis/gear.api'
+import {
+  getGearCategoriesForUser,
+  addGearCategoryForUser,
+} from '../apis/gear.api'
 
 export const SET_GEARCATEGORIES_SUCCESS = 'SET_GEARCATEGORIES_SUCCESS'
 
 export function fetchGearCategoriesForUser(userId) {
   return (dispatch) => {
     return getGearCategoriesForUser(userId)
+      .then((categories) => {
+        dispatch(setGearCategoriesSuccess(categories))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
+
+export function addGearCategory(category) {
+  return (dispatch) => {
+    return addGearCategoryForUser(category)
       .then((categories) => {
         dispatch(setGearCategoriesSuccess(categories))
       })

@@ -11,3 +11,10 @@ export function getGearCategoriesForUser(userId) {
     return res.body
   })
 }
+
+export function addGearCategoryForUser(category) {
+  return request
+    .post('/gears/addCategoryForUser')
+    .send(category)
+    .then((res) => res.body)
+}
