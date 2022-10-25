@@ -40,4 +40,15 @@ router.post('/addCategoryForUser', (req, res) => {
     })
 })
 
+router.post('/addGearForUser', (req, res) => {
+  const gear = req.body
+  gearsDb
+    .addGear(gear)
+    .then((gears) => res.json(gears))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router

@@ -6,6 +6,7 @@ module.exports = {
   getGears,
   getCategory,
   addCategory,
+  addGear,
 }
 
 function getGears(userId, db = connection) {
@@ -38,4 +39,17 @@ function addCategory(category, db = connection) {
       userId: category.userId,
     })
     .then(() => getCategory(category.userId))
+}
+
+function addGear(gear, db = connection) {
+  return db('gear_items')
+    .insert({
+      name: gear.gear,
+      description: gear.description,
+      price: gear.price,
+      weight: gear.weight,
+      quantity: gear.quantity,
+      categoryId: gear.categoryId,
+    })
+    .then(() => getGears(gear.userId))
 }
