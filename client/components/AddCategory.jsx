@@ -33,7 +33,7 @@ export default function AddCategory(props) {
         />
         <input
           type="submit"
-          className="btn rounded btn-warning hover:opacity-80 mt-5 mb-5 btn-sm"
+          className="btn rounded btn-warning hover:opacity-80 m-5  btn-sm"
         />
       </form>
     </div>
