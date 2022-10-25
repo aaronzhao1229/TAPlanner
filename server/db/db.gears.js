@@ -5,6 +5,7 @@ const connection = require('knex')(config)
 module.exports = {
   getGears,
   getCategory,
+  addCategory,
 }
 
 function getGears(userId, db = connection) {
@@ -28,4 +29,13 @@ function getCategory(userId, db = connection) {
   return db('gear_category')
     .select('userId', 'id', 'name as category')
     .where('userId', userId)
+}
+
+function addCategory(category, db = connection) {
+  return db('gear_category')
+    .insert({
+      name: category.category,
+      userId: category.userId,
+    })
+    .then(() => getCategory(category.userId))
 }

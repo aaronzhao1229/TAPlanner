@@ -29,4 +29,15 @@ router.get('/getGearCategories/:userId', (req, res) => {
     })
 })
 
+router.post('/addCategoryForUser', (req, res) => {
+  const category = req.body
+  gearsDb
+    .addCategory(category)
+    .then((categories) => res.json(categories))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router
