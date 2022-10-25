@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddGear from './AddGear'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -8,7 +8,8 @@ export default function Category({ category }) {
   let allWeight = 0
   let allPrice = 0
   let allQuantity = 0
-  let additem = false
+
+  const [additem, setAddItem] = useState(false)
   const user = useSelector((state) => state.loggedInUser)
   const gears = useSelector((state) => state.gears)
   const targetGears = gears.filter((gear) => gear.categoryId === category.id)
@@ -23,7 +24,7 @@ export default function Category({ category }) {
   }, [])
 
   function clickAdd() {
-    additem = true
+    setAddItem(true)
   }
 
   return (
@@ -71,10 +72,10 @@ export default function Category({ category }) {
               <td>{allQuantity}</td>
               <td></td>
             </tr>
+            {additem && <AddGear />}
           </tbody>
         </table>
       </div>
-      <AddGear />
     </div>
   )
 }
