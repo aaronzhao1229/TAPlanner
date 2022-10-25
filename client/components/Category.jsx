@@ -8,6 +8,7 @@ export default function Category({ category }) {
   let allWeight = 0
   let allPrice = 0
   let allQuantity = 0
+  let additem = false
   const user = useSelector((state) => state.loggedInUser)
   const gears = useSelector((state) => state.gears)
   const targetGears = gears.filter((gear) => gear.categoryId === category.id)
@@ -20,6 +21,10 @@ export default function Category({ category }) {
   useEffect(() => {
     dispatch(fetchGearsForUser(user.id))
   }, [])
+
+  function clickAdd() {
+    additem = true
+  }
 
   return (
     <div>
@@ -55,7 +60,11 @@ export default function Category({ category }) {
               )
             })}
             <tr>
-              <td></td>
+              <td>
+                <button onClick={clickAdd} className="btn btn-primary btn-sm">
+                  Add new item
+                </button>
+              </td>
               <td></td>
               <td>{allPrice}</td>
               <td>{allWeight}</td>
