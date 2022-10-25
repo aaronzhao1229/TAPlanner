@@ -75,7 +75,9 @@ export default function Category({ category }) {
             </tr>
           </tbody>
         </table>
-        {additem && <AddGear setAddItemStatus={setAddItem} />}
+        {additem && (
+          <AddGear setAddItemStatus={setAddItem} category={category} />
+        )}
       </div>
     </div>
   )

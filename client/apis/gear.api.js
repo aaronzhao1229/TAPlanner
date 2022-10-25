@@ -18,3 +18,10 @@ export function addGearCategoryForUser(category) {
     .send(category)
     .then((res) => res.body)
 }
+
+export function addGearForUser(gear) {
+  return request
+    .post('/gears/addGearForUser')
+    .send(gear)
+    .then((res) => res.body)
+}

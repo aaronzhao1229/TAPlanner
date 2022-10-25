@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { addGear } from '../actions/gears'
 const initialFormData = {
   name: '',
   description: '',
@@ -9,7 +10,10 @@ const initialFormData = {
 }
 
 export default function AddGear(props) {
+  const user = useSelector((state) => state.loggedInUser)
+  const dispatch = useDispatch()
   const setAddItem = props.setAddItemStatus
+  const category = props.category
   const [form, setForm] = useState(initialFormData)
   const { name, description, price, weight, quantity } = form
 
@@ -19,6 +23,17 @@ export default function AddGear(props) {
 
   function handleSubmit(event) {
     event.preventDefault()
+    const gearToBeAdded = {
+      gear: name,
+      description: description,
+      price: price,
+      weight: weight,
+      quantity: quantity,
+      categoryId: category.id,
+      userId: user.id,
+    }
+    console.log(gearToBeAdded)
+    dispatch(addGear(gearToBeAdded))
     setAddItem(false)
   }
 
