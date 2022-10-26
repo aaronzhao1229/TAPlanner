@@ -1,4 +1,5 @@
 const knex = require('knex')
+
 const config = require('../knexfile').test
 const testDb = knex(config)
 const gearsDb = require('../db.gears')
@@ -46,5 +47,19 @@ it('addGear', () => {
   return gearsDb.addGear(mockGear, testDb).then((gears) => {
     expect(gears).toHaveLength(4)
     expect(gears[3].gear).toBe('gas')
+  })
+})
+
+it('deleteGear', () => {
+  return gearsDb.deleteGear(2, 1, testDb).then((gears) => {
+    expect(gears).toHaveLength(2)
+    expect(gears[0].gear).toBe('tent')
+  })
+})
+
+it('deleteCategory', () => {
+  return gearsDb.deleteCategory(2, 1, testDb).then((categories) => {
+    expect(categories).toHaveLength(1)
+    expect(categories[0].category).toBe('Big Three')
   })
 })
