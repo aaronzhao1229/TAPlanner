@@ -40,8 +40,18 @@ export default function Category({ category }) {
 
   return (
     <div>
-      <div className="pt-5 pl-2 text-lg font-bold">{category.category}</div>
-      <button onClick={clickDeleteCategory}>Delete category</button>
+      <div className="flex justify-between pt-5 pl-2 ">
+        <div className="text-lg font-bold">{category.category}</div>
+        <div>
+          <button
+            onClick={clickDeleteCategory}
+            className="btn btn-error btn-sm"
+          >
+            Delete category
+          </button>
+        </div>
+      </div>
+
       <div className="overflow-x-auto">
         <table
           id="geartable"
