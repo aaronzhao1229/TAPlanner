@@ -63,4 +63,16 @@ router.delete('/deleteGear/:gearId/:userId', (req, res) => {
     })
 })
 
+router.delete('/deleteCategory/:categoryId/:userId', (req, res) => {
+  const userId = req.params.userId
+  const categoryId = req.params.categoryId
+  gearsDb
+    .deleteCategory(categoryId, userId)
+    .then((categories) => res.json(categories))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router
