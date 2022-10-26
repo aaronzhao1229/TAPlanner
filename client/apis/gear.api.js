@@ -31,3 +31,11 @@ export function deleteGearForUser(gearId, userId) {
     return res.body
   })
 }
+
+export function deleteCategoryForUser(categoryId, userId) {
+  return request
+    .delete(`/gears/deleteCategory/${categoryId}/${userId}`)
+    .then((res) => {
+      return res.body
+    })
+}

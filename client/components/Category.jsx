@@ -3,6 +3,7 @@ import AddGear from './AddGear'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchGearsForUser, deleteGear } from '../actions/gears'
+import { deleteCategory } from '../actions/gearCategories'
 
 export default function Category({ category }) {
   let allWeight = 0
@@ -32,9 +33,15 @@ export default function Category({ category }) {
     dispatch(deleteGear(gearId, user.id))
   }
 
+  function clickDeleteCategory() {
+    dispatch(deleteCategory(category.id, user.id))
+    dispatch(fetchGearsForUser(user.id))
+  }
+
   return (
     <div>
       <div className="pt-5 pl-2 text-lg font-bold">{category.category}</div>
+      <button onClick={clickDeleteCategory}>Delete category</button>
       <div className="overflow-x-auto">
         <table
           id="geartable"
