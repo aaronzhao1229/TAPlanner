@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AddGear from './AddGear'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchGearsForUser } from '../actions/gears'
+import { fetchGearsForUser, deleteGear } from '../actions/gears'
 
 export default function Category({ category }) {
   let allWeight = 0
@@ -18,6 +18,7 @@ export default function Category({ category }) {
     allPrice += gear.price
     allQuantity += gear.quantity
   })
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchGearsForUser(user.id))
@@ -26,7 +27,11 @@ export default function Category({ category }) {
   function clickAdd() {
     setAddItem(true)
   }
-  console.log(additem)
+
+  function clickDelete(gearId) {
+    dispatch(deleteGear(gearId, user.id))
+  }
+
   return (
     <div>
       <div className="pt-5 pl-2 text-lg font-bold">{category.category}</div>
@@ -48,14 +53,19 @@ export default function Category({ category }) {
           <tbody>
             {targetGears.map((gear) => {
               return (
-                <tr key={gear.id}>
+                <tr key={gear.gearId}>
                   <td>{gear.gear}</td>
                   <td>{gear.description}</td>
                   <td>{gear.price}</td>
                   <td>{gear.weight}</td>
                   <td>{gear.quantity}</td>
                   <td>
-                    <button className="btn btn-error btn-sm">Delete</button>
+                    <button
+                      onClick={() => clickDelete(gear.gearId)}
+                      className="btn btn-error btn-sm"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               )

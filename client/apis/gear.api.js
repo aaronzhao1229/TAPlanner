@@ -25,3 +25,9 @@ export function addGearForUser(gear) {
     .send(gear)
     .then((res) => res.body)
 }
+
+export function deleteGearForUser(gearId, userId) {
+  return request.delete(`/gears/deleteGear/${gearId}/${userId}`).then((res) => {
+    return res.body
+  })
+}
