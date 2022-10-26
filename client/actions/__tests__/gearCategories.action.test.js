@@ -1,11 +1,13 @@
 import {
   getGearCategoriesForUser,
   addGearCategoryForUser,
+  deleteCategoryForUser,
 } from '../../apis/gear.api'
 import {
   SET_GEARCATEGORIES_SUCCESS,
   fetchGearCategoriesForUser,
   addGearCategory,
+  deleteCategory,
 } from '../gearCategories'
 
 jest.mock('../../apis/gear.api')
@@ -69,6 +71,29 @@ describe('addGearCategory', () => {
     console.error.mockImplementation(() => {})
     return addGearCategory()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('add category failure')
+    })
+  })
+})
+
+describe('deleteCategory', () => {
+  it('return all categories after deleting category', () => {
+    const fakeCategories = [{ category: 'random' }, { category: 'bathroom' }]
+    deleteCategoryForUser.mockReturnValue(Promise.resolve(fakeCategories))
+    return deleteCategory()(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(2)
+      expect(fakeDispatchArgument.payload[0].category).toBe('random')
+      expect(fakeDispatchArgument.type).toBe(SET_GEARCATEGORIES_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    deleteCategoryForUser.mockImplementation(() => {
+      return Promise.reject(new Error('delete category failure'))
+    })
+    console.error.mockImplementation(() => {})
+    return deleteCategory()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('delete category failure')
     })
   })
 })

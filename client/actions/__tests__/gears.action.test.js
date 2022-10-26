@@ -1,5 +1,14 @@
-import { fetchGearsForUser, SET_GEARS_SUCCESS, addGear } from '../gears'
-import { getGearsForUser, addGearForUser } from '../../apis/gear.api'
+import {
+  fetchGearsForUser,
+  SET_GEARS_SUCCESS,
+  addGear,
+  deleteGear,
+} from '../gears'
+import {
+  getGearsForUser,
+  addGearForUser,
+  deleteGearForUser,
+} from '../../apis/gear.api'
 
 jest.mock('../../apis/gear.api')
 jest.spyOn(console, 'error')
@@ -61,6 +70,30 @@ describe('addGear', () => {
     console.error.mockImplementation(() => {})
     return addGear()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('add gear failure')
+    })
+  })
+})
+
+describe('deleteGear', () => {
+  it('dispatch setGearsForUser', () => {
+    const fakeGears = [{ gear: 'pillow' }, { gear: 'pot' }]
+    deleteGearForUser.mockReturnValue(Promise.resolve(fakeGears))
+    const thunkFn = deleteGear()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(2)
+      expect(fakeDispatchArgument.payload[1].gear).toBe('pot')
+      expect(fakeDispatchArgument.type).toBe(SET_GEARS_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    deleteGearForUser.mockImplementation(() =>
+      Promise.reject(new Error('delete gear failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return deleteGear()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('delete gear failure')
     })
   })
 })
