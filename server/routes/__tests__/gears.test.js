@@ -6,6 +6,8 @@ const {
   getCategory,
   addCategory,
   addGear,
+  deleteCategory,
+  deleteGear,
 } = require('../../db/db.gears')
 
 jest.mock('../../db/db.gears')
@@ -123,6 +125,65 @@ describe('POST /gears/addGearForUser', () => {
       .then((res) => {
         expect(res.status).toBe(500)
         expect(console.error).toHaveBeenCalledWith('add gear failure')
+      })
+  })
+})
+
+describe('DELETE /gears/deleteGear/:gearId/:userId', () => {
+  it('return gears after deleting', () => {
+    const fakeGears = [
+      { gear: 'stove', weight: 80 },
+      { gear: 'spork', weight: 15 },
+    ]
+    deleteGear.mockReturnValue(Promise.resolve(fakeGears))
+    return request(server)
+      .delete('/gears/deleteGear/2/1')
+      .then((res) => {
+        expect(res.body).toHaveLength(2)
+        expect(res.body[1].gear).toBe('spork')
+      })
+  })
+
+  it('show error', () => {
+    deleteGear.mockImplementation(() =>
+      Promise.reject(new Error('delete gear failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return request(server)
+      .delete('/gears/deleteGear/2/1')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('delete gear failure')
+      })
+  })
+})
+
+describe('DELETE /gears/deleteCategory/:categoryId/:userId', () => {
+  it('return categories after deleting', () => {
+    const fakeCategories = [
+      { category: 'bathroom' },
+      { category: 'office' },
+      { category: 'random' },
+    ]
+    deleteCategory.mockReturnValue(Promise.resolve(fakeCategories))
+    return request(server)
+      .delete('/gears/deleteCategory/2/1')
+      .then((res) => {
+        expect(res.body).toHaveLength(3)
+        expect(res.body[1].category).toBe('office')
+      })
+  })
+
+  it('show error', () => {
+    deleteCategory.mockImplementation(() =>
+      Promise.reject(new Error('delete category failure'))
+    )
+    console.error.mockImplementation(() => {})
+    return request(server)
+      .delete('/gears/deleteCategory/2/1')
+      .then((res) => {
+        expect(res.status).toBe(500)
+        expect(console.error).toHaveBeenCalledWith('delete category failure')
       })
   })
 })
