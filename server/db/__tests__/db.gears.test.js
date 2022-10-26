@@ -24,3 +24,27 @@ it('getCategory for userId 1', () => {
     expect(categories[0].category).toBe('Big Three')
   })
 })
+
+it('addCategory', () => {
+  const mockCategory = { category: 'others', userId: 1 }
+  return gearsDb.addCategory(mockCategory, testDb).then((categories) => {
+    expect(categories).toHaveLength(3)
+    expect(categories[2].category).toBe('others')
+  })
+})
+
+it('addGear', () => {
+  const mockGear = {
+    gear: 'gas',
+    description: 'emergency',
+    price: 10,
+    weight: 110,
+    quantity: 1,
+    categoryId: 2,
+    userId: 1,
+  }
+  return gearsDb.addGear(mockGear, testDb).then((gears) => {
+    expect(gears).toHaveLength(4)
+    expect(gears[3].gear).toBe('gas')
+  })
+})

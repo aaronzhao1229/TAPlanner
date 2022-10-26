@@ -38,7 +38,7 @@ function addCategory(category, db = connection) {
       name: category.category,
       userId: category.userId,
     })
-    .then(() => getCategory(category.userId))
+    .then(() => getCategory(category.userId, db))
 }
 
 function addGear(gear, db = connection) {
@@ -51,5 +51,5 @@ function addGear(gear, db = connection) {
       quantity: gear.quantity,
       categoryId: gear.categoryId,
     })
-    .then(() => getGears(gear.userId))
+    .then(() => getGears(gear.userId, db))
 }
