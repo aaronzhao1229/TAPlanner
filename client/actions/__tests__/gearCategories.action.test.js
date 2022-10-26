@@ -1,7 +1,11 @@
-import { getGearCategoriesForUser } from '../../apis/gear.api'
+import {
+  getGearCategoriesForUser,
+  addGearCategoryForUser,
+} from '../../apis/gear.api'
 import {
   SET_GEARCATEGORIES_SUCCESS,
   fetchGearCategoriesForUser,
+  addGearCategory,
 } from '../gearCategories'
 
 jest.mock('../../apis/gear.api')
@@ -37,6 +41,34 @@ describe('fetchGearCategoriesForUser', () => {
     console.error.mockImplementation(() => {})
     return fetchGearCategoriesForUser()(fakeDispatch).then(() => {
       expect(console.error).toHaveBeenCalledWith('failure')
+    })
+  })
+})
+
+describe('addGearCategory', () => {
+  it('return all category after adding a category', () => {
+    const fakeCategories = [
+      { category: 'office' },
+      { category: 'bathroom' },
+      { category: 'random' },
+    ]
+    addGearCategoryForUser.mockReturnValue(Promise.resolve(fakeCategories))
+    const thunkFn = addGearCategory()
+    return thunkFn(fakeDispatch).then(() => {
+      const fakeDispatchArgument = fakeDispatch.mock.calls[0][0]
+      expect(fakeDispatchArgument.payload).toHaveLength(3)
+      expect(fakeDispatchArgument.payload[0].category).toBe('office')
+      expect(fakeDispatchArgument.type).toBe(SET_GEARCATEGORIES_SUCCESS)
+    })
+  })
+
+  it('show error', () => {
+    addGearCategoryForUser.mockImplementation(() => {
+      return Promise.reject(new Error('add category failure'))
+    })
+    console.error.mockImplementation(() => {})
+    return addGearCategory()(fakeDispatch).then(() => {
+      expect(console.error).toHaveBeenCalledWith('add category failure')
     })
   })
 })
