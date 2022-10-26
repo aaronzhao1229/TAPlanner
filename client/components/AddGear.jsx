@@ -32,7 +32,7 @@ export default function AddGear(props) {
       categoryId: category.id,
       userId: user.id,
     }
-    console.log(gearToBeAdded)
+
     dispatch(addGear(gearToBeAdded))
     setAddItem(false)
   }
