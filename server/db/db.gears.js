@@ -7,6 +7,7 @@ module.exports = {
   getCategory,
   addCategory,
   addGear,
+  deleteGear,
 }
 
 function getGears(userId, db = connection) {
@@ -52,4 +53,11 @@ function addGear(gear, db = connection) {
       categoryId: gear.categoryId,
     })
     .then(() => getGears(gear.userId, db))
+}
+
+function deleteGear(gearId, userId, db = connection) {
+  return db('gear_items')
+    .delete()
+    .where('id', gearId)
+    .then(() => getGears(userId, db))
 }

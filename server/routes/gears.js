@@ -51,4 +51,16 @@ router.post('/addGearForUser', (req, res) => {
     })
 })
 
+router.delete('/deleteGear/:gearId/:userId', (req, res) => {
+  const userId = req.params.userId
+  const gearId = req.params.gearId
+  gearsDb
+    .deleteGear(gearId, userId)
+    .then((gears) => res.json(gears))
+    .catch((err) => {
+      console.error(err.message)
+      res.status(500).send(err.message)
+    })
+})
+
 module.exports = router
