@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import AddGear from './AddGear'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { FcAddRow } from 'react-icons/fc'
+import { RiDeleteBin2Fill } from 'react-icons/ri'
 import { fetchGearsForUser, deleteGear } from '../actions/gears'
 import { deleteCategory } from '../actions/gearCategories'
 
@@ -43,11 +44,21 @@ export default function Category({ category }) {
       <div className="flex justify-between pt-5 pl-2 ">
         <div className="text-lg font-bold">{category.category}</div>
         <div>
-          <button
-            onClick={clickDeleteCategory}
-            className="btn btn-error btn-sm"
-          >
-            Delete category
+          <button onClick={clickDeleteCategory} className="hover:bg-error">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+              />
+            </svg>
           </button>
         </div>
       </div>
@@ -64,7 +75,7 @@ export default function Category({ category }) {
               <th>Price</th>
               <th>Weight</th>
               <th>Quantity</th>
-              <th>Delete?</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -79,9 +90,9 @@ export default function Category({ category }) {
                   <td>
                     <button
                       onClick={() => clickDelete(gear.gearId)}
-                      className="btn btn-error btn-sm"
+                      className="hover:bg-error"
                     >
-                      Delete
+                      <RiDeleteBin2Fill />
                     </button>
                   </td>
                 </tr>
@@ -90,8 +101,8 @@ export default function Category({ category }) {
 
             <tr>
               <td>
-                <button onClick={clickAdd} className="btn btn-primary btn-sm">
-                  Add new item
+                <button onClick={clickAdd} className="flex hover:bg-primary">
+                  <FcAddRow /> Add new item
                 </button>
               </td>
               <td></td>
