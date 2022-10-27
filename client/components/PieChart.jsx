@@ -29,6 +29,19 @@ export default function PieChart() {
       },
     ],
   }
+  const plugIns = {
+    plugins: {
+      legend: {
+        position: 'right',
+        rtl: true,
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle',
+          padding: 20,
+        },
+      },
+    },
+  }
   const categories = useSelector((state) => state.gearCategories)
   const gears = useSelector((state) => state.gears)
 
@@ -46,8 +59,8 @@ export default function PieChart() {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="basis-1/4">
-        <Doughnut data={pieChartData} />
+      <div className="basis-1/5">
+        <Doughnut data={pieChartData} options={plugIns} />
       </div>
     </div>
   )
