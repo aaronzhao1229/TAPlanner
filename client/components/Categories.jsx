@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Category from './Category'
 import AddCategory from './AddCategory'
 import PieChart from './PieChart'
-
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGearCategoriesForUser } from '../actions/gearCategories'
 import { fetchGearsForUser } from '../actions/gears'
 
 export default function Categories() {
   const [addCategory, setAddCategory] = useState(false)
+
   const user = useSelector((state) => state.loggedInUser)
   const gearCategories = useSelector((state) => state.gearCategories)
   const dispatch = useDispatch()
