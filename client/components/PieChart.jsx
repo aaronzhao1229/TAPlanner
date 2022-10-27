@@ -11,6 +11,7 @@ export default function PieChart() {
   const categories = useSelector((state) => state.gearCategories)
   const gears = useSelector((state) => state.gears)
 
+  // make pie chart data
   categories.map((category) => {
     pieChartData.labels.push(category.category)
     let weightSum = 0
@@ -21,6 +22,12 @@ export default function PieChart() {
     })
     pieChartData.datasets[0].data.push(weightSum)
   })
-  console.log(pieChartData)
-  return <Pie data={pieChartData} />
+
+  return (
+    <div className="flex flex-row justify-center">
+      <div className="basis-1/4">
+        <Pie data={pieChartData} />
+      </div>
+    </div>
+  )
 }
