@@ -33,14 +33,29 @@ export default function PieChart() {
     plugins: {
       legend: {
         position: 'right',
-        rtl: true,
+        rtl: false,
         labels: {
           usePointStyle: true,
-          pointStyle: 'circle',
+          pointStyle: 'rect',
           padding: 20,
+          generateLabels: customLabels,
+        },
+        title: {
+          display: true,
+          color: 'red',
+          text: 'Hey',
         },
       },
     },
+  }
+
+  function customLabels() {
+    const datasets = pieChartData.datasets
+    return datasets[0].data.map((data, i) => ({
+      text: `${pieChartData.labels[i]} ${data}`,
+      fillStyle: datasets[0].backgroundColor[i],
+      lineWidth: 0,
+    }))
   }
   const categories = useSelector((state) => state.gearCategories)
   const gears = useSelector((state) => state.gears)
