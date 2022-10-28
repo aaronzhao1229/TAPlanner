@@ -81,7 +81,7 @@ export default function Category({ category }) {
           <tbody>
             {targetGears.map((gear) => {
               return (
-                <tr key={gear.gearId}>
+                <tr key={gear.gearId} className="hover">
                   <td>{gear.gear}</td>
                   <td>{gear.description}</td>
                   <td>{gear.price}</td>
