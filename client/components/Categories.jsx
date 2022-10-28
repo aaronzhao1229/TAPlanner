@@ -8,7 +8,7 @@ import { fetchGearsForUser } from '../actions/gears'
 
 export default function Categories() {
   const [addCategory, setAddCategory] = useState(false)
-
+  const gears = useSelector((state) => state.gears)
   const user = useSelector((state) => state.loggedInUser)
   const gearCategories = useSelector((state) => state.gearCategories)
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export default function Categories() {
 
   return (
     <>
-      <PieChart />
+      {gears.length !== 0 && <PieChart />}
       <div className="px-5">
         {gearCategories.map((category) => {
           return (
