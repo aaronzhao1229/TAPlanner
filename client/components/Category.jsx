@@ -44,7 +44,11 @@ export default function Category({ category }) {
       <div className="flex justify-between pt-5 pl-2 ">
         <div className="text-lg font-bold">{category.category}</div>
         <div>
-          <button onClick={clickDeleteCategory} className="hover:bg-error">
+          <button
+            data-testid="delete-category"
+            onClick={clickDeleteCategory}
+            className="hover:bg-error"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -89,6 +93,7 @@ export default function Category({ category }) {
                   <td>{gear.quantity}</td>
                   <td>
                     <button
+                      data-testid="delete-item"
                       onClick={() => clickDelete(gear.gearId)}
                       className="hover:bg-error"
                     >
