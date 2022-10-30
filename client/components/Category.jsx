@@ -76,8 +76,8 @@ export default function Category({ category }) {
             <tr>
               <th>Name</th>
               <th>Description</th>
-              <th>Price</th>
-              <th>Weight</th>
+              <th>Price(NZD)</th>
+              <th>Weight(g)</th>
               <th>Quantity</th>
               <th></th>
             </tr>
@@ -110,10 +110,10 @@ export default function Category({ category }) {
                   <FcAddRow /> Add new item
                 </button>
               </td>
-              <td></td>
-              <td>{allPrice}</td>
-              <td>{allWeight}</td>
-              <td>{allQuantity}</td>
+              <td className="font-bold">Total</td>
+              <td className="font-bold">{allPrice}</td>
+              <td className="font-bold">{allWeight}</td>
+              <td className="font-bold">{allQuantity}</td>
               <td></td>
             </tr>
           </tbody>

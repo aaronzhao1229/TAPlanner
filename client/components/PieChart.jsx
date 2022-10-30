@@ -4,6 +4,8 @@ import 'chart.js/auto'
 import { Doughnut } from 'react-chartjs-2'
 
 export default function PieChart() {
+  const categories = useSelector((state) => state.gearCategories)
+  const gears = useSelector((state) => state.gears)
   const pieChartData = {
     labels: [],
     datasets: [
@@ -40,25 +42,34 @@ export default function PieChart() {
           padding: 20,
           generateLabels: customLabels,
         },
-        title: {
-          display: true,
-          color: 'red',
-          text: 'Hey',
-        },
+        // title: {
+        //   display: true,
+        //   color: 'red',
+        //   text: 'Hey',
+        // },
       },
     },
   }
 
   function customLabels() {
     const datasets = pieChartData.datasets
-    return datasets[0].data.map((data, i) => ({
-      text: `${pieChartData.labels[i]} ${data}`,
+    const totalWeight = datasets[0].data.reduce(
+      (previousValue, currentValue) => previousValue + currentValue,
+      0
+    )
+    const label = datasets[0].data.map((data, i) => ({
+      text: `${pieChartData.labels[i]}   ${data} (g)`,
       fillStyle: datasets[0].backgroundColor[i],
       lineWidth: 0,
     }))
+    label.push({
+      text: `Total   ${totalWeight} (g)`,
+      fillStyle: 'white',
+      lineWidth: 0,
+      fontColor: 'black',
+    })
+    return label
   }
-  const categories = useSelector((state) => state.gearCategories)
-  const gears = useSelector((state) => state.gears)
 
   // make pie chart data
   categories.map((category) => {
