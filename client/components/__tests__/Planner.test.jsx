@@ -14,8 +14,8 @@ AddSection.mockReturnValue(<></>)
 import Planner from '../Planner'
 
 const fakePlan = [
-  { day: 'Day 1', region: 'Canterbury' },
-  { day: 'Day 2', region: 'Otago' },
+  { day: 'Day 1', region: 'Canterbury', planId: 1 },
+  { day: 'Day 2', region: 'Otago', planId: 2 },
 ]
 useDispatch.mockReturnValue(fakeDispatch)
 useSelector.mockReturnValue(fakePlan)
