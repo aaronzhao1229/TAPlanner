@@ -14,11 +14,44 @@ import { BrowserRouter } from 'react-router-dom'
 
 import './styles/index.css'
 
+// local storage to persist state
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state')
+    if (serializedState === null) {
+      return undefined
+    }
+    return JSON.parse(serializedState)
+  } catch (e) {
+    return undefined
+  }
+}
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('state', serializedState)
+  } catch (e) {
+    // Ignore write errors;
+  }
+}
+const peristedState = loadState()
+// local storage to persist state
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(
   reducers,
+  // local storage to persist state
+  peristedState,
   composeEnhancers(applyMiddleware(thunkMiddleware))
 )
+
+// local storage to persist state
+store.subscribe(() => {
+  saveState(store.getState())
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
