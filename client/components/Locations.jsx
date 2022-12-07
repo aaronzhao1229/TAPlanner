@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchLocations } from '../actions/locations'
 
-export default function Location() {
+export default function Location({ getLocationData }) {
   const dispatch = useDispatch()
   const [form, setForm] = useState('')
   const [showOptions, setShowOptions] = useState(false)
@@ -15,6 +15,7 @@ export default function Location() {
   }
 
   function handleSelect(index) {
+    getLocationData(locations[index].formatted_address)
     setForm(locations[index].formatted_address)
     setShowOptions(false)
   }
@@ -29,11 +30,14 @@ export default function Location() {
   }, [locations])
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div>
       <div className="relative">
+        <label htmlFor="location" className="label">
+          Location
+        </label>
         <input
           type="text"
-          className="rounded-full border-2"
+          className="input input-bordered w-full max-w-xs"
           name="location"
           onChange={handleChange}
           value={form}
