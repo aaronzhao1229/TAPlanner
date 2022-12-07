@@ -11,9 +11,12 @@ export default function Location() {
 
   function handleChange(event) {
     setForm(event.target.value)
-    if (event.target.value.length > 3) {
-      dispatch(fetchLocations(event.target.value))
-    }
+    dispatch(fetchLocations(event.target.value))
+  }
+
+  function handleSelect(index) {
+    setForm(locations[index].formatted_address)
+    setShowOptions(false)
   }
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function Location() {
     if (locations.length <= 0) {
       setShowOptions(false)
     }
-  }, [form])
+  }, [locations])
 
   return (
     <div className="h-screen flex items-center justify-center">
@@ -44,6 +47,7 @@ export default function Location() {
                 <div
                   key={index}
                   className="cursor-pointer hover:bg-black hover:bg-opacity-10 p-2"
+                  onMouseDown={() => handleSelect(index)}
                 >
                   {item.formatted_address}
                 </div>
