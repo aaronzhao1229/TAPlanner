@@ -36,20 +36,26 @@ export default function Location({ getLocationData }) {
           Location
         </label>
         <input
+          id="location"
           type="text"
           className="input input-bordered w-full max-w-xs"
           name="location"
           onChange={handleChange}
           value={form}
           placeholder="Search your query ..."
+          data-testid="test-location"
         />
         {/* search result container */}
         {showOptions && (
-          <div className="absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br max-h-52 overflow-y-auto">
+          <div
+            className="absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br max-h-52 overflow-y-auto"
+            data-testid="test-container"
+          >
             {locations.map((item, index) => {
               return (
                 <div
                   key={index}
+                  data-testid={`option${index}`}
                   className="cursor-pointer hover:bg-black hover:bg-opacity-10 p-2"
                   onMouseDown={() => handleSelect(index)}
                 >
