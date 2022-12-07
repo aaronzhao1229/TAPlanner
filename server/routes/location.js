@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
       key: process.env.GOOGLE_APIKEY,
     })
     .then((response) => {
-      console.log(response.body.results)
       res.json(response.body.results)
     })
     .catch(() => {
