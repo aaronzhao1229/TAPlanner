@@ -3,9 +3,13 @@ import { getLocations } from '../apis/location'
 
 export function fetchLocations(text) {
   return (dispatch) => {
-    return getLocations(text).then((locations) => {
-      dispatch(updateLocation(locations))
-    })
+    return getLocations(text)
+      .then((locations) => {
+        dispatch(updateLocation(locations))
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
   }
 }
 
