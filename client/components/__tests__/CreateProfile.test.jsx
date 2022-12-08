@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 const { screen, render } = require('@testing-library/react')
 import { uploadProfile } from '../../apis/user.api'
+import Location from '../Locations'
 
 require('@testing-library/jest-dom')
 import userEvent from '@testing-library/user-event'
@@ -12,6 +13,7 @@ jest.mock('../Nav')
 jest.mock('react-redux')
 jest.mock('react-router-dom')
 jest.mock('../../apis/user.api')
+jest.mock('../Locations')
 
 jest.spyOn(console, 'error')
 
@@ -20,6 +22,7 @@ afterEach(() => {
 })
 
 Nav.mockReturnValue(<></>)
+Location.mockReturnValue(<></>)
 
 const fakeUser = { email: '1234@gmail.com', auth0Id: '1234' }
 const fakeUserWithFirstname = {
@@ -64,14 +67,13 @@ describe('<CreateProfile />', () => {
     await userEvent.upload(imageInput, file)
     await userEvent.type(screen.getByLabelText(/first/i), 'William')
     await userEvent.type(screen.getByLabelText(/last/i), 'Wilson')
-    await userEvent.type(screen.getByLabelText(/location/i), 'Chch')
+    // await userEvent.type(screen.getByLabelText(/location/i), 'Chch')
     await userEvent.click(screen.getByRole('button', { name: /submit/i }))
     expect(fakeDispatch).toHaveBeenCalledWith({
       payload: {
         auth0Id: '1234',
         firstName: 'William',
         lastName: 'Wilson',
-        location: 'Chch',
       },
       type: 'UPDATE_LOGGED_IN_USER',
     })

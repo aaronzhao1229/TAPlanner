@@ -32,7 +32,6 @@ const App = () => {
           if (userInDb[0]) {
             dispatch(updateLoggedInUser(userInDb[0]))
           } else {
-            console.log('navigate')
             navigate('/createProfile')
           }
         })

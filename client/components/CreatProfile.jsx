@@ -5,21 +5,24 @@ import { useNavigate } from 'react-router-dom'
 import { updateLoggedInUser } from '../actions/loggedInUser'
 import Header from './Header'
 import Nav from './Nav'
+
+import Location from './Locations'
+
 const initialFormData = {
   firstName: '',
   lastName: '',
-  location: '',
 }
 
 export default function CreateProfile() {
   const [form, setForm] = useState(initialFormData)
   const [selectedImage, setSelectedImage] = useState(null)
+  const [location, setLocation] = useState('')
   const user = useSelector((state) => state.loggedInUser)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { firstName, lastName, location } = form
+  const { firstName, lastName } = form
 
   useEffect(() => {
     if (user.firstName) navigate('/')
@@ -87,7 +90,7 @@ export default function CreateProfile() {
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="location" className="label">
                 Location
               </label>
@@ -99,7 +102,7 @@ export default function CreateProfile() {
                 onChange={handleChange}
                 className="input input-bordered w-full max-w-xs"
               />
-            </div>
+            </div> */}
             <div>
               <label htmlFor="profile" className="label">
                 Upload your photo
@@ -113,6 +116,7 @@ export default function CreateProfile() {
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
+            <Location getLocationData={setLocation} />
             <input
               type="submit"
               className="btn rounded btn-primary hover:opacity-80 mt-5 mb-5"
