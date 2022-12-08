@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-
 import Nav from './Nav'
 import Header from './Header'
 import Planner from './Planner'
