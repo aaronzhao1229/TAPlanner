@@ -51,7 +51,7 @@ export default function CreateProfile() {
       .then(() => dispatch(updateLoggedInUser(userInfo)))
       .catch((err) => console.error(err.message))
   }
-  console.log(location)
+
   return (
     <>
       <Header />
